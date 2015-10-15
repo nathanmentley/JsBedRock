@@ -1,0 +1,27 @@
+{
+  "name": "JsBedRock.Collections",
+  "version": "0.0.1",
+  "license": "CC-BY-SA-4.0",
+  "author": "Nathan Mentley <NathanMentley@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathanmentley/JsBedRock"
+  },
+  "bugs": {
+    "url": "https://github.com/nathanmentley/JsBedRock/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-html-generator": "~0.3.0",
+    "grunt-contrib-qunit": "~0.7.0"
+  },
+  "private": true,
+  "sourceFiles": [
+    "src/AsmConfig.js",
+    "src/List.js",
+    "../Common/ExecutableWrappers/ClassLibrary.js"
+  ]
+}
