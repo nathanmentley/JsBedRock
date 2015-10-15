@@ -24,6 +24,8 @@
     "src/IEnumerable.js",
     "src/IList.js",
     "src/List.js",
+    "src/IDictionary.js",
+    "src/Dictionary.js",
     "../Common/ExecutableWrappers/ClassLibrary.js"
   ]
 }

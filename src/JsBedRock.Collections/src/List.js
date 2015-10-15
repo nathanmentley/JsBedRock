@@ -6,7 +6,7 @@ JsBedRock.Collections = JsBedRock.Collections || {};
     asm.OnLoad(function () {
         JsBedRock.Collections.List = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
-                this.__Values = [];
+                this.Clear();
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
@@ -23,11 +23,22 @@ JsBedRock.Collections = JsBedRock.Collections || {};
 				Count: function () {
                     return this.__Values.length;
                 },
-				Contains: function (item) { },
-				IndexOf: function (item) { },
-				Insert: function (index, item) { },
-				Remove: function (item) { },
-				RemoveAt: function (index) { },
+				Contains: function (item) {
+                    return this.__Values.indexOf(item) !== -1;
+                },
+				IndexOf: function (item) {
+                    return this.__Values.indexOf(item);
+                },
+				Insert: function (index, item) {
+                    this.__Values.splice(index, 0, item);
+                },
+				Remove: function (item) {
+                    if(this.Contains(item))
+                        this.RemoveAt(this.IndexOf(item));
+                },
+				RemoveAt: function (index) {
+                    this.__Values.splice(index, 1);
+                },
                 __Values: null
             },
             Implements: [

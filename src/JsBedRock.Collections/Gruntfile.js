@@ -13,7 +13,7 @@ module.exports = function(grunt) {
         dest: 'obj/' + pkg.name + '.js'
       },
       testsDist: {
-        src: ['tests/AsmConfig.js', 'tests/**/*.js', '../Common/ExecutableWrappers/TestRunner.js'],
+        src: ['tests/AsmConfig.js', 'tests/**/*.Tests.js', '../Common/ExecutableWrappers/TestRunner.js'],
         dest: 'obj/' + pkg.name + '.tests.js'
       }
     },
