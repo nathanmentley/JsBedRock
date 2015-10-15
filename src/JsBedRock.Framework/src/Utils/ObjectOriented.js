@@ -98,6 +98,9 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         for(var i = 0; i < values.Implements.length; i++)
             PrivateMembers.Implement(classDef, values.Implements[i]);
             
+        //LinkClass To Assembly
+        JsBedRock.CurrentAssembly.Classes.push(classDef);
+         
         return classDef;
     };
     

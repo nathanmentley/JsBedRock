@@ -1,5 +1,5 @@
 {
-  "name": "JsBedRock.Core",
+  "name": "JsBedRock.Collections.Tests",
   "version": "0.0.1",
   "license": "CC-BY-SA-4.0",
   "author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -19,12 +19,8 @@
   "private": true,
   "sourceFiles": [
     "src/AsmConfig.js",
-    
-    "src/Types/Interface.js",
-    "src/Types/Object.js",
-    
-    "src/Console.js",
-    
-    "../sdk/AssemblyWrappers/ClassLibrary.js"
+    "src/DictionaryTests.js",
+    "src/ListTests.js",
+    "../sdk/AssemblyWrappers/TestRunner.Js"
   ]
 }

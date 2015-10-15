@@ -14,9 +14,7 @@
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
     "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-html-generator": "~0.3.0",
-    "grunt-contrib-qunit": "~0.7.0"
+    "grunt-contrib-uglify": "~0.5.0"
   },
   "private": true,
   "sourceFiles": [
@@ -26,6 +24,6 @@
     "src/List.js",
     "src/IDictionary.js",
     "src/Dictionary.js",
-    "../Common/ExecutableWrappers/ClassLibrary.js"
+    "../sdk/AssemblyWrappers/ClassLibrary.js"
   ]
 }

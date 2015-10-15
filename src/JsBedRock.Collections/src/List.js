@@ -12,34 +12,34 @@ JsBedRock.Collections = JsBedRock.Collections || {};
             },
             Members: {
 				GetEnumerator: function () {
-                    return this.__Values;
+                    return this._Values;
                 },
 				Add: function (item) {
-                    this.__Values.push(item);
+                    this._Values.push(item);
                 },
 				Clear: function () {
-                    this.__Values = [];
+                    this._Values = [];
                 },
 				Count: function () {
-                    return this.__Values.length;
+                    return this._Values.length;
                 },
 				Contains: function (item) {
-                    return this.__Values.indexOf(item) !== -1;
+                    return this._Values.indexOf(item) !== -1;
                 },
 				IndexOf: function (item) {
-                    return this.__Values.indexOf(item);
+                    return this._Values.indexOf(item);
                 },
 				Insert: function (index, item) {
-                    this.__Values.splice(index, 0, item);
+                    this._Values.splice(index, 0, item);
                 },
 				Remove: function (item) {
                     if(this.Contains(item))
                         this.RemoveAt(this.IndexOf(item));
                 },
 				RemoveAt: function (index) {
-                    this.__Values.splice(index, 1);
+                    this._Values.splice(index, 1);
                 },
-                __Values: null
+                _Values: null
             },
             Implements: [
                 JsBedRock.Collections.IEnumerable,

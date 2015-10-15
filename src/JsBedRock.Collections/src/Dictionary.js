@@ -12,24 +12,24 @@ JsBedRock.Collections = JsBedRock.Collections || {};
             },
             Members: {
 				GetEnumerator: function () {
-                    return this.__Values;
+                    return this._Values;
                 },
 				Add: function (key, item) {
-                    this.__Values[key] = item;
+                    this._Values[key] = item;
                 },
 				Clear: function () {
-                    this.__Values = {};
+                    this._Values = {};
                 },
 				Contains: function (key) {
-                    return (key in this.__Values)
+                    return (key in this._Values)
                 },
 				Get: function (key) {
-                    return this.__Values[key];
+                    return this._Values[key];
                 },
 				Remove: function (key) {
-                    delete this.__Values[key];
+                    delete this._Values[key];
                 },
-                __Values: null
+                _Values: null
             },
             Implements: [
                 JsBedRock.Collections.IEnumerable,

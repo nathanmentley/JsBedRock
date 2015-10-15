@@ -16,12 +16,17 @@
     "grunt-cli": "~0.1.13",
     "grunt-run-grunt": "~0.1.4",
     "grunt-auto-install": "~0.3.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "qunitjs": "~1.19.0"
+    "grunt-contrib-watch": "~0.6.1"
   },
   "childProjects": [
     "JsBedRock.Framework",
     "JsBedRock.Core",
-    "JsBedRock.Collections"
+    "JsBedRock.Collections",
+    "JsBedRock.UnitTesting",
+    
+    "JsBedRock.Framework.Tests",
+    "JsBedRock.Core.Tests",
+    "JsBedRock.Collections.Tests",
+    "JsBedRock.UnitTesting.Tests"
   ]
 }

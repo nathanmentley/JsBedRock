@@ -18,7 +18,10 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 		  return asmKey in PrivateMembers._GAC;
         },
         LoadAssembly: function (asmDep, callback) {
-            PrivateMembers.LoadScript('../../../bin/' + PrivateMembers.GetAssemblyKey(asmDep) + '.min.js', callback);
+            PrivateMembers.LoadScript('./' + PrivateMembers.GetAssemblyKey(asmDep) + '.min.js', callback);
+            
+            //add placeholder in GAC.
+            PrivateMembers._GAC[PrivateMembers.GetAssemblyKey(asmDep)] = asmDep;
         },
         GetAssemblyKey: function (asmDef) {
             return asmDef.Name;// + '-' + asmDef.Version;

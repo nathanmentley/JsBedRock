@@ -10,6 +10,7 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
                 Name: '',
                 Dependencies: [],
                 Callbacks: [],
+                Classes: [],
                 OnLoad: function(callback) {
                     context.Callbacks.push(callback);
                 }

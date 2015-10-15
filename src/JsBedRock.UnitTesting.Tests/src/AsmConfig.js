@@ -1,9 +1,9 @@
 (function () {
 	new JsBedRock.Assemblies.AssemblyDef({
-		Name: 'JsBedRock.Core.Tests',
+		Name: 'JsBedRock.UnitTesting.Tests',
 		Dependencies: [
 			new JsBedRock.Assemblies.AssemblyDependency({
-				Name: 'JsBedRock.Core'
+				Name: 'JsBedRock.UnitTesting'
 			})
 		]
 	});
