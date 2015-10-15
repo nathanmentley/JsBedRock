@@ -39,7 +39,6 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         for(var i = 0; i < asmDef.Dependencies.length; i++){
             if(!PrivateMembers.DoesAssemblyExist(PrivateMembers.GetAssemblyKey(asmDef.Dependencies[i]))){
                 PrivateMembers.LoadAssembly(asmDef.Dependencies[i], function () {
-                    PrivateMembers.AssembliesLoading--;
                     JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asmDef);
                 });
                 return;

@@ -10,9 +10,9 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             }
         };
         
-        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
-        
-        for(var prop in values)
-            this[prop] = values[prop];
+        JsBedRock.Utils.Object.MergeObjects(
+            this,
+            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
+        );
     };
 })();

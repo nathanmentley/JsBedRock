@@ -4,23 +4,22 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 //JsBedRock.Assemblies.AssemblyDef
 (function () {
     JsBedRock.Assemblies.AssemblyDef = function (overrides) {
+        var context = this;
         var PrivateMembers = {
             Defaults: {
                 Name: '',
                 Dependencies: [],
-                Callbacks: []
+                Callbacks: [],
+                OnLoad: function(callback) {
+                    context.Callbacks.push(callback);
+                }
             }
         };
-        var context = this;
         
-        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
-        
-        for(var prop in values)
-            this[prop] = values[prop];
-
-        this.OnLoad = function(callback) {
-            context.Callbacks.push(callback);
-        };
+        JsBedRock.Utils.Object.MergeObjects(
+            context,
+            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
+        );
         
         JsBedRock.CurrentAssembly = this;
     };
