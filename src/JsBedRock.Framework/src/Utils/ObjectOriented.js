@@ -10,11 +10,15 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             /// <param name="_constructor" type="function">The CTOR function.</param>
             /// <returns type="function">Class definition function.</returns>
     
-            //if (typeof _constructor != 'function')
-            //    JsBedRock.Console.Error("Invalid Constructor. Cannot create object definition.");
+            if (typeof _constructor != 'function')
+                JsBedRock.Console.Error("Invalid Constructor. Cannot create object definition.");
     
             //Setup any methods that all objects should have.
+            // GetType
             _constructor.prototype.GetType = function () { return _constructor; };
+            // GetAssembly
+            var classAssembly = JsBedRock.CurrentAssembly;
+            _constructor.prototype.GetAssembly = function () { return classAssembly; }
     
             return _constructor;
         },
@@ -62,18 +66,22 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //if everything is defined we should add the interface def to the __Implemented array.
             _cls.prototype.__Implemented.push(_interface);
         },
-        Defaults: {
+        ClassDefaults: {
             Inherit: null,
             Implements: [],
             Constructor: function () {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {}
+        },
+        InterfaceDefaults: {
+            Name: '',
+            Members: {}
         }
     };
     
     JsBedRock.Utils.ObjectOriented.CreateClass = function (overrides) {
-        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.ClassDefaults, overrides);
         var classDef = PrivateMembers.ObjectDefBuilder(values.Constructor);
         
         if (values.Inherit === null) {
@@ -91,6 +99,19 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             PrivateMembers.Implement(classDef, values.Implements[i]);
             
         return classDef;
+    };
+    
+    JsBedRock.Utils.ObjectOriented.CreateInterface = function (overrides) {
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.InterfaceDefaults, overrides);
+        
+        var interfaceDef = function () {};
+	
+		interfaceDef.InterfaceName = values.Name;
+	
+        for(var prop in values.Members)
+            interfaceDef.prototype[prop] = values.Members[prop];
+	
+		return interfaceDef;
     };
 	
     JsBedRock.Utils.ObjectOriented.IsOfType = function (_instance, _type) {

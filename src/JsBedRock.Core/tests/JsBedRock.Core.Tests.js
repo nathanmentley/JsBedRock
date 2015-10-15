@@ -7,18 +7,14 @@ if (typeof JsBedRock.Utils == "undefined") JsBedRock.Console.Error("JsBedRock.Ut
     JsBedRock.Tests.Utils = JsBedRock.Tests.Utils || {};
     JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {};
 
-    JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1 = (function () {
-        var interfaceDef = function () { };
-        interfaceDef.InterfaceName = "ITestInterface1";
-
-        interfaceDef.prototype = {
+    JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1 = JsBedRock.Utils.ObjectOriented.CreateInterface({
+        Name: "ITestInterface1",
+        Members: {
             TestMethod: function () { },
             TestMethod2: function () { },
             TestMethod3: function () { }
-        };
-
-        return interfaceDef;
-    })();
+        }
+    });
 
     JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1 = JsBedRock.Utils.ObjectOriented.CreateClass({
         Inherit: JsBedRock.Types.Object,
