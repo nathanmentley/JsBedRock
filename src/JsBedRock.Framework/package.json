@@ -22,6 +22,7 @@
   "sourceFiles": [
     "src/Core.js",
     
+    "src/Utils/Object.js",
     "src/Utils/ObjectOriented.js",
     "src/Utils/ObjectOriented.Reflection.js",
     "src/Utils/String.js",

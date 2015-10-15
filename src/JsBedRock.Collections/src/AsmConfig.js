@@ -1,8 +1,10 @@
 (function () {
-	new JsBedRock.Assemblies.AssemblyDef(
-		'JsBedRock.Collections',
-		[
-			new JsBedRock.Assemblies.AssemblyDependency('JsBedRock.Core')
+	new JsBedRock.Assemblies.AssemblyDef({
+		Name: 'JsBedRock.Collections',
+		Dependencies: [
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Core'
+			})
 		]
-	);
+	});
 })();

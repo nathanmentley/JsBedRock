@@ -5,15 +5,14 @@ JsBedRock.Collections.Generic = JsBedRock.Collections.Generic || {};
 //JsBedRock.Collections
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Collections.Generic.List1 = (function () {
-            var classDef = JsBedRock.Utils.ObjectOriented.ObjectDefBuilder(function () {
+        JsBedRock.Collections.Generic.List1 = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.Collections.Hidden.List,
+            Constructor: function () {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Collections.Hidden.List);
-            });
-            JsBedRock.Utils.ObjectOriented.Inherit(classDef, JsBedRock.Collections.Hidden.List);
-    
-            classDef.prototype.Name = "List1";
-    
-            return classDef;
-        })();
+            },
+            Members: {
+                Name: "List1"
+            }
+        });
     });
 })(JsBedRock.CurrentAssembly);

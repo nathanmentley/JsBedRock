@@ -20,54 +20,48 @@ if (typeof JsBedRock.Utils == "undefined") JsBedRock.Console.Error("JsBedRock.Ut
         return interfaceDef;
     })();
 
-    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1 = (function () {
-        var PrivateMembers = {};
-        var classDef = JsBedRock.Utils.ObjectOriented.ObjectDefBuilder(function () {
+    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1 = JsBedRock.Utils.ObjectOriented.CreateClass({
+        Inherit: JsBedRock.Types.Object,
+        Constructor: function () {
             JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-        });
-        JsBedRock.Utils.ObjectOriented.Inherit(classDef, JsBedRock.Types.Object);
-
-        classDef.prototype.Name = "BaseTestObject1";
-        classDef.prototype.TestMethod = function (var1) {
-            return ++var1;
-        };
-
-        return classDef;
-    })();
-
-    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2 = (function () {
-        var PrivateMembers = {};
-        var classDef = JsBedRock.Utils.ObjectOriented.ObjectDefBuilder(function () {
+        },
+        Members: {
+            Name: "BaseTestObject1",
+            TestMethod: function (var1) {
+                return ++var1;
+            }
+        }
+    });
+    
+    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2 = JsBedRock.Utils.ObjectOriented.CreateClass({
+        Inherit: JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1,
+        Constructor: function () {
             JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1);
-        });
-        JsBedRock.Utils.ObjectOriented.Inherit(classDef, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1);
-
-        classDef.prototype.Name = "BaseTestObject2";
-        classDef.prototype.TestMethod2 = function (var1) { return var1 + 5; };
-        classDef.prototype.TestMethod3 = function () { return 'a'; };
-
-        return classDef;
-    })();
-
-    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3 = (function () {
-        var PrivateMembers = {};
-        var classDef = JsBedRock.Utils.ObjectOriented.ObjectDefBuilder(function () {
+        },
+        Members: {
+            Name: "BaseTestObject2",
+            TestMethod2: function (var1) { return var1 + 5; },
+            TestMethod3: function () { return 'a'; }
+        }
+    });
+    
+    JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3 = JsBedRock.Utils.ObjectOriented.CreateClass({
+        Inherit: JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2,
+        Constructor: function () {
             JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2);
-        });
-        JsBedRock.Utils.ObjectOriented.Inherit(classDef, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2);
-
-        classDef.prototype.Name = "BaseTestObject3";
-        classDef.prototype.TestMethod = function (var1) {
-            var1 = this.Base(var1);
-
-            return var1 + 10;
-        };
-        classDef.prototype.TestMethod3 = function () { return 'b'; };
-
-        JsBedRock.Utils.ObjectOriented.Implement(classDef, JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1);
-
-        return classDef;
-    })();
+        },
+        Implements: [
+            JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1
+        ],
+        Members: {
+            Name: "BaseTestObject3",
+            TestMethod: function (var1) {
+                var1 = this.Base(var1);
+                return var1 + 10;
+            },
+            TestMethod3: function () { return 'b'; }
+        }
+    });
 })();
 
 QUnit.test("JsBedRock.Types.ObjectBuilder GetType tests", function (assert) {
