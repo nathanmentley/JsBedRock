@@ -22,7 +22,6 @@
   "childProjects": [
     "JsBedRock.Framework",
     "JsBedRock.Core",
-    "JsBedRock.Collections",
-    "JsBedRock.Collections.Generic"
+    "JsBedRock.Collections"
   ]
 }

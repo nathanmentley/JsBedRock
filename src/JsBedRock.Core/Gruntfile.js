@@ -13,7 +13,7 @@ module.exports = function(grunt) {
         dest: 'obj/' + pkg.name + '.js'
       },
       testsDist: {
-        src: ['tests/**/*.js'],
+        src: ['tests/AsmConfig.js', 'tests/**/*Tests.js', '../Common/ExecutableWrappers/TestRunner.js'],
         dest: 'obj/' + pkg.name + '.tests.js'
       }
     },
@@ -44,7 +44,6 @@ module.exports = function(grunt) {
         files: {
           js: [
             '../../../bin/JsBedRock.Framework.min.js',
-            '../../../bin/' + pkg.name + '.min.js',
             '../../../node_modules/qunitjs/qunit/qunit.js',
             pkg.name + '.tests.min.js'
           ],

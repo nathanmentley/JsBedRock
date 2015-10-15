@@ -7,8 +7,7 @@ JsBedRock.Types = JsBedRock.Types || {};
 		JsBedRock.Types.Interface = JsBedRock.Utils.ObjectOriented.CreateInterface({
 			Name: "Interface",
 			Members: {
-				Init: function () { },
-				Name: ''
+				Init: function () { }
 			}
 		});
 	});

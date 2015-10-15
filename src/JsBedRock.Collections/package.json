@@ -21,6 +21,8 @@
   "private": true,
   "sourceFiles": [
     "src/AsmConfig.js",
+    "src/IEnumerable.js",
+    "src/IList.js",
     "src/List.js",
     "../Common/ExecutableWrappers/ClassLibrary.js"
   ]

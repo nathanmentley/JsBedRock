@@ -18,7 +18,6 @@ window.JsBedRock = window.JsBedRock || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Name: "Reporter",
                 Init: function () {
                     PrivateMembers.EnableConsole = false;
                     this.Base();

@@ -21,7 +21,6 @@ JsBedRock.Types = JsBedRock.Types || {};
                 JsBedRock.Types.Interface
             ],
             Members: {
-                Name: "Object",
                 Base: function () {
                     /// <summary>Executes the inherited class def's implementation of the current method</summary>
                     /// <param name="param[]" type="any">Any parameters for the base method should be included as parameters on this method call.</param>
