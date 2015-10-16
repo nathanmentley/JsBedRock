@@ -3,6 +3,7 @@
 		//Entry Point
 	});
 	
+	//TODO: This is awful.
 	JsBedRock.Assemblies.LoaderLogic = function (u, c){
 		var d = document;
 		var t = 'script';
