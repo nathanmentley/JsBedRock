@@ -19,6 +19,7 @@
   "private": true,
   "sourceFiles": [
     "src/AsmConfig.js",
+    "src/TestGroupTests.js",
     "../sdk/AssemblyWrappers/TestRunner.js"
   ]
 }
