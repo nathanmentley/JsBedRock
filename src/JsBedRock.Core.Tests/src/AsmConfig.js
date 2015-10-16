@@ -6,7 +6,7 @@
 				Name: 'JsBedRock.UnitTesting'
 			}),
 			new JsBedRock.Assemblies.AssemblyDependency({
-				Name: 'JsBedRock.Core'
+				Name: 'JsBedRock.Collections'
 			})
 		]
 	});

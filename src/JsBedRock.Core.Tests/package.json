@@ -20,7 +20,17 @@
   "sourceFiles": [
     "src/AsmConfig.js",
     
-    "src/CoreTests.js",
+    "src/TestData/ITestInterface1.js",
+    "src/TestData/BaseTestObject1.js",
+    "src/TestData/BaseTestObject2.js",
+    "src/TestData/BaseTestObject3.js",
+    
+    "src/TestGroupControllers/ConsoleTests.js",
+    "src/TestGroupControllers/GetTypeTests.js",
+    "src/TestGroupControllers/ImplementTests.js",
+    "src/TestGroupControllers/InheritTests.js",
+    "src/TestGroupControllers/IsOfTypeTests.js",
+    "src/TestGroupControllers/ReflectionGetMethodNameTests.js",
     
     "../sdk/AssemblyWrappers/TestRunner.js"
   ]
