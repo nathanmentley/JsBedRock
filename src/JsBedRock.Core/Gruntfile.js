@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     concat: {
       options: {
-        separator: ';',
+        separator: grunt.util.linefeed + ';' + grunt.util.linefeed,
         sourceMap: true
       },
       dist: {

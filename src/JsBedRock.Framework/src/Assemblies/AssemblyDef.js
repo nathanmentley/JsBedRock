@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 
 //JsBedRock.Assemblies.AssemblyDef

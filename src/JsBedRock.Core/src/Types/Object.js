@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Types = JsBedRock.Types || {};
 
 //JsBedRock.Types
@@ -7,15 +6,7 @@ JsBedRock.Types = JsBedRock.Types || {};
         JsBedRock.Types.Object = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
                 /// <summary>Base Object Type. All JsBedRock Object Types must Inherit from this object.</summary>
-                var context = this;
-                //Safe on document ready.
-                if (document.readyState) {
-                    this.Init();
-                } else {
-                    document.addEventListener('DOMContentLoaded', function() {
-                        context.Init();
-                    });
-                }
+                this.Init();
             },
             Implements: [
                 JsBedRock.Types.Interface

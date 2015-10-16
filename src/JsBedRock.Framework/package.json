@@ -18,7 +18,7 @@
   },
   "private": true,
   "sourceFiles": [
-    "src/Core.js",
+    "src/Config.js",
     
     "src/Utils/Object.js",
     "src/Utils/ObjectOriented.js",

@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 
 //JsBedRock.Assemblies.GlobalAssemblyCache
@@ -7,18 +6,13 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 	var PrivateMembers = {
 		_GAC: {},
         LoadScript: function(u, c) {
-            var d = document, t = 'script',
-                o = d.createElement(t),
-                s = d.getElementsByTagName(t)[0];
-            o.src = u;
-            if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-            s.parentNode.insertBefore(o, s);
+            JsBedRock.Assemblies.LoaderLogic(u, c);
         },
         DoesAssemblyExist: function (asmKey) {
 		  return asmKey in PrivateMembers._GAC;
         },
         LoadAssembly: function (asmDep, callback) {
-            PrivateMembers.LoadScript('./' + PrivateMembers.GetAssemblyKey(asmDep) + '.min.js', callback);
+            PrivateMembers.LoadScript('../../bin/' + PrivateMembers.GetAssemblyKey(asmDep) + '.min.js', callback);
             
             //add placeholder in GAC.
             PrivateMembers._GAC[PrivateMembers.GetAssemblyKey(asmDep)] = asmDep;

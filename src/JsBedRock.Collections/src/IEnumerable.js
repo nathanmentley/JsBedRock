@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Collections = JsBedRock.Collections || {};
 
 //JsBedRock.Collections

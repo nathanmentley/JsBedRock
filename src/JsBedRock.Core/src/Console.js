@@ -1,5 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
-
 //JsBedRock.Console
 (function (asm) {
     asm.OnLoad(function () {

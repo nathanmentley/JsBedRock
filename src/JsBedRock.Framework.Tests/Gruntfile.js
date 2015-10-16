@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     concat: {
       options: {
-        separator: ';',
+        separator: grunt.util.linefeed + ';' + grunt.util.linefeed,
         sourceMap: true
       },
       dist: {
@@ -22,12 +22,18 @@ module.exports = function(grunt) {
         src: 'obj/' + pkg.name + '.js',
         dest: '../../bin/' + pkg.name + '.min.js'
       }
+    },
+    execute: {
+        target: {
+            src: ['../../bin/' + pkg.name + '.min.js']
+        }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-execute');
 
   // Default task(s).
-  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.registerTask('default', ['concat', 'uglify', 'execute']);
 };

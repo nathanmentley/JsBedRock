@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Utils = JsBedRock.Utils || {};
 
 //JsBedRock.Utils.ObjectOriented

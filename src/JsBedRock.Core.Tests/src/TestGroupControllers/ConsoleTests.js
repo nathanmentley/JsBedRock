@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Core = JsBedRock.Core || {};
 JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
 

@@ -1,4 +1,3 @@
-window.JsBedRock = window.JsBedRock || {};
 JsBedRock.Types = JsBedRock.Types || {};
 
 //JsBedRock.Types
