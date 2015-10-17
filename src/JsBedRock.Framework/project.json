@@ -1,16 +1,16 @@
 {
-  "name": "JsBedRock.Framework",
-  "version": "0.0.1",
-  "license": "CC-BY-SA-4.0",
-  "author": "Nathan Mentley <NathanMentley@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nathanmentley/JsBedRock"
+  "Name": "JsBedRock.Framework",
+  "Version": "0.0.1",
+  "License": "CC-BY-SA-4.0",
+  "Author": "Nathan Mentley <NathanMentley@gmail.com>",
+  "Repository": {
+    "Type": "git",
+    "Url": "https://github.com/nathanmentley/JsBedRock"
   },
-  "bugs": {
-    "url": "https://github.com/nathanmentley/JsBedRock/issues"
+  "Bugs": {
+    "Url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
-  "sourceFiles": [
+  "SourceFiles": [
     "src/Config.js",
     
     "src/Utils/Object.js",
@@ -22,6 +22,6 @@
     "src/Assemblies/AssemblyDef.js",
     "src/Assemblies/AssemblyDependency.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Framework.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.js",
   "ProjectType": "Flat"
 }

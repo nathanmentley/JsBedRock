@@ -1,5 +1,5 @@
 {
-  "Name": "JsBedRock.UnitTesting.Tests",
+  "Name": "JsBedRock SDK",
   "Version": "0.0.1",
   "License": "CC-BY-SA-4.0",
   "Author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -11,9 +11,11 @@
     "Url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "SourceFiles": [
-    "src/AsmConfig.js",
-    "src/TestGroupTests.js"
+    "AssemblyWrappers/BrowserExecutable.js",
+    "AssemblyWrappers/ClassLibrary.js",
+    "AssemblyWrappers/NodeExecutable.js",
+    "AssemblyWrappers/TestRunner.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.UnitTesting.Tests.js",
-  "ProjectType": "TestRunner"
+  "OutputFile": "../../bin/sdk/{{Version}}/",
+  "ProjectType": "Assets"
 }

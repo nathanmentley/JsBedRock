@@ -50,6 +50,9 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 						return false;
 					}
 				},
+				CopyFile: function (fileFrom, fileTo) {
+					this.__FS.createReadStream(fileFrom).pipe(this.__FS.createWriteStream(fileTo));	
+				},
 				Rename: function (oldName, newName) {
 					this.__FS.renameSync(oldName, newName);
 				},
