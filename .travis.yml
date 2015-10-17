@@ -1,4 +1,4 @@
 language: node_js
 node_js:
   - "4.2"
-before_script: node ./BuildTools/JsBedRock.Compiler.js solution.json
+script: node ./BuildTools/JsBedRock.Compiler.js solution.json
