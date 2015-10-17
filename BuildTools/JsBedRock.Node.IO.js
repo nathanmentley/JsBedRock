@@ -35,6 +35,21 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 				ReadFile: function (fileName, callback) {
 					return this.__FS.readFile(fileName, callback);
 				},
+				MkDir: function (path, callback) {
+					this.__FS.mkdir(path, callback);
+				},
+				MkDirSync: function (path) {
+					this.__FS.mkdirSync(path);
+				},
+				DirectoryExistsSync: function (path) {
+					try {
+						var stats = this.__FS.lstatSync(path);
+						return stats.isDirectory();
+					}
+					catch (e) {
+						return false;
+					}
+				},
 				Rename: function (oldName, newName) {
 					this.__FS.renameSync(oldName, newName);
 				},

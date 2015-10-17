@@ -45,6 +45,10 @@
                         ).toString();
                     }
                     
+                    if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(this.__Path.dirname(outputFile))) {
+                       (new JsBedRock.Node.IO.FileSystem()).MkDirSync(this.__Path.dirname(outputFile));
+                    }
+                    
                     if(!JsBedRock.Utils.String.IsEmptyOrSpaces(outputFile))
                         (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(outputFile, compiledFile);        
                 },
