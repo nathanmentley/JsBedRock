@@ -15,5 +15,6 @@
     "src/AsmConfig.js",
     "../sdk/AssemblyWrappers/TestRunner.Js"
   ],
-  "outputFile": "../../bin/JsBedRock.Node.IO.Tests.js"
+  "outputFile": "../../bin/JsBedRock.Node.IO.Tests.js",
+  "IsUnitTestProject": true
 }

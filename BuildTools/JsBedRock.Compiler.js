@@ -360,6 +360,7 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
                 this.__Path = require('path');
+                this.__ChildProcess = require('child_process');
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
@@ -379,11 +380,27 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
                                 this.__Path.join(projectDir, projectData.sourceFiles[j])
                             ).toString();
                         }
+                        
                         if(!JsBedRock.Utils.String.IsEmptyOrSpaces(outputFile))
                             (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(outputFile, compiledFile);
+                            
+                        if(projectData.IsUnitTestProject)
+                            this.__ChildProcess.exec('node ' + outputFile, function (error, stdout, stderr) { 
+                                if (error) {
+                                    JsBedRock.Console.Write(error.stack);
+                                    JsBedRock.Console.Write('Error code: '+error.code);
+                                    JsBedRock.Console.Write('Signal received: '+error.signal);
+                                    throw error;
+                                }
+                                if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stdout))
+                                    JsBedRock.Console.Write('Child Process STDOUT: '+stdout);
+                                if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stderr))
+                                    JsBedRock.Console.Write('Child Process STDERR: '+stderr);
+                            });
                     }
                 },
-                __Path: null
+                __Path: null,
+                __ChildProcess: null
             }
         });
     });

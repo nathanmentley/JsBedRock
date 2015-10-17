@@ -28,5 +28,6 @@
     
     "../sdk/AssemblyWrappers/TestRunner.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Core.Tests.js"
+  "outputFile": "../../bin/JsBedRock.Core.Tests.js",
+  "IsUnitTestProject": true
 }

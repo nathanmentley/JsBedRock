@@ -16,16 +16,13 @@
     "./src/JsBedRock.Core/package.json",
     "./src/JsBedRock.Collections/package.json",
     "./src/JsBedRock.UnitTesting/package.json",
-    
     "./src/JsBedRock.Node.IO/package.json",
-    
     "./src/JsBedRock.Compiler/package.json",
     
     "./src/JsBedRock.Framework.Tests/package.json",
     "./src/JsBedRock.Core.Tests/package.json",
     "./src/JsBedRock.Collections.Tests/package.json",
     "./src/JsBedRock.UnitTesting.Tests/package.json",
-    
     "./src/JsBedRock.Node.IO.Tests/package.json"
   ]
 }

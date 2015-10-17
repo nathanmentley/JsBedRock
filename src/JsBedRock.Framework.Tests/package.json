@@ -16,5 +16,6 @@
     "src/StringUtilsTests.js",
     "../sdk/AssemblyWrappers/TestRunner.Js"
   ],
-  "outputFile": "../../bin/JsBedRock.Framework.Tests.js"
+  "outputFile": "../../bin/JsBedRock.Framework.Tests.js",
+  "IsUnitTestProject": true
 }

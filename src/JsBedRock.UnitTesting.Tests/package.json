@@ -16,5 +16,6 @@
     "src/TestGroupTests.js",
     "../sdk/AssemblyWrappers/TestRunner.js"
   ],
-  "outputFile": "../../bin/JsBedRock.UnitTesting.Tests.js"
+  "outputFile": "../../bin/JsBedRock.UnitTesting.Tests.js",
+  "IsUnitTestProject": true
 }
