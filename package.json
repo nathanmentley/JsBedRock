@@ -11,22 +11,21 @@
   "bugs": {
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-cli": "~0.1.13",
-    "grunt-run-grunt": "~0.1.4",
-    "grunt-auto-install": "~0.3.0",
-    "grunt-contrib-watch": "~0.6.1"
-  },
-  "childProjects": [
-    "JsBedRock.Framework",
-    "JsBedRock.Core",
-    "JsBedRock.Collections",
-    "JsBedRock.UnitTesting",
+  "projects": [
+    "./src/JsBedRock.Framework/package.json",
+    "./src/JsBedRock.Core/package.json",
+    "./src/JsBedRock.Collections/package.json",
+    "./src/JsBedRock.UnitTesting/package.json",
     
-    "JsBedRock.Framework.Tests",
-    "JsBedRock.Core.Tests",
-    "JsBedRock.Collections.Tests",
-    "JsBedRock.UnitTesting.Tests"
+    "./src/JsBedRock.Node.IO/package.json",
+    
+    "./src/JsBedRock.Compiler/package.json",
+    
+    "./src/JsBedRock.Framework.Tests/package.json",
+    "./src/JsBedRock.Core.Tests/package.json",
+    "./src/JsBedRock.Collections.Tests/package.json",
+    "./src/JsBedRock.UnitTesting.Tests/package.json",
+    
+    "./src/JsBedRock.Node.IO.Tests/package.json"
   ]
 }

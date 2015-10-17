@@ -1,6 +1,7 @@
 (function(asm) {
 	asm.OnLoad(function () {
 		//Entry Point
+		(new JsBedRock.Main()).Main();
 	});
 	
 	//TODO: This is awful.
@@ -10,7 +11,7 @@
 		var o = d.createElement(t);
         var s = d.getElementsByTagName(t)[0];
         
-		o.src = u;
+		o.src = u + ".js";
         if (c)
 			o.addEventListener('load', function (e) { c(null, e); }, false);
 		

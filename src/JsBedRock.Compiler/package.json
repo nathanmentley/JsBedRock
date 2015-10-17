@@ -1,5 +1,5 @@
 {
-  "name": "JsBedRock.UnitTesting.Tests",
+  "name": "JsBedRock.Compiler",
   "version": "0.0.1",
   "license": "CC-BY-SA-4.0",
   "author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -13,8 +13,8 @@
   "sourceFiles": [
     "../../bin/JsBedRock.Framework.js",
     "src/AsmConfig.js",
-    "src/TestGroupTests.js",
-    "../sdk/AssemblyWrappers/TestRunner.js"
+    "src/Main.js",
+    "../sdk/AssemblyWrappers/NodeExecutable.js"
   ],
-  "outputFile": "../../bin/JsBedRock.UnitTesting.Tests.js"
+  "outputFile": "../../bin/JsBedRock.Compiler.js"
 }

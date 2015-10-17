@@ -7,6 +7,7 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         var PrivateMembers = {
             Defaults: {
                 Name: '',
+                Loaded: false,
                 Dependencies: [],
                 Callbacks: [],
                 Classes: [],

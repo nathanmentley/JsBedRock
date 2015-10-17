@@ -5,7 +5,8 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
     JsBedRock.Assemblies.AssemblyDependency = function (overrides) { 
         var PrivateMembers = {
             Defaults: {
-                Name: ''
+                Name: '',
+                Loaded: false
             }
         };
         

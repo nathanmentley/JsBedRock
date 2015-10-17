@@ -10,19 +10,12 @@
   "bugs": {
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-uglify": "~0.5.0",
-    "grunt-execute": "~0.2.2"
-  },
-  "private": true,
   "sourceFiles": [
-    "../../bin/JsBedRock.Framework.min.js",
+    "../../bin/JsBedRock.Framework.js",
     "src/AsmConfig.js",
     "src/DictionaryTests.js",
     "src/ListTests.js",
     "../sdk/AssemblyWrappers/TestRunner.Js"
-  ]
+  ],
+  "outputFile": "../../bin/JsBedRock.Collections.Tests.js"
 }

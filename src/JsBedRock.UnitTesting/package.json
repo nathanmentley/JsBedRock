@@ -10,16 +10,10 @@
   "bugs": {
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-concat": "~0.5.1",
-    "grunt-contrib-uglify": "~0.5.0"
-  },
-  "private": true,
   "sourceFiles": [
     "src/AsmConfig.js",
     "src/TestGroup.js",
     "../sdk/AssemblyWrappers/ClassLibrary.js"
-  ]
+  ],
+  "outputFile": "../../bin/JsBedRock.UnitTesting.js"
 }

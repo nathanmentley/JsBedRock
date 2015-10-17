@@ -35,6 +35,11 @@
                         if (!JsBedRock.Utils.String.IsEmptyOrSpaces(_message) && PrivateMembers.EnableConsole)
                             console.log(message);
                 },
+                Write: function (_message) {
+                    if (typeof console != "undefined")
+                        if (!JsBedRock.Utils.String.IsEmptyOrSpaces(_message))
+                            console.info(_message);
+                },
                 EnableDebugging: function () {
                     PrivateMembers.EnableConsole = true;
                 },

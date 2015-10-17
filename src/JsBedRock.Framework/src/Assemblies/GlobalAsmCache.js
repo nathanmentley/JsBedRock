@@ -3,16 +3,21 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 //JsBedRock.Assemblies.GlobalAssemblyCache
 (function () {
     JsBedRock.Assemblies.GlobalAssemblyCache = JsBedRock.Assemblies.GlobalAssemblyCache || {};
+    
 	var PrivateMembers = {
 		_GAC: {},
-        LoadScript: function(u, c) {
-            JsBedRock.Assemblies.LoaderLogic(u, c);
-        },
+        LoadedAsms: [],
         DoesAssemblyExist: function (asmKey) {
 		  return asmKey in PrivateMembers._GAC;
         },
+        IsAssemblyLoaded: function (asmKey) {
+		  return (PrivateMembers.LoadedAsms.indexOf(asmKey) !== -1);
+        },
         LoadAssembly: function (asmDep, callback) {
-            PrivateMembers.LoadScript('../../bin/' + PrivateMembers.GetAssemblyKey(asmDep) + '.min.js', callback);
+            JsBedRock.Assemblies.LoaderLogic(
+                PrivateMembers.GetAssemblyKey(asmDep),
+                callback
+            );
             
             //add placeholder in GAC.
             PrivateMembers._GAC[PrivateMembers.GetAssemblyKey(asmDep)] = asmDep;
@@ -28,6 +33,7 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             
             //include in GAC.
             PrivateMembers._GAC[PrivateMembers.GetAssemblyKey(asmDef)] = asmDef;
+            PrivateMembers.LoadedAsms.push(PrivateMembers.GetAssemblyKey(asmDef));
         }
 	};
     
@@ -36,8 +42,19 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         for(var i = 0; i < asmDef.Dependencies.length; i++){
             if(!PrivateMembers.DoesAssemblyExist(PrivateMembers.GetAssemblyKey(asmDef.Dependencies[i]))){
                 PrivateMembers.LoadAssembly(asmDef.Dependencies[i], function () {
-                    JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asmDef);
+		            setTimeout(function() {
+                            JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asmDef);
+                        },
+                        1
+                    );
                 });
+                return;
+            }else if(!PrivateMembers.IsAssemblyLoaded(PrivateMembers.GetAssemblyKey(asmDef.Dependencies[i]))){
+		        setTimeout(function() {
+                        JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asmDef);
+                    },
+                    1
+                );
                 return;
             }
         }

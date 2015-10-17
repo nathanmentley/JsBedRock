@@ -29,8 +29,9 @@
 	
 	//TODO: This is awful.
 	JsBedRock.Assemblies.LoaderLogic = function (u, c){
-		eval(require('fs').readFileSync(u, 'utf8'));
-		c();
+		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		
+		setTimeout( function() { c(); }, 0 );
 	}
 	
 	JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
