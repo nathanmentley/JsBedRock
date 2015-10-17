@@ -16,9 +16,8 @@
     "src/Types/Interface.js",
     "src/Types/Object.js",
     
-    "src/Console.js",
-    
-    "../sdk/AssemblyWrappers/ClassLibrary.js"
+    "src/Console.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Core.js"
+  "outputFile": "../../bin/JsBedRock.Core.js",
+  "ProjectType": "ClassLibrary"
 }

@@ -1,5 +1,5 @@
 {
-  "name": "JsBedRock.Compiler",
+  "name": "JsBedRock.Node.IO.Tests",
   "version": "0.0.1",
   "license": "CC-BY-SA-4.0",
   "author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -11,10 +11,8 @@
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "sourceFiles": [
-    "../../bin/JsBedRock.Framework.js",
-    "src/AsmConfig.js",
-    "src/Main.js",
-    "../sdk/AssemblyWrappers/NodeExecutable.js"
+    "src/AsmConfig.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Compiler.js"
+  "outputFile": "../../bin/JsBedRock.Node.IO.Tests.js",
+  "ProjectType": "TestRunner"
 }

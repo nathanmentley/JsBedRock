@@ -1,5 +1,5 @@
 {
-  "name": "JsBedRock.UnitTesting.Tests",
+  "name": "JsBedRock.Collections.Tests",
   "version": "0.0.1",
   "license": "CC-BY-SA-4.0",
   "author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -11,11 +11,10 @@
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "sourceFiles": [
-    "../../bin/JsBedRock.Framework.js",
     "src/AsmConfig.js",
-    "src/TestGroupTests.js",
-    "../sdk/AssemblyWrappers/TestRunner.js"
+    "src/DictionaryTests.js",
+    "src/ListTests.js"
   ],
-  "outputFile": "../../bin/JsBedRock.UnitTesting.Tests.js",
-  "IsUnitTestProject": true
+  "outputFile": "../../bin/JsBedRock.Collections.Tests.js",
+  "ProjectType": "TestRunner"
 }

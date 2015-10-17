@@ -22,5 +22,6 @@
     "src/Assemblies/AssemblyDef.js",
     "src/Assemblies/AssemblyDependency.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Framework.js"
+  "outputFile": "../../bin/JsBedRock.Framework.js",
+  "ProjectType": "Flat"
 }

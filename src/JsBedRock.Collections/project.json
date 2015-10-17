@@ -16,8 +16,8 @@
     "src/IList.js",
     "src/List.js",
     "src/IDictionary.js",
-    "src/Dictionary.js",
-    "../sdk/AssemblyWrappers/ClassLibrary.js"
+    "src/Dictionary.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Collections.js"
+  "outputFile": "../../bin/JsBedRock.Collections.js",
+  "ProjectType": "ClassLibrary"
 }

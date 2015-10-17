@@ -1,5 +1,5 @@
 {
-  "name": "JsBedRock.Node.IO",
+  "name": "JsBedRock.Framework.Tests",
   "version": "0.0.1",
   "license": "CC-BY-SA-4.0",
   "author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -12,8 +12,8 @@
   },
   "sourceFiles": [
     "src/AsmConfig.js",
-    "src/FileSystem.js",
-    "../sdk/AssemblyWrappers/ClassLibrary.js"
+    "src/StringUtilsTests.js"
   ],
-  "outputFile": "../../bin/JsBedRock.Node.IO.js"
+  "outputFile": "../../bin/JsBedRock.Framework.Tests.js",
+  "ProjectType": "TestRunner"
 }

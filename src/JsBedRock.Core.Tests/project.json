@@ -11,7 +11,6 @@
     "url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "sourceFiles": [
-    "../../bin/JsBedRock.Framework.js",
     "src/AsmConfig.js",
     
     "src/TestData/ITestInterface1.js",
@@ -24,10 +23,8 @@
     "src/TestGroupControllers/ImplementTests.js",
     "src/TestGroupControllers/InheritTests.js",
     "src/TestGroupControllers/IsOfTypeTests.js",
-    "src/TestGroupControllers/ReflectionGetMethodNameTests.js",
-    
-    "../sdk/AssemblyWrappers/TestRunner.js"
+    "src/TestGroupControllers/ReflectionGetMethodNameTests.js"
   ],
   "outputFile": "../../bin/JsBedRock.Core.Tests.js",
-  "IsUnitTestProject": true
+  "ProjectType": "TestRunner"
 }

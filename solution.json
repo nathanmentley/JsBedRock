@@ -1,0 +1,29 @@
+{
+  "name": "JsBedRock",
+  "version": "0.0.1",
+  "license": "CC-BY-SA-4.0",
+  "description": "An object oriented framework for JavaScript.",
+  "author": "Nathan Mentley <NathanMentley@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nathanmentley/JsBedRock"
+  },
+  "bugs": {
+    "url": "https://github.com/nathanmentley/JsBedRock/issues"
+  },
+  "projects": [
+    "./src/JsBedRock.Framework/project.json",
+    "./src/JsBedRock.Core/project.json",
+    "./src/JsBedRock.Collections/project.json",
+    "./src/JsBedRock.UnitTesting/project.json",
+    "./src/JsBedRock.Node.IO/project.json",
+    "./src/JsBedRock.Compiler/project.json",
+    
+    "./src/JsBedRock.Framework.Tests/project.json",
+    "./src/JsBedRock.Core.Tests/project.json",
+    "./src/JsBedRock.Collections.Tests/project.json",
+    "./src/JsBedRock.UnitTesting.Tests/project.json",
+    "./src/JsBedRock.Node.IO.Tests/project.json"
+  ],
+  "FrameworkVersion": "0.0.1"
+}
