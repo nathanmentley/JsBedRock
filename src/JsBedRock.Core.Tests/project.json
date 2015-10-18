@@ -15,6 +15,6 @@
     "src/TestGroupControllers/IsOfTypeTests.js",
     "src/TestGroupControllers/ReflectionGetMethodNameTests.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Core.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.Tests.js",
   "ProjectType": "TestRunner"
 }

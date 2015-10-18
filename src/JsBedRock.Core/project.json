@@ -8,6 +8,6 @@
     
     "src/Console.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Core.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.js",
   "ProjectType": "ClassLibrary"
 }

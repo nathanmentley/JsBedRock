@@ -1,5 +1,7 @@
 
 ;
+
+;
 ﻿var JsBedRock = {};
 JsBedRock.FrameworkVersion = '0.0.1';
 ;
@@ -340,3 +342,80 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         );
     };
 })();
+;
+(function () {
+	new JsBedRock.Assemblies.AssemblyDef({
+		Name: 'JsBedRock.Framework.Tests',
+		Dependencies: [
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.UnitTesting'
+			}),
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Collections'
+			})
+		]
+	});
+})();
+;
+JsBedRock.Framework = JsBedRock.Framework || {};
+JsBedRock.Framework.Tests = JsBedRock.Framework.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Framework.Tests.StringUtilsTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'StringUtilsTests',
+                IsEmptyOrSpaces: function () {
+                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces("      "), "Whitespace returns true.");
+                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(""), "Empty string returns true.");
+                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(null), "null returns true.");
+                    this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("Westeros"), "characters returns false");
+                    this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("  Essos  "), "characters wrapped in whitespace returns false");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+(function(asm) {
+	asm.OnLoad(function () {
+		JsBedRock.Console.EnableDebugging();
+		
+		var testClasses = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(asm, JsBedRock.UnitTesting.TestGroup);
+		
+		for(var i = 0; i < testClasses.length; i++) {
+			var instance = new testClasses[i]();
+			
+			instance.InitTestGroup();
+			
+			for (var j = 0; j < Object.keys(testClasses[i].prototype).length; j++) {
+				if(!(Object.keys(testClasses[i].prototype)[j] in JsBedRock.UnitTesting.TestGroup.prototype)) {
+					instance.InitTest();
+					instance[Object.keys(testClasses[i].prototype)[j]]();
+					instance.DeinitTest();
+				}
+			}
+			
+			instance.DeinitTestGroup();
+			
+			JsBedRock.Console.Info(instance.TestGroupName + " results: " + instance.GetSuccesses() + " / " + instance.GetAttempts() + " passed tests.");
+			
+			if (instance.GetFailures() > 0){
+				JsBedRock.Console.Error("Unit Tests Failed. See log for details.");
+			}
+		}
+	});
+	
+	//TODO: This is awful.
+	JsBedRock.Assemblies.LoaderLogic = function (u, c){
+		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		
+		setTimeout( function() { c(); }, 0 );
+	}
+	
+	JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+})(JsBedRock.CurrentAssembly);

@@ -1,5 +1,7 @@
 
 ;
+
+;
 ﻿var JsBedRock = {};
 JsBedRock.FrameworkVersion = '0.0.1';
 ;
@@ -340,3 +342,142 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         );
     };
 })();
+;
+(function () {
+	new JsBedRock.Assemblies.AssemblyDef({
+		Name: 'JsBedRock.Collections.Tests',
+		Dependencies: [
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.UnitTesting'
+			}),
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Collections'
+			})
+		]
+	});
+})();
+;
+JsBedRock.Collections = JsBedRock.Collections || {};
+JsBedRock.Collections.Tests = JsBedRock.Collections.Tests || {};
+
+//JsBedRock.Collections
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Collections.Tests.DictionaryTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'DictionaryTests',
+                FirstTest: function () {
+                    var list = new JsBedRock.Collections.Dictionary();
+                    var list2 = new JsBedRock.Collections.Dictionary();
+                    
+                    list.Add("test", 1);
+                    list.Add("test1", 2);
+                    list.Add("test2", 3);
+                    list.Add("test3", 4);
+                    
+                    list2.Add("test", 9);
+                    list2.Add("test1", 8);
+                    list2.Add("test2", 7);
+                    list2.Add("test3", 6);
+                    list2.Add("test4", 5);
+                    
+                    this.Assert(list.Contains("test1") === true, "Console Debugging Turns On");
+                    list.Remove("test1");
+                    this.Assert(list.Contains("test1") === false, "Console Debugging Turns On");
+                    
+                    list2.Remove("test");
+                    list2.Remove("test3");
+                    
+                    this.Assert(list2.Get("test4") === 5, "Console Debugging Turns On");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Collections = JsBedRock.Collections || {};
+JsBedRock.Collections.Tests = JsBedRock.Collections.Tests || {};
+
+//JsBedRock.Collections
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Collections.Tests.ListTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'ListTests',
+                FirstTest: function () {
+                    var list = new JsBedRock.Collections.List();
+                    var list2 = new JsBedRock.Collections.List();
+                    
+                    this.Assert(list.Count() === 0, "Console Debugging Turns On");
+                    this.Assert(list2.Count() === 0, "Console Debugging Turns On");
+                    
+                    list.Add("test");
+                    list.Add("test1");
+                    list.Add("test2");
+                    list.Add("test3");
+                    
+                    list2.Add("test");
+                    list2.Add("test1");
+                    list2.Add("test2");
+                    list2.Add("test3");
+                    list2.Add("test4");
+                    
+                    this.Assert(list.Count() === 4, "Console Debugging Turns On");
+                    this.Assert(list2.Count() === 5, "Console Debugging Turns On");
+                    
+                    this.Assert(list.IndexOf("test1") === 1, "Console Debugging Turns On");
+                    list.Remove("test1");
+                    this.Assert(list.IndexOf("test2") === 1, "Console Debugging Turns On");
+                    this.Assert(list2.IndexOf("test2") === 2, "Console Debugging Turns On");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+(function(asm) {
+	asm.OnLoad(function () {
+		JsBedRock.Console.EnableDebugging();
+		
+		var testClasses = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(asm, JsBedRock.UnitTesting.TestGroup);
+		
+		for(var i = 0; i < testClasses.length; i++) {
+			var instance = new testClasses[i]();
+			
+			instance.InitTestGroup();
+			
+			for (var j = 0; j < Object.keys(testClasses[i].prototype).length; j++) {
+				if(!(Object.keys(testClasses[i].prototype)[j] in JsBedRock.UnitTesting.TestGroup.prototype)) {
+					instance.InitTest();
+					instance[Object.keys(testClasses[i].prototype)[j]]();
+					instance.DeinitTest();
+				}
+			}
+			
+			instance.DeinitTestGroup();
+			
+			JsBedRock.Console.Info(instance.TestGroupName + " results: " + instance.GetSuccesses() + " / " + instance.GetAttempts() + " passed tests.");
+			
+			if (instance.GetFailures() > 0){
+				JsBedRock.Console.Error("Unit Tests Failed. See log for details.");
+			}
+		}
+	});
+	
+	//TODO: This is awful.
+	JsBedRock.Assemblies.LoaderLogic = function (u, c){
+		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		
+		setTimeout( function() { c(); }, 0 );
+	}
+	
+	JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+})(JsBedRock.CurrentAssembly);

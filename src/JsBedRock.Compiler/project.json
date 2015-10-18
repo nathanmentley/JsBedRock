@@ -3,8 +3,19 @@
   "SourceFiles": [
     "src/AsmConfig.js",
     "src/SettingResolver.js",
-    "src/ProjectCompiler.js",
+    "src/Compilers/ProjectTypesEnum.js",
+    "src/Compilers/ProjectCompilerBase.js",
+    "src/Compilers/ExecutableProjectCompilerBase.js",
+    "src/Compilers/AssetProjectCompiler.js",
+    "src/Compilers/BrowserExecutableProjectCompiler.js",
+    "src/Compilers/ClassLibraryProjectCompiler.js",
+    "src/Compilers/NodeExecutableProjectCompiler.js",
+    "src/Compilers/TestRunnerProjectCompiler.js",
     "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.IO",
+    "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/JsBedRock.Compiler.js",
   "ProjectType": "NodeExecutable"

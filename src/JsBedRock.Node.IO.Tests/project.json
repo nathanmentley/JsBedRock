@@ -3,6 +3,6 @@
   "SourceFiles": [
     "src/AsmConfig.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Node.IO.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Node.IO.Tests.js",
   "ProjectType": "TestRunner"
 }

@@ -1,5 +1,7 @@
 
 ;
+
+;
 ﻿var JsBedRock = {};
 JsBedRock.FrameworkVersion = '0.0.1';
 ;
@@ -340,3 +342,112 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         );
     };
 })();
+;
+var WebApp = {};
+
+(function () {
+	new JsBedRock.Assemblies.AssemblyDef({
+		Name: 'WebApp',
+		Dependencies: [
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Core'
+			})
+		]
+	});
+})();
+;
+WebApp.TestClasses = WebApp.TestClasses || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: (WebApp.TestClasses.Base = function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+            }),
+            Members: {
+				TestMethod: function () {
+                    JsBedRock.Console.Write("Base");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+WebApp.TestClasses = WebApp.TestClasses || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: (WebApp.TestClasses.OnceInheritedClass = function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, WebApp.TestClasses.Base);
+            }),
+            Inherit: WebApp.TestClasses.Base,
+            Members: {
+				TestMethod: function () {
+                    JsBedRock.Console.Write("OnceInheritedClass");
+                    this.Base();
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly)
+;
+WebApp.TestClasses = WebApp.TestClasses || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: (WebApp.TestClasses.TwiceInheritedClass = function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, WebApp.TestClasses.OnceInheritedClass);
+            }),
+            Inherit: WebApp.TestClasses.OnceInheritedClass,
+            Members: {
+				TestMethod: function () {
+                    JsBedRock.Console.Write("TwiceInheritedClass");
+                    this.Base();
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly)
+;
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: (JsBedRock.Main = function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+            }),
+            Members: {
+				Main: function () {
+                    var test = new WebApp.TestClasses.TwiceInheritedClass();
+                    test.TestMethod();
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+(function(asm) {
+	asm.OnLoad(function () {
+		//Entry Point
+		(new JsBedRock.Main()).Main();
+	});
+	
+	//TODO: This is awful.
+	JsBedRock.Assemblies.LoaderLogic = function (u, c){
+		var d = document;
+		var t = 'script';
+		var o = d.createElement(t);
+        var s = d.getElementsByTagName(t)[0];
+        
+		o.src = u + ".js";
+        if (c)
+			o.addEventListener('load', function (e) { c(null, e); }, false);
+		
+        s.parentNode.insertBefore(o, s);
+	}
+	
+	document.addEventListener("DOMContentLoaded", function(event) {
+		JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+	});
+})(JsBedRock.CurrentAssembly);

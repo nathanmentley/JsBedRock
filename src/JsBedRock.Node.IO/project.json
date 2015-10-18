@@ -4,6 +4,6 @@
     "src/AsmConfig.js",
     "src/FileSystem.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Node.IO.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Node.IO.js",
   "ProjectType": "ClassLibrary"
 }

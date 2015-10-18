@@ -18,5 +18,7 @@
         s.parentNode.insertBefore(o, s);
 	}
 	
-	JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+	document.addEventListener("DOMContentLoaded", function(event) {
+		JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+	});
 })(JsBedRock.CurrentAssembly);

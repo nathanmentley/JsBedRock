@@ -4,6 +4,6 @@
     "src/AsmConfig.js",
     "src/TestGroup.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.UnitTesting.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UnitTesting.js",
   "ProjectType": "ClassLibrary"
 }

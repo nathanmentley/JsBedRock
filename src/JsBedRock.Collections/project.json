@@ -8,6 +8,6 @@
     "src/IDictionary.js",
     "src/Dictionary.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Collections.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Collections.js",
   "ProjectType": "ClassLibrary"
 }

@@ -1,5 +1,7 @@
 
 ;
+
+;
 ﻿var JsBedRock = {};
 JsBedRock.FrameworkVersion = '0.0.1';
 ;
@@ -340,3 +342,90 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         );
     };
 })();
+;
+(function () {
+	new JsBedRock.Assemblies.AssemblyDef({
+		Name: 'JsBedRock.UnitTesting.Tests',
+		Dependencies: [
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.UnitTesting'
+			}),
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Collections'
+			})
+		]
+	});
+})();
+;
+JsBedRock.UnitTesting = JsBedRock.UnitTesting || {};
+JsBedRock.UnitTesting.Tests = JsBedRock.UnitTesting.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.UnitTesting.Tests.TestGroupTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'TestGroupTests',
+                TestGroupKeepsTrackOfAsserts: function () {
+                    var testGroup = new JsBedRock.UnitTesting.TestGroup();
+                    
+                    this.Assert(testGroup.GetFailures() === 0, "should start with zero failures.");
+                    this.Assert(testGroup.GetAttempts() === 0, "should start with zero attempts.");
+                    this.Assert(testGroup.GetSuccesses() === 0, "should start with zero successes.");
+                    
+                    testGroup.Assert(false, "Mock: force fail.");
+                    
+                    this.Assert(testGroup.GetAttempts() === 1, "a failure should count as an attempt.");
+                    this.Assert(testGroup.GetFailures() === 1, "a failure should count as a failure.");
+                    
+                    testGroup.Assert(true, "Mock: force pass.");
+                    
+                    this.Assert(testGroup.GetAttempts() === 2, "a pass should count as an attempt.");
+                    this.Assert(testGroup.GetSuccesses() === 1, "a pass should count as a success.");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+(function(asm) {
+	asm.OnLoad(function () {
+		JsBedRock.Console.EnableDebugging();
+		
+		var testClasses = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(asm, JsBedRock.UnitTesting.TestGroup);
+		
+		for(var i = 0; i < testClasses.length; i++) {
+			var instance = new testClasses[i]();
+			
+			instance.InitTestGroup();
+			
+			for (var j = 0; j < Object.keys(testClasses[i].prototype).length; j++) {
+				if(!(Object.keys(testClasses[i].prototype)[j] in JsBedRock.UnitTesting.TestGroup.prototype)) {
+					instance.InitTest();
+					instance[Object.keys(testClasses[i].prototype)[j]]();
+					instance.DeinitTest();
+				}
+			}
+			
+			instance.DeinitTestGroup();
+			
+			JsBedRock.Console.Info(instance.TestGroupName + " results: " + instance.GetSuccesses() + " / " + instance.GetAttempts() + " passed tests.");
+			
+			if (instance.GetFailures() > 0){
+				JsBedRock.Console.Error("Unit Tests Failed. See log for details.");
+			}
+		}
+	});
+	
+	//TODO: This is awful.
+	JsBedRock.Assemblies.LoaderLogic = function (u, c){
+		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		
+		setTimeout( function() { c(); }, 0 );
+	}
+	
+	JsBedRock.Assemblies.GlobalAssemblyCache.RegisterAssembly(asm);
+})(JsBedRock.CurrentAssembly);

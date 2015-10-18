@@ -5,6 +5,6 @@
     "src/DictionaryTests.js",
     "src/ListTests.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Collections.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Collections.Tests.js",
   "ProjectType": "TestRunner"
 }

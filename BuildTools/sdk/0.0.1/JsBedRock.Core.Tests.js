@@ -345,333 +345,284 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 ;
 (function () {
 	new JsBedRock.Assemblies.AssemblyDef({
-		Name: 'JsBedRock.Compiler',
+		Name: 'JsBedRock.Core.Tests',
 		Dependencies: [
 			new JsBedRock.Assemblies.AssemblyDependency({
-				Name: 'JsBedRock.Node.IO'
+				Name: 'JsBedRock.UnitTesting'
+			}),
+			new JsBedRock.Assemblies.AssemblyDependency({
+				Name: 'JsBedRock.Collections'
 			})
 		]
 	});
 })();
 ;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
+JsBedRock.Tests = JsBedRock.Tests || {};
+JsBedRock.Tests.Utils = JsBedRock.Tests.Utils || {};
+JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.SettingResolver = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: function (soultionData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-            },
-            Members: {
-                ResolveSolutionSetting: function (solutionData, value) {
-                    return value.replace(/{{.*?}}/g, function myFunction(x){return solutionData[x.substring(2, x.length - 2)]; });
+            JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1 = JsBedRock.Utils.ObjectOriented.CreateInterface({
+                Name: "ITestInterface1",
+                Members: {
+                    TestMethod: function () { },
+                    TestMethod2: function () { },
+                    TestMethod3: function () { }
                 }
-            }
-        });
+            });
     });
 })(JsBedRock.CurrentAssembly);
 ;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
+JsBedRock.Tests = JsBedRock.Tests || {};
+JsBedRock.Tests.Utils = JsBedRock.Tests.Utils || {};
+JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.ProjectTypes = {
-            Assets: "Assets",
-            Flat: "Flat",
-            ClassLibrary: "ClassLibrary",
-            TestRunner: "TestRunner",
-            BrowserExecutable: "BrowserExecutable",
-            NodeExecutable: "NodeExecutable"
-        };
-	});
-})(JsBedRock.CurrentAssembly);
-;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
-
-(function (asm) {
-    asm.OnLoad(function () {
-        var PrivateStatics = {
-            NewLineChar: "\r\n"
-        };
-        
-        JsBedRock.Compiler.ProjectCompilerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: function (soultionData, projectData, projectFile) {
-                this.__Path = require('path');
-                this.__SettingResolver = new JsBedRock.Compiler.SettingResolver();
-                
-                this._SolutionData = soultionData;
-                this._ProjectData = projectData;
-                this._ProjectDir = this.__Path.dirname(projectFile);
-                this._OutputFile = this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.OutputFile));
-                
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-            },
-            Members: {
-				CompileProject: function () {
-                    this._WriteOutputFile(
-                        this._BuildProject()
-                    );
+            JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1 = JsBedRock.Utils.ObjectOriented.CreateClass({
+                Inherit: JsBedRock.Types.Object,
+                Constructor: function () {
+                    JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
                 },
-                _BuildProject: function () {
-                    var compiledFile = '';
-                    
-                    for (var j = 0; j < this._ProjectData.SourceFiles.length; j++){
-                        compiledFile = this._ConcatFile(compiledFile, this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
-                    }
-                    
-                    return compiledFile;
-                },
-                _WriteOutputFile: function(compiledFile) {
-                    this._EnsureDirectoryExists(this.__Path.dirname(this._OutputFile));
-                    
-                    if(!JsBedRock.Utils.String.IsEmptyOrSpaces(this._OutputFile))
-                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile, compiledFile);   
-                },
-                _EnsureDirectoryExists: function(directory) {
-                    var paths = directory.split(this.__Path.sep);
-                    
-                    if(paths.length > 1) {
-                        paths.pop();
-                        this._EnsureDirectoryExists(paths.join(this.__Path.sep));
-                    }
-                    
-                    if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(directory)) {
-                       (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
-                    }
-                },
-                _GetSdkLocation: function (solutionData) {
-                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(solutionData.SDKLocationOverride))
-                        return __dirname + "/sdk/" + this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.FrameworkVersion) + "/";
-                        
-                    return this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.SDKLocationOverride);
-                },
-                _ConcatFile: function (currentFile, fileToAdd) {
-                    return currentFile + PrivateStatics.NewLineChar + ";" + PrivateStatics.NewLineChar +
-                        (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(fileToAdd).toString();
-                },
-                _SolutionData: null,
-                _ProjectData: null,
-                _ProjectDir: null,
-                _OutputFile: null,
-                __Path: null
-            }
-        });
-    });
-})(JsBedRock.CurrentAssembly);
-;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
-
-(function (asm) {
-    asm.OnLoad(function () {
-        JsBedRock.Compiler.ExecutableProjectCompilerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Inherit: JsBedRock.Compiler.ProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-				CompileProject: function () {
-                    this.Base();
-                    
-                    this._CopyDependencies();
-                },
-                _BuildProject: function () {
-                    //return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base();
-                    return this.Base();
-                },
-                _CopyDependencies: function() {
-                    //TODO: Support non framework dependencies.
-                    var outputPath = this.__Path.dirname(this._OutputFile);
-                    
-                    for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
-                        var sourceFile = this._GetSdkLocation(this._SolutionData) + this._ProjectData.Dependencies[i] + ".js";
-                        var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
-                        
-                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                            sourceFile,
-                            targetFile
-                        );
+                Members: {
+                    Name: "BaseTestObject1",
+                    TestMethod: function (var1) {
+                        return ++var1;
                     }
                 }
-            }
-        });
+            });
     });
 })(JsBedRock.CurrentAssembly);
 ;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
+JsBedRock.Tests = JsBedRock.Tests || {};
+JsBedRock.Tests.Utils = JsBedRock.Tests.Utils || {};
+JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.AssetProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
-			Inherit: JsBedRock.Compiler.ProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-                CompileProject: function () {
-                    for (var j = 0; j < this._ProjectData.SourceFiles.length; j++){
-                        var targetFile = this.__Path.join(this._OutputFile, this._ProjectData.SourceFiles[j]);
-                        this._EnsureDirectoryExists(this.__Path.dirname(targetFile));
-                    
-                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                            this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]),
-                            targetFile
-                        );
-                    }
+            JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2 = JsBedRock.Utils.ObjectOriented.CreateClass({
+                Inherit: JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1,
+                Constructor: function () {
+                    JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1);
                 },
-            }
-        });
-    });
-})(JsBedRock.CurrentAssembly);
-;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
-
-(function (asm) {
-    asm.OnLoad(function () {
-        JsBedRock.Compiler.BrowserExecutableProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
-			Inherit: JsBedRock.Compiler.ExecutableProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js"
-                    );
+                Members: {
+                    Name: "BaseTestObject2",
+                    TestMethod2: function (var1) { return var1 + 5; },
+                    TestMethod3: function () { return 'a'; }
                 }
-            }
-        });
+            });
     });
 })(JsBedRock.CurrentAssembly);
 ;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
+JsBedRock.Tests = JsBedRock.Tests || {};
+JsBedRock.Tests.Utils = JsBedRock.Tests.Utils || {};
+JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.ClassLibraryProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
-			Inherit: JsBedRock.Compiler.ProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js"
-                    );
+            JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3 = JsBedRock.Utils.ObjectOriented.CreateClass({
+                Inherit: JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2,
+                Constructor: function () {
+                    JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2);
+                },
+                Implements: [
+                    JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1
+                ],
+                Members: {
+                    Name: "BaseTestObject3",
+                    TestMethod: function (var1) {
+                        var1 = this.Base(var1);
+                        return var1 + 10;
+                    },
+                    TestMethod3: function () { return 'b'; }
                 }
-            }
-        });
+            });
     });
 })(JsBedRock.CurrentAssembly);
 ;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.NodeExecutableProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
-			Inherit: JsBedRock.Compiler.ExecutableProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.NodeExecutable + ".js"
-                    );
-                }
-            }
-        });
-    });
-})(JsBedRock.CurrentAssembly);
-;
-JsBedRock.Compiler = JsBedRock.Compiler || {};
-
-(function (asm) {
-    asm.OnLoad(function () {
-        JsBedRock.Compiler.TestRunnerProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
-			Inherit: JsBedRock.Compiler.ExecutableProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                this.__ChildProcess = require('child_process');
-                
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, projectData, projectFile);
-            },
-            Members: {
-				CompileProject: function () {
-					this.Base();
-                    
-                    this.__ExecuteUnitTests(this._ProjectData);
-                },
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js"
-                    );
-                },
-                __ExecuteUnitTests: function (projectData) {
-                    this.__ChildProcess.exec('node ' + this._OutputFile, function (error, stdout, stderr) { 
-                        if (error) {
-                            JsBedRock.Console.Write(error.stack);
-                            JsBedRock.Console.Write('Error code: '+error.code);
-                            JsBedRock.Console.Write('Signal received: '+error.signal);
-                            throw error;
-                        }
-                        if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stdout))
-                            JsBedRock.Console.Write('Child Process STDOUT: '+stdout);
-                        if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stderr))
-                            JsBedRock.Console.Write('Child Process STDERR: '+stderr);
-                    });
-                },
-                __ChildProcess: null
-            }
-        });
-    });
-})(JsBedRock.CurrentAssembly);
-;
-(function (asm) {
-    asm.OnLoad(function () {
-        JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Core.Tests.ConsoleTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
             Constructor: function () {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
             },
             Members: {
-				Main: function () {
-                    var settingResolver = new JsBedRock.Compiler.SettingResolver();
-                    
-                    var solutionFile = process.argv[2];
-                    var solutionData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(solutionFile).toString());
-                    
-                    for(var i = 0; i < solutionData.Projects.length; i++){
-                        var projectFile = settingResolver.ResolveSolutionSetting(solutionData, solutionData.Projects[i]);
-                        var projectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
-                        
-                        var projectCompiler = this.ProjectCompilerFactory(solutionData, projectData, projectFile);
-                        
-                        projectCompiler.CompileProject();
-                    }
-                },
-                ProjectCompilerFactory: function (solutionData, projectData, projectFile) {
-                    switch(projectData.ProjectType){
-                        case JsBedRock.Compiler.ProjectTypes.Assets:
-                            return new JsBedRock.Compiler.AssetProjectCompiler(solutionData, projectData, projectFile);
-                            break;
-                        case JsBedRock.Compiler.ProjectTypes.BrowserExecutable:
-                            return new JsBedRock.Compiler.BrowserExecutableProjectCompiler(solutionData, projectData, projectFile);
-                            break;
-                        case JsBedRock.Compiler.ProjectTypes.ClassLibrary:
-                            return new JsBedRock.Compiler.ClassLibraryProjectCompiler(solutionData, projectData, projectFile);
-                            break;
-                        case JsBedRock.Compiler.ProjectTypes.NodeExecutable:
-                            return new JsBedRock.Compiler.NodeExecutableProjectCompiler(solutionData, projectData, projectFile);
-                            break;
-                        case JsBedRock.Compiler.ProjectTypes.TestRunner:
-                            return new JsBedRock.Compiler.TestRunnerProjectCompiler(solutionData, projectData, projectFile);
-                            break;
-                        default:
-                            return new JsBedRock.Compiler.ProjectCompilerBase(solutionData, projectData, projectFile);
-                            break;
-                    };
+                TestGroupName: 'ConsoleTests',
+				Test: function () {
+                    JsBedRock.Console.DisableDebugging();
+                    this.Assert(!JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns Off");
+                
+                    //assert.throws(function () { JsBedRock.Console.Error("Without Debugging"); }, Error, "Error throws exception with debugging turned off.");
+                
+                    JsBedRock.Console.EnableDebugging();
+                    this.Assert(JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns On");
+                
+                    //assert.throws(function () { JsBedRock.Console.Error("With Debugging"); }, Error, "Error throws exception with debugging turned on.");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Core.Tests.GetTypeTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'GetTypeTests',
+				Test: function () {
+                    this.Assert(
+                        new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3().GetType() === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3,
+                        "BaseTestObject3 -> GetType returned correct object def"
+                    );
+                    this.Assert(
+                        new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2().GetType() === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2,
+                        "BaseTestObject2 -> GetType returned correct object def"
+                    );
+                    this.Assert(
+                        new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1().GetType() === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1,
+                        "BaseTestObject1 -> GetType returned correct object def"
+                    );
+                    this.Assert(
+                        new JsBedRock.Types.Object().GetType() === JsBedRock.Types.Object,
+                        "Object -> GetType returned correct object def"
+                    );
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Core.Tests.ImplementTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'ImplementTests',
+				Test: function () {
+                    var object3 = new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3();
+                
+                    //Test that we've implemented all the interfaces and that we're of the interface types.
+                    //this.Assert(object3.__Implemented.length === 2, "Implemented both interfaces.");
+                
+                    this.Assert(object3.__Implemented[0] === JsBedRock.Types.Interface, "Implemented Interface");
+                    //this.Assert(object3.__Implemented[1] === JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1, "Implemented ITestInterface1");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Core.Tests.InheritTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'InheritTests',
+				Test: function () {
+                    var object3 = new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3();
+                
+                    //Test that we're inherited all three sub types.
+                    this.Assert(object3.__InheritanceChain.length === 3, "BaseTestObject3 correctly inherited three sub classes")
+                
+                    this.Assert(object3.__InheritanceChain[0] === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2, "Inherited BaseTestObject2");
+                    this.Assert(object3.__InheritanceChain[1] === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1, "Inherited BaseTestObject1");
+                    this.Assert(object3.__InheritanceChain[2] === JsBedRock.Types.Object, "Inherited Object");
+                
+                    //Test that we're inheriting methods.
+                    this.Assert(object3.TestMethod2(2) === 7, "Method Inherited Correctly.");
+                
+                    //Test that we're overriding methods correctly.
+                    this.Assert(object3.TestMethod3() === 'b', "Method Overriden Correctly.");
+                
+                    //Test overriden methods correctly handle this.Base(0);
+                    this.Assert(object3.TestMethod(3) === 14, "this.Base() executed previously defined method the correct number of times.");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Core.Tests.IsOfTypeTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'IsOfTypeTests',
+				Test: function () {
+                    var object3 = new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3();
+                
+                    //Test that we're inherited all three sub types and that we're of the expected type.
+                    this.Assert(JsBedRock.Utils.ObjectOriented.IsOfType(object3, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3), "IsOfType BaseTestObject3");
+                    this.Assert(JsBedRock.Utils.ObjectOriented.IsOfType(object3, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2), "IsOfType BaseTestObject2");
+                    this.Assert(JsBedRock.Utils.ObjectOriented.IsOfType(object3, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1), "IsOfType BaseTestObject1");
+                    this.Assert(JsBedRock.Utils.ObjectOriented.IsOfType(object3, JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1), "IsOfType ITestInterface1");
+                    this.Assert(JsBedRock.Utils.ObjectOriented.IsOfType(object3, JsBedRock.Types.Object), "IsOfType Object");
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Core = JsBedRock.Core || {};
+JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Core.Tests.ReflectionGetMethodNameTests = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UnitTesting.TestGroup,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
+            },
+            Members: {
+                TestGroupName: 'ReflectionGetMethodNameTests',
+				Test: function () {
+                    var object3 = new JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3();
+                
+                    this.Assert(
+                        JsBedRock.Utils.ObjectOriented.Reflection.GetMethodName(
+                            object3,
+                            JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject3.prototype.TestMethod3
+                        ) === "TestMethod3",
+                        "Reflected method name from method declared on the instance"
+                    );
+                
+                    this.Assert(
+                        JsBedRock.Utils.ObjectOriented.Reflection.GetMethodName(
+                            object3,
+                            JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2.prototype.TestMethod2
+                        ) === "TestMethod2",
+                        "Reflected method name from method inherited onto the instance"
+                    );
                 }
             }
         });
@@ -680,8 +631,31 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 ;
 (function(asm) {
 	asm.OnLoad(function () {
-		//Entry Point
-		(new JsBedRock.Main()).Main();
+		JsBedRock.Console.EnableDebugging();
+		
+		var testClasses = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(asm, JsBedRock.UnitTesting.TestGroup);
+		
+		for(var i = 0; i < testClasses.length; i++) {
+			var instance = new testClasses[i]();
+			
+			instance.InitTestGroup();
+			
+			for (var j = 0; j < Object.keys(testClasses[i].prototype).length; j++) {
+				if(!(Object.keys(testClasses[i].prototype)[j] in JsBedRock.UnitTesting.TestGroup.prototype)) {
+					instance.InitTest();
+					instance[Object.keys(testClasses[i].prototype)[j]]();
+					instance.DeinitTest();
+				}
+			}
+			
+			instance.DeinitTestGroup();
+			
+			JsBedRock.Console.Info(instance.TestGroupName + " results: " + instance.GetSuccesses() + " / " + instance.GetAttempts() + " passed tests.");
+			
+			if (instance.GetFailures() > 0){
+				JsBedRock.Console.Error("Unit Tests Failed. See log for details.");
+			}
+		}
 	});
 	
 	//TODO: This is awful.

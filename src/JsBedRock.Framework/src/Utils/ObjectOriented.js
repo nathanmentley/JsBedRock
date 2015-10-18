@@ -42,6 +42,7 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //these are public, but they start with __ because VisualStudio's intellisense hides javascript members that start with _.
             //This pattern supports single inheritance chain... So an array is good. No need for worrying about two parents.
             _cls.prototype.__InheritanceChain = _cls.prototype.__InheritanceChain || [];
+            
             _cls.prototype.__InheritanceChain.unshift(_superCls);
         },
         Implement: function (_cls, _interface) {

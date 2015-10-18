@@ -4,6 +4,6 @@
     "src/AsmConfig.js",
     "src/StringUtilsTests.js"
   ],
-  "OutputFile": "../../bin/JsBedRock.Framework.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.Tests.js",
   "ProjectType": "TestRunner"
 }
