@@ -353,6 +353,25 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 	});
 })();
 ;
+JsBedRock.Compiler = JsBedRock.Compiler || {};
+
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Compiler.SettingResolver = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: function (soultionData, projectFile) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+            },
+            Members: {
+                ResolveSolutionSetting: function (solutionData, value) {
+                    return value.replace(/{{.*?}}/g, function myFunction(x){return solutionData[x.substring(2, x.length - 2)]; });
+                }
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+JsBedRock.Compiler = JsBedRock.Compiler || {};
+
 (function (asm) {
     asm.OnLoad(function () {
         var PrivateStatics = {
@@ -367,37 +386,37 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             NewLineChar: "\r\n"
         };
         
-        JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: function () {
+        JsBedRock.Compiler.ProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: function (soultionData, projectFile) {
                 this.__Path = require('path');
                 this.__ChildProcess = require('child_process');
+                this.__SettingResolver = new JsBedRock.Compiler.SettingResolver();
+                
+                this._SolutionData = soultionData;
+                this._ProjectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
+                this._ProjectDir = this.__Path.dirname(projectFile);
+                
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Main: function () {
-                    var solutionFile = process.argv[2];
-                    var solutionData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(solutionFile).toString());
-                    
-                    for(var i = 0; i < solutionData.Projects.length; i++){
-                        var projectFile = this.ResolveSetting(solutionData, solutionData.Projects[i]);
-                        var projectDir = this.__Path.dirname(projectFile);
-                        var projectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
-                        var outputFile = this.__Path.join(projectDir, this.ResolveSetting(solutionData, projectData.OutputFile));
+				CompileProject: function () {
+                    var outputFile = this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.OutputFile));
                         
-                        if (projectData.ProjectType === PrivateStatics.ProjectTypes.Assets) {
-                            this.PopulateAssestProject(solutionData, projectData, projectDir, outputFile);
-                        } else {
-                            this.BuildProject(solutionData, projectData, projectDir, outputFile);
+                    JsBedRock.Console.Write(this._ProjectData.Name + ": Building Project");
+                    if (this._ProjectData.ProjectType === PrivateStatics.ProjectTypes.Assets) {
+                        this._PopulateAssestProject(this._SolutionData, this._ProjectData, this._ProjectDir, outputFile);
+                    } else {
+                        this._BuildProject(this._SolutionData, this._ProjectData, this._ProjectDir, outputFile);
                         
-                            if (projectData.ProjectType === PrivateStatics.ProjectTypes.TestRunner)
-                                this.ExecuteUnitTests(projectData, outputFile);
-                        }
+                        if (this._ProjectData.ProjectType === PrivateStatics.ProjectTypes.TestRunner)
+                            this._ExecuteUnitTests(this._ProjectData, outputFile);
                     }
+                    JsBedRock.Console.Write(this._ProjectData.Name + ": Successfully Built");
                 },
-                PopulateAssestProject: function (solutionData, projectData, projectDir, outputFile) {
+                _PopulateAssestProject: function (solutionData, projectData, projectDir, outputFile) {
                     for (var j = 0; j < projectData.SourceFiles.length; j++){
                         var targetFile = this.__Path.join(outputFile, projectData.SourceFiles[j]);
-                        this.EnsureDirectoryExists(this.__Path.dirname(targetFile));
+                        this._EnsureDirectoryExists(this.__Path.dirname(targetFile));
                     
                         (new JsBedRock.Node.IO.FileSystem()).CopyFile(
                             this.__Path.join(projectDir, projectData.SourceFiles[j]),
@@ -405,11 +424,11 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
                         );
                     }
                 },
-                BuildProject: function (solutionData, projectData, projectDir, outputFile) {
+                _BuildProject: function (solutionData, projectData, projectDir, outputFile) {
                     var compiledFile = '';
                     
                     if(projectData.ProjectType !== PrivateStatics.ProjectTypes.ClassLibrary && projectData.ProjectType != PrivateStatics.ProjectTypes.Flat) {
-                        compiledFile = this._ConcatFile(compiledFile, this.GetSdkLocation(solutionData) + "JsBedRock.Framework.js");
+                        compiledFile = this._ConcatFile(compiledFile, this._GetSdkLocation(solutionData) + "JsBedRock.Framework.js");
                     }
                     
                     for (var j = 0; j < projectData.SourceFiles.length; j++){
@@ -419,16 +438,16 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
                     if(projectData.ProjectType !== "Flat") {
                         compiledFile = this._ConcatFile(
                             compiledFile,
-                            this.GetSdkLocation(solutionData) + "AssemblyWrappers/" + projectData.ProjectType + ".js"
+                            this._GetSdkLocation(solutionData) + "AssemblyWrappers/" + projectData.ProjectType + ".js"
                         );
                     }
                     
-                    this.EnsureDirectoryExists(this.__Path.dirname(outputFile));
+                    this._EnsureDirectoryExists(this.__Path.dirname(outputFile));
                     
                     if(!JsBedRock.Utils.String.IsEmptyOrSpaces(outputFile))
                         (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(outputFile, compiledFile);        
                 },
-                ExecuteUnitTests: function (projectData, outputFile) {
+                _ExecuteUnitTests: function (projectData, outputFile) {
                     this.__ChildProcess.exec('node ' + outputFile, function (error, stdout, stderr) { 
                         if (error) {
                             JsBedRock.Console.Write(error.stack);
@@ -442,33 +461,57 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
                             JsBedRock.Console.Write('Child Process STDERR: '+stderr);
                     });
                 },
-                EnsureDirectoryExists: function(directory) {
+                _EnsureDirectoryExists: function(directory) {
                     var paths = directory.split(this.__Path.sep);
                     
                     if(paths.length > 1) {
                         paths.pop();
-                        this.EnsureDirectoryExists(paths.join(this.__Path.sep));
+                        this._EnsureDirectoryExists(paths.join(this.__Path.sep));
                     }
                     
                     if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(directory)) {
                        (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
                     }
                 },
-                GetSdkLocation: function (solutionData) {
+                _GetSdkLocation: function (solutionData) {
                     if(JsBedRock.Utils.String.IsEmptyOrSpaces(solutionData.SDKLocationOverride))
-                        return __dirname + "/sdk/" + this.ResolveSetting(solutionData, solutionData.FrameworkVersion) + "/";
+                        return __dirname + "/sdk/" + this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.FrameworkVersion) + "/";
                         
-                    return this.ResolveSetting(solutionData, solutionData.SDKLocationOverride);
-                },
-                ResolveSetting: function (solutionData, value) {
-                    return value.replace(/{{.*?}}/g, function myFunction(x){return solutionData[x.substring(2, x.length - 2)]; });
+                    return this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.SDKLocationOverride);
                 },
                 _ConcatFile: function (currentFile, fileToAdd) {
                     return currentFile + PrivateStatics.NewLineChar + ";" + PrivateStatics.NewLineChar +
                         (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(fileToAdd).toString();
                 },
+                _SolutionData: null,
+                _ProjectData: null,
+                _ProjectDir: null,
                 __Path: null,
                 __ChildProcess: null
+            }
+        });
+    });
+})(JsBedRock.CurrentAssembly);
+;
+(function (asm) {
+    asm.OnLoad(function () {
+        JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+            },
+            Members: {
+				Main: function () {
+                    var settingResolver = new JsBedRock.Compiler.SettingResolver();
+                    
+                    var solutionFile = process.argv[2];
+                    var solutionData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(solutionFile).toString());
+                    
+                    for(var i = 0; i < solutionData.Projects.length; i++){
+                        var projectCompiler = new JsBedRock.Compiler.ProjectCompiler(solutionData, settingResolver.ResolveSolutionSetting(solutionData, solutionData.Projects[i]));
+                        
+                        projectCompiler.CompileProject();
+                    }
+                }
             }
         });
     });

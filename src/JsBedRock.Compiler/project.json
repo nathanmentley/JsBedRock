@@ -1,17 +1,9 @@
 {
   "Name": "JsBedRock.Compiler",
-  "Version": "0.0.1",
-  "License": "CC-BY-SA-4.0",
-  "Author": "Nathan Mentley <NathanMentley@gmail.com>",
-  "Repository": {
-    "Type": "git",
-    "Url": "https://github.com/nathanmentley/JsBedRock"
-  },
-  "Bugs": {
-    "Url": "https://github.com/nathanmentley/JsBedRock/issues"
-  },
   "SourceFiles": [
     "src/AsmConfig.js",
+    "src/SettingResolver.js",
+    "src/ProjectCompiler.js",
     "src/Main.js"
   ],
   "OutputFile": "../../bin/JsBedRock.Compiler.js",
