@@ -1,7 +1,6 @@
 {
   "Name": "WebApp",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/TestClasses/BaseClass.js",
     "src/TestClasses/OnceInheritedClass.js",
     "src/TestClasses/TwiceInheritedClass.js",
