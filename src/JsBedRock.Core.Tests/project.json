@@ -17,5 +17,6 @@
     "JsBedRock.UnitTesting"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.Tests.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

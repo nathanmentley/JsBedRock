@@ -2,26 +2,23 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.ExecutableProjectCompilerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Inherit: JsBedRock.Compiler.ProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, projectData, projectFile);
-            },
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.Compiler.AssemblyProjectCompilerBase,
+            Constructor: (JsBedRock.Compiler.ExecutableProjectCompilerBase = function (soultionData, solutionFile, projectData, projectFile) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.AssemblyProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
+            }),
             Members: {
 				CompileProject: function () {
                     this.Base();
                     
                     this._CopyDependencies();
                 },
-                _BuildProject: function () {
-                    var asmConfig = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                _GetSourceFiles: function () {
+                    var ret = this.Base();
                     
-                    return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") +
-                        this._ResolveAsmConfig(asmConfig) +
-                        this.Base();
-                },
-                _ResolveAsmConfig: function(asmConfig) {
-                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
+                    ret.unshift(this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js");
+                    
+                    return ret;
                 },
                 _CopyDependencies: function() {
                     //TODO: Support non framework dependencies.
@@ -37,7 +34,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                         );
                     }
                 }
-            }
+            },
+            Name: 'ExecutableProjectCompilerBase'
         });
     });
 })(JsBedRock.CurrentAssembly);

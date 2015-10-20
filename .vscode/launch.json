@@ -24,7 +24,7 @@
 				"NODE_ENV": "development"
 			},
 			// Use JavaScript source maps (if they exist).
-			"sourceMaps": false,
+			"sourceMaps": true,
 			// If JavaScript source maps are enabled, the generated code is expected in this directory.
 			"outDir": null
 		},
@@ -36,7 +36,7 @@
 			// Workspace relative or absolute path to the program.
 			"program": "./BuildTools/JsBedRock.Compiler.js",
 			// Automatically stop program after launch.
-			"stopOnEntry": false,
+			"stopOnEntry": true,
 			// Command line arguments passed to the program.
 			"args": ["solution.json"],
 			// Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
@@ -60,7 +60,7 @@
 			// Type of configuration.
 			"type": "node",
 			// Workspace relative or absolute path to the program.
-			"program": "./bin/sdk/0.0.1/JsBedRock.Framework.Tests.js",
+			"program": "./bin/sdk/0.0.1/JsBedRock.Core.Tests.js",
 			// Automatically stop program after launch.
 			"stopOnEntry": false,
 			// Command line arguments passed to the program.
@@ -76,7 +76,7 @@
 				"NODE_ENV": "development"
 			},
 			// Use JavaScript source maps (if they exist).
-			"sourceMaps": false,
+			"sourceMaps": true,
 			// If JavaScript source maps are enabled, the generated code is expected in this directory.
 			"outDir": null
 		}

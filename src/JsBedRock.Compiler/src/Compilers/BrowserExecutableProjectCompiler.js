@@ -2,19 +2,21 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.BrowserExecutableProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Utils.ObjectOriented.CreateClass({
 			Inherit: JsBedRock.Compiler.ExecutableProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, projectData, projectFile);
-            },
+            Constructor: (JsBedRock.Compiler.BrowserExecutableProjectCompiler = function (soultionData, solutionFile, projectData, projectFile) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
+            }),
             Members: {
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js"
-                    );
+                _GetSourceFiles: function () {
+                    var ret = this.Base();
+                    
+                    ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js");
+                    
+                    return ret;
                 }
-            }
+            },
+            Name: 'BrowserExecutableProjectCompiler'
         });
     });
 })(JsBedRock.CurrentAssembly);

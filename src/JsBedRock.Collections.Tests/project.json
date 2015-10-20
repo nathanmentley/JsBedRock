@@ -9,5 +9,6 @@
     "JsBedRock.Collections"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Collections.Tests.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

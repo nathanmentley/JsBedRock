@@ -1,6 +1,7 @@
 (function () {
 	new JsBedRock.Assemblies.AssemblyDef({
 		Name: '{{Name}}',
-		Dependencies: [ {{Dependencies}} ]
+		Dependencies: [ {{Dependencies}} ],
+		NodeDependencies: [ {{NodeDependencies}} ]
 	});
 })();

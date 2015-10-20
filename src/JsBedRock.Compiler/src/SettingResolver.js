@@ -24,6 +24,20 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                                 }
                                 
                                 return ret.substring(0, ret.length - 1);
+                            case 'NodeDependencies':
+                                var deps = projectData[settingKey];
+                                var ret = '';
+                                
+                                if(deps) {
+                                    for(var i = 0; i < deps.length; i++) {
+                                        ret += '"' + deps[i] + '",';
+                                    }
+                                }
+                                
+                                if(JsBedRock.Utils.String.IsEmptyOrSpaces(ret))
+                                    return JsBedRock.Utils.String.Empty;
+                                else
+                                    return ret.substring(0, ret.length - 1);
                             default:
                                 return projectData[settingKey];
                         }

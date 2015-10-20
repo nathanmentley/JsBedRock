@@ -2,5 +2,6 @@
 [Tt]humbs.db
 *.DS_Store
 
-/bin/*.js
-/bin/**/*.js
+/bin/*
+/bin/**/*
+**/node_modules/**/*

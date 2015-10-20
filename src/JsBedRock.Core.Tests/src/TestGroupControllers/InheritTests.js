@@ -16,9 +16,9 @@ JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
                     //Test that we're inherited all three sub types.
                     this.Assert(object3.__InheritanceChain.length === 3, "BaseTestObject3 correctly inherited three sub classes")
                 
-                    this.Assert(object3.__InheritanceChain[2] === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2, "Inherited BaseTestObject2");
+                    this.Assert(object3.__InheritanceChain[0] === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject2, "Inherited BaseTestObject2");
                     this.Assert(object3.__InheritanceChain[1] === JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1, "Inherited BaseTestObject1");
-                    this.Assert(object3.__InheritanceChain[0] === JsBedRock.Types.Object, "Inherited Object");
+                    this.Assert(object3.__InheritanceChain[2] === JsBedRock.Types.Object, "Inherited Object");
                 
                     //Test that we're inheriting methods.
                     this.Assert(object3.TestMethod2(2) === 7, "Method Inherited Correctly.");

@@ -13,5 +13,6 @@
     "src/Assemblies/AssemblyDependency.js"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "Flat"
 }

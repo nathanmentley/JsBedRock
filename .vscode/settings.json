@@ -5,6 +5,7 @@
 		"**/.DS_Store": true,
 		"**/.vscode": true,
    		"**/BuildTools": true,
+		"**/node_modules/**/*": true,
    		"**/bin": true,
    		".gitignore": true,
    		".travis.yml": true

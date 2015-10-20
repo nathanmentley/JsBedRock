@@ -7,5 +7,6 @@
     "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UnitTesting.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

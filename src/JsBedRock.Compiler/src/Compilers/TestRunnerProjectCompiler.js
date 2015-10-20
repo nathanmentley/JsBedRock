@@ -2,24 +2,25 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.TestRunnerProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Utils.ObjectOriented.CreateClass({
 			Inherit: JsBedRock.Compiler.ExecutableProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
+            Constructor: (JsBedRock.Compiler.TestRunnerProjectCompiler = function (soultionData, solutionFile, projectData, projectFile) {
                 this.__ChildProcess = require('child_process');
                 
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, projectData, projectFile);
-            },
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
+            }),
             Members: {
 				CompileProject: function () {
 					this.Base();
                     
                     this.__ExecuteUnitTests(this._ProjectData);
                 },
-                _BuildProject: function () {
-                    return this._ConcatFile(
-                        this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js"
-                    );
+                _GetSourceFiles: function () {
+                    var ret = this.Base();
+                    
+                    ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js");
+                    
+                    return ret;
                 },
                 __ExecuteUnitTests: function (projectData) {
                     this.__ChildProcess.exec('node ' + this._OutputFile, function (error, stdout, stderr) { 
@@ -36,7 +37,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     });
                 },
                 __ChildProcess: null
-            }
+            },
+            Name: 'TestRunnerProjectCompiler'
         });
     });
 })(JsBedRock.CurrentAssembly);

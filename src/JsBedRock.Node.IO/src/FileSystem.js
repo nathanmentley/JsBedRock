@@ -48,6 +48,12 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 						callback(err);
 					});
 				},
+				Delete: function(file, callback) {
+					this.__FS.unlinkSync(file, callback);
+				},
+				DeleteSync: function(file) {
+					this.__FS.unlinkSync(file);
+				},
 				__FS: null
             }
         });

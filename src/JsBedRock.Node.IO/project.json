@@ -7,5 +7,6 @@
     "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Node.IO.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

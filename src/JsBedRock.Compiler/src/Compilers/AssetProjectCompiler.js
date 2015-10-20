@@ -2,11 +2,11 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Compiler.AssetProjectCompiler = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Utils.ObjectOriented.CreateClass({
 			Inherit: JsBedRock.Compiler.ProjectCompilerBase,
-            Constructor: function (soultionData, projectData, projectFile) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, projectData, projectFile);
-            },
+            Constructor: (JsBedRock.Compiler.AssetProjectCompiler = function (soultionData, solutionFile, projectData, projectFile) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
+            }),
             Members: {
                 CompileProject: function () {
                     for (var j = 0; j < this._ProjectData.SourceFiles.length; j++){
@@ -19,7 +19,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                         );
                     }
                 },
-            }
+            },
+            Name: 'AssetProjectCompiler'
         });
     });
 })(JsBedRock.CurrentAssembly);

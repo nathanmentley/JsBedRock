@@ -44,7 +44,7 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //This pattern supports single inheritance chain... So an array is good. No need for worrying about two parents.
             _cls.prototype.__InheritanceChain = _cls.prototype.__InheritanceChain || [];
             
-            _cls.prototype.__InheritanceChain.push(_superCls);
+            _cls.prototype.__InheritanceChain.unshift(_superCls);
         },
         Implement: function (_cls, _interface) {
             /// <summary>Ensures an interface is Implemented on an object and marks the object as implemented.</summary>
@@ -73,7 +73,8 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             Constructor: function () {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
-            Members: {}
+            Members: {},
+            Name: ''
         },
         InterfaceDefaults: {
             Name: '',
@@ -95,13 +96,15 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         
         for(var prop in values.Members)
             classDef.prototype[prop] = values.Members[prop];
+            
+        classDef.prototype.__ClassName = values.Name;
         
         for(var i = 0; i < values.Implements.length; i++)
             PrivateMembers.Implement(classDef, values.Implements[i]);
             
         //LinkClass To Assembly
         JsBedRock.CurrentAssembly.Classes.push(classDef);
-         
+        
         return classDef;
     };
     

@@ -22,26 +22,25 @@ JsBedRock.Types = JsBedRock.Types || {};
                     //Create these hidden props if they don't exist.
                     this.__InheritanceMethodDepth = this.__InheritanceMethodDepth || {};
                     this.__InheritanceChain = this.__InheritanceChain || [];
-                    this.__InheritanceMethodDepth[methodName] = this.__InheritanceMethodDepth[methodName] || this.__InheritanceChain.length;
-                    var inheritanceChain = this.__InheritanceChain.reverse();
-                    
-                    //We're now looking for a method that's one more step down the inheritance chain.
-                    this.__InheritanceMethodDepth[methodName]--;
+                    this.__InheritanceMethodDepth[methodName] = this.__InheritanceMethodDepth[methodName] || 0;
+        
+                    if(!this.__InheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName])
+                        JsBedRock.Console.Error(methodName + " not found and could not be called from this.Base();");
         
                     //If we find the method, but it has the same def as the method we just executed... we don't want to re-execute.
                     // So we'll keep jumping down until we find the overriden method.
-                    while (inheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName] === arguments.callee.caller || !inheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName])
-                        this.__InheritanceMethodDepth[methodName]--;
+                    while (this.__InheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName] === arguments.callee.caller)
+                        this.__InheritanceMethodDepth[methodName]++;
         
                     //call the overriden method.
-                    var ret = inheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName].apply(this, arguments);
+                    var ret = this.__InheritanceChain[this.__InheritanceMethodDepth[methodName]].prototype[methodName].apply(this, arguments);
         
                     //Now that's it's been executed let's jump back up to the correct inheritance chain level.
-                    this.__InheritanceMethodDepth[methodName]++;
+                    this.__InheritanceMethodDepth[methodName]--;
         
                     //If the method has the same definition we'll need to keep jumping up.
-                    while (this.__InheritanceMethodDepth[methodName] + 1 < this.__InheritanceDepth && inheritanceChain[this.__InheritanceMethodDepth[methodName] + 1].prototype[methodName] === arguments.callee.caller)
-                        this.__InheritanceMethodDepth[methodName]++;
+                    while (this.__InheritanceMethodDepth[methodName] - 1 >= 0 && this.__InheritanceChain[this.__InheritanceMethodDepth[methodName] - 1].prototype[methodName] === arguments.callee.caller)
+                        this.__InheritanceMethodDepth[methodName]--;
         
                     return ret;
                 },

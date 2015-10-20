@@ -2,42 +2,40 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        var PrivateStatics = {
-            NewLineChar: "\r\n"
-        };
-        
-        JsBedRock.Compiler.ProjectCompilerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: function (soultionData, projectData, projectFile) {
+        JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: (JsBedRock.Compiler.ProjectCompilerBase = function (soultionData, solutionFile, projectData, projectFile) {
+                this.__Uglifyjs = require('uglify-js');
                 this.__Path = require('path');
                 this.__SettingResolver = new JsBedRock.Compiler.SettingResolver();
                 
                 this._SolutionData = soultionData;
+                this._SolutionDir = this.__Path.dirname(solutionFile);
                 this._ProjectData = projectData;
                 this._ProjectDir = this.__Path.dirname(projectFile);
                 this._OutputFile = this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.OutputFile));
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-            },
+            }),
             Members: {
 				CompileProject: function () {
-                    this._WriteOutputFile(
-                        this._BuildProject()
-                    );
+                    //this._WriteOutputFile(
+                    //    this._BuildProject()
+                    //);
+                    this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));
                 },
-                _BuildProject: function () {
-                    var compiledFile = '';
-                    
-                    for (var j = 0; j < this._ProjectData.SourceFiles.length; j++){
-                        compiledFile = this._ConcatFile(compiledFile, this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
-                    }
-                    
-                    return compiledFile;
+                _GetSourceFiles: function () {
+                    var ret = [];
+                    for (var j = 0; j < this._ProjectData.SourceFiles.length; j++)
+                        ret.push(this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
+                    return ret;
                 },
                 _WriteOutputFile: function(compiledFile) {
                     this._EnsureDirectoryExists(this.__Path.dirname(this._OutputFile));
                     
-                    if(!JsBedRock.Utils.String.IsEmptyOrSpaces(this._OutputFile))
-                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile, compiledFile);   
+                    if(!JsBedRock.Utils.String.IsEmptyOrSpaces(this._OutputFile)){
+                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile, compiledFile.code);   
+                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile + ".map", compiledFile.map);   
+                    }
                 },
                 _EnsureDirectoryExists: function(directory) {
                     var paths = directory.split(this.__Path.sep);
@@ -51,22 +49,31 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                        (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
                     }
                 },
-                _GetSdkLocation: function (solutionData) {
-                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(solutionData.SDKLocationOverride))
-                        return __dirname + "/sdk/" + this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.FrameworkVersion) + "/";
+                _GetSdkLocation: function () {
+                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(this._SolutionData.SDKLocationOverride))
+                        return __dirname + "/sdk/" + this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.FrameworkVersion) + "/";
                         
-                    return this.__SettingResolver.ResolveSolutionSetting(solutionData, solutionData.SDKLocationOverride);
+                    return this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride);
                 },
-                _ConcatFile: function (currentFile, fileToAdd) {
-                    return currentFile + PrivateStatics.NewLineChar + ";" + PrivateStatics.NewLineChar +
-                        (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(fileToAdd).toString();
+                _GetUglifyJsOptions: function () {
+                    var ret = {
+                        outSourceMap: this._OutputFile + ".map"
+                    };
+                    
+                    if('DebugSourceRoot' in this._ProjectData)
+                        ret.sourceRoot = this._ProjectData['DebugSourceRoot'];
+                    
+                    return ret;
                 },
                 _SolutionData: null,
+                _SolutionDir: null,
                 _ProjectData: null,
                 _ProjectDir: null,
                 _OutputFile: null,
-                __Path: null
-            }
+                __Path: null,
+                __Uglifyjs: null
+            },
+            Name: 'ProjectCompilerBase'
         });
     });
 })(JsBedRock.CurrentAssembly);

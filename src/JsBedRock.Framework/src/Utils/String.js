@@ -11,4 +11,6 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         /// <returns type="Boolean">Returns true if the string is null, empty, or whitespace.</returns>
         return _str == null || _str.trim() === '';
     };
+    
+    JsBedRock.Utils.String.Empty = '';
 })();

@@ -11,5 +11,6 @@
     "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Collections.js",
+  "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }
