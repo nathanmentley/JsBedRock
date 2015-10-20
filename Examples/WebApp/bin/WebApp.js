@@ -64,7 +64,7 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //This pattern supports single inheritance chain... So an array is good. No need for worrying about two parents.
             _cls.prototype.__InheritanceChain = _cls.prototype.__InheritanceChain || [];
             
-            _cls.prototype.__InheritanceChain.unshift(_superCls);
+            _cls.prototype.__InheritanceChain.push(_superCls);
         },
         Implement: function (_cls, _interface) {
             /// <summary>Ensures an interface is Implemented on an object and marks the object as implemented.</summary>

@@ -13,9 +13,15 @@ JsBedRock.Utils = JsBedRock.Utils || {};
 	var PrivateMembers = {};
 	
 	JsBedRock.Utils.Object.MergeObjects = function (defaults, overrides) {
+		var ret = {};
+		
+		for(var prop in defaults)
+			ret[prop] = defaults[prop];
+			
 		for(var prop in overrides)
-			defaults[prop] = overrides[prop];
-		return defaults;
+			ret[prop] = overrides[prop];
+			
+		return ret;
 	};
 })();
 ;
@@ -50,21 +56,22 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //save GetType. Or else it'll be incorrectly overwritten.
             // TODO: This should probably save any methods defined in ObjectDefBuilder
             var getTypeDef = _cls.prototype.GetType;
+            var getAsmDef = _cls.prototype.GetAssembly;
     
             //Copy the prototype from the super class.
-            var construct = function () { };
-            construct.prototype = _superCls.prototype;
-            _cls.prototype = new construct;
-            _cls.prototype.constructor = _cls;
-    
+            _cls.prototype = {};
+            for(var prop in _superCls.prototype)
+                _cls.prototype[prop] = _superCls.prototype[prop] instanceof Array ? _superCls.prototype[prop].slice() : _superCls.prototype[prop];
+                
             //restore GetType
             _cls.prototype.GetType = getTypeDef;
+            _cls.prototype.GetAssembly = getAsmDef;
             
             //these are public, but they start with __ because VisualStudio's intellisense hides javascript members that start with _.
             //This pattern supports single inheritance chain... So an array is good. No need for worrying about two parents.
             _cls.prototype.__InheritanceChain = _cls.prototype.__InheritanceChain || [];
             
-            _cls.prototype.__InheritanceChain.unshift(_superCls);
+            _cls.prototype.__InheritanceChain.push(_superCls);
         },
         Implement: function (_cls, _interface) {
             /// <summary>Ensures an interface is Implemented on an object and marks the object as implemented.</summary>
@@ -147,7 +154,11 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         //if this is an instance of the type return true. This will get actual instances and inherited types.
         if (_instance instanceof _type)
             return true;
-
+        
+        for(var inheritedTypeKey in _instance.__InheritanceChain)
+            if (_type === _instance.__InheritanceChain[inheritedTypeKey])
+                return true;
+            
         //If the interface is in the implemented array we should return true.
 		if(_instance.__Implemented instanceof Array)
 			for(var i = 0; i < _instance.__Implemented.length; i++)
@@ -315,10 +326,10 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             }
         };
         
-        JsBedRock.Utils.Object.MergeObjects(
-            context,
-            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
-        );
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
+        
+        for(var prop in values)
+            context[prop] = values[prop];
         
         JsBedRock.CurrentAssembly = this;
     };
@@ -328,7 +339,8 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 
 //JsBedRock.Assemblies.AssemblyDependency
 (function () {
-    JsBedRock.Assemblies.AssemblyDependency = function (overrides) { 
+    JsBedRock.Assemblies.AssemblyDependency = function (overrides) {
+        var context = this;
         var PrivateMembers = {
             Defaults: {
                 Name: '',
@@ -336,21 +348,15 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             }
         };
         
-        JsBedRock.Utils.Object.MergeObjects(
-            this,
-            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
-        );
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
+        
+        for(var prop in values)
+            context[prop] = values[prop];
     };
-})();
-;
-(function () {
+})();(function () {
 	new JsBedRock.Assemblies.AssemblyDef({
 		Name: 'JsBedRock.Compiler',
-		Dependencies: [
-			new JsBedRock.Assemblies.AssemblyDependency({
-				Name: 'JsBedRock.Node.IO'
-			})
-		]
+		Dependencies: [ new JsBedRock.Assemblies.AssemblyDependency({ Name: 'JsBedRock.Node.IO' }),new JsBedRock.Assemblies.AssemblyDependency({ Name: 'JsBedRock.Core' }) ]
 	});
 })();
 ;
@@ -365,6 +371,25 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
                 ResolveSolutionSetting: function (solutionData, value) {
                     return value.replace(/{{.*?}}/g, function myFunction(x){return solutionData[x.substring(2, x.length - 2)]; });
+                },
+                ResolveProjectSetting: function (projectData, value) {
+                    return value.replace(/{{.*?}}/g, function myFunction(x){
+                        var settingKey = x.substring(2, x.length - 2);
+                        
+                        switch(settingKey) {
+                            case 'Dependencies':
+                                var deps = projectData[settingKey];
+                                var ret = '';
+                                
+                                for(var i = 0; i < deps.length; i++) {
+                                    ret += "new JsBedRock.Assemblies.AssemblyDependency({ Name: '" + deps[i] + "' }),";
+                                }
+                                
+                                return ret.substring(0, ret.length - 1);
+                            default:
+                                return projectData[settingKey];
+                        }
+                    });
                 }
             }
         });
@@ -475,8 +500,14 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     this._CopyDependencies();
                 },
                 _BuildProject: function () {
-                    //return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base();
-                    return this.Base();
+                    var asmConfig = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                    
+                    return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") +
+                        this._ResolveAsmConfig(asmConfig) +
+                        this.Base();
+                },
+                _ResolveAsmConfig: function(asmConfig) {
+                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
                 },
                 _CopyDependencies: function() {
                     //TODO: Support non framework dependencies.
@@ -535,7 +566,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
                 _BuildProject: function () {
                     return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
+                        this.Base(),
                         this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js"
                     );
                 }
@@ -555,11 +586,17 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             },
             Members: {
                 _BuildProject: function () {
-                    return this._ConcatFile(
-                        this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js"
-                    );
-                }
+                    var asmConfig = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                    
+                    return this._ResolveAsmConfig(asmConfig) +
+                        this._ConcatFile(
+                            this.Base(),
+                            this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js"
+                        );
+                },
+                _ResolveAsmConfig: function(asmConfig) {
+                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
+                },
             }
         });
     });
@@ -577,7 +614,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
                 _BuildProject: function () {
                     return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
+                        this.Base(),
                         this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.NodeExecutable + ".js"
                     );
                 }
@@ -605,7 +642,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 },
                 _BuildProject: function () {
                     return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
+                        this.Base(),
                         this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js"
                     );
                 },

@@ -1,8 +1,10 @@
 {
   "Name": "JsBedRock.UnitTesting.Tests",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/TestGroupTests.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.UnitTesting"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UnitTesting.Tests.js",
   "ProjectType": "TestRunner"

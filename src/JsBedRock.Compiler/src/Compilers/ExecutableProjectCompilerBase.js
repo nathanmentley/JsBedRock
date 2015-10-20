@@ -14,8 +14,14 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     this._CopyDependencies();
                 },
                 _BuildProject: function () {
-                    //return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base();
-                    return this.Base();
+                    var asmConfig = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                    
+                    return this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") +
+                        this._ResolveAsmConfig(asmConfig) +
+                        this.Base();
+                },
+                _ResolveAsmConfig: function(asmConfig) {
+                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
                 },
                 _CopyDependencies: function() {
                     //TODO: Support non framework dependencies.

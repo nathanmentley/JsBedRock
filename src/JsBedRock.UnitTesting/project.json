@@ -1,8 +1,10 @@
 {
   "Name": "JsBedRock.UnitTesting",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/TestGroup.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UnitTesting.js",
   "ProjectType": "ClassLibrary"

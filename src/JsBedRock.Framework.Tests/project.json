@@ -1,8 +1,11 @@
 {
   "Name": "JsBedRock.Framework.Tests",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/StringUtilsTests.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.UnitTesting",
+    "JsBedRock.Collections"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.Tests.js",
   "ProjectType": "TestRunner"

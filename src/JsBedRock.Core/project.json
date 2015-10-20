@@ -1,12 +1,12 @@
 {
   "Name": "JsBedRock.Core",
   "SourceFiles": [
-    "src/AsmConfig.js",
-    
     "src/Types/Interface.js",
     "src/Types/Object.js",
     
     "src/Console.js"
+  ],
+  "Dependencies": [
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.js",
   "ProjectType": "ClassLibrary"

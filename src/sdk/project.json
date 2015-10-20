@@ -1,6 +1,7 @@
 {
   "Name": "JsBedRock SDK",
   "SourceFiles": [
+    "AssemblyWrappers/AsmConfig.js",
     "AssemblyWrappers/BrowserExecutable.js",
     "AssemblyWrappers/ClassLibrary.js",
     "AssemblyWrappers/NodeExecutable.js",

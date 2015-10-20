@@ -10,7 +10,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
                 _BuildProject: function () {
                     return this._ConcatFile(
-                        (this._ConcatFile('', this._GetSdkLocation(this._SolutionData) + "JsBedRock.Framework.js") + this.Base()),//this.Base(),
+                        this.Base(),
                         this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.NodeExecutable + ".js"
                     );
                 }

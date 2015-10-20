@@ -2,7 +2,8 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
 
 //JsBedRock.Assemblies.AssemblyDependency
 (function () {
-    JsBedRock.Assemblies.AssemblyDependency = function (overrides) { 
+    JsBedRock.Assemblies.AssemblyDependency = function (overrides) {
+        var context = this;
         var PrivateMembers = {
             Defaults: {
                 Name: '',
@@ -10,9 +11,9 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             }
         };
         
-        JsBedRock.Utils.Object.MergeObjects(
-            this,
-            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
-        );
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
+        
+        for(var prop in values)
+            context[prop] = values[prop];
     };
 })();

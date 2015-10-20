@@ -29,21 +29,22 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             //save GetType. Or else it'll be incorrectly overwritten.
             // TODO: This should probably save any methods defined in ObjectDefBuilder
             var getTypeDef = _cls.prototype.GetType;
+            var getAsmDef = _cls.prototype.GetAssembly;
     
             //Copy the prototype from the super class.
-            var construct = function () { };
-            construct.prototype = _superCls.prototype;
-            _cls.prototype = new construct;
-            _cls.prototype.constructor = _cls;
-    
+            _cls.prototype = {};
+            for(var prop in _superCls.prototype)
+                _cls.prototype[prop] = _superCls.prototype[prop] instanceof Array ? _superCls.prototype[prop].slice() : _superCls.prototype[prop];
+                
             //restore GetType
             _cls.prototype.GetType = getTypeDef;
+            _cls.prototype.GetAssembly = getAsmDef;
             
             //these are public, but they start with __ because VisualStudio's intellisense hides javascript members that start with _.
             //This pattern supports single inheritance chain... So an array is good. No need for worrying about two parents.
             _cls.prototype.__InheritanceChain = _cls.prototype.__InheritanceChain || [];
             
-            _cls.prototype.__InheritanceChain.unshift(_superCls);
+            _cls.prototype.__InheritanceChain.push(_superCls);
         },
         Implement: function (_cls, _interface) {
             /// <summary>Ensures an interface is Implemented on an object and marks the object as implemented.</summary>
@@ -126,7 +127,11 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         //if this is an instance of the type return true. This will get actual instances and inherited types.
         if (_instance instanceof _type)
             return true;
-
+        
+        for(var inheritedTypeKey in _instance.__InheritanceChain)
+            if (_type === _instance.__InheritanceChain[inheritedTypeKey])
+                return true;
+            
         //If the interface is in the implemented array we should return true.
 		if(_instance.__Implemented instanceof Array)
 			for(var i = 0; i < _instance.__Implemented.length; i++)

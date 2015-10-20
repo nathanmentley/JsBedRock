@@ -9,6 +9,25 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
                 ResolveSolutionSetting: function (solutionData, value) {
                     return value.replace(/{{.*?}}/g, function myFunction(x){return solutionData[x.substring(2, x.length - 2)]; });
+                },
+                ResolveProjectSetting: function (projectData, value) {
+                    return value.replace(/{{.*?}}/g, function myFunction(x){
+                        var settingKey = x.substring(2, x.length - 2);
+                        
+                        switch(settingKey) {
+                            case 'Dependencies':
+                                var deps = projectData[settingKey];
+                                var ret = '';
+                                
+                                for(var i = 0; i < deps.length; i++) {
+                                    ret += "new JsBedRock.Assemblies.AssemblyDependency({ Name: '" + deps[i] + "' }),";
+                                }
+                                
+                                return ret.substring(0, ret.length - 1);
+                            default:
+                                return projectData[settingKey];
+                        }
+                    });
                 }
             }
         });

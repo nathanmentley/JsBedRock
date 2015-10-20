@@ -17,10 +17,10 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
             }
         };
         
-        JsBedRock.Utils.Object.MergeObjects(
-            context,
-            JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides)
-        );
+        var values = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.Defaults, overrides);
+        
+        for(var prop in values)
+            context[prop] = values[prop];
         
         JsBedRock.CurrentAssembly = this;
     };

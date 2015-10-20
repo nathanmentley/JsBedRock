@@ -1,7 +1,6 @@
 {
   "Name": "JsBedRock.Compiler",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/SettingResolver.js",
     "src/Compilers/ProjectTypesEnum.js",
     "src/Compilers/ProjectCompilerBase.js",

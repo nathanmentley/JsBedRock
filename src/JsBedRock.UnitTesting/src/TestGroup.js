@@ -10,10 +10,10 @@ JsBedRock.UnitTesting = JsBedRock.UnitTesting || {};
             Members: {
                 TestGroupName: 'DefaultTestGroup',
                 InitTestGroup: function () {
-                    JsBedRock.Console.Info("Running Test Group: " + this.TestGroupName);
+                    JsBedRock.Console.Write("Running Test Group: " + this.TestGroupName);
                 },
                 DeinitTestGroup: function () {
-                    JsBedRock.Console.Info("Finished Test Group: " + this.TestGroupName);
+                    JsBedRock.Console.Write("Finished Test Group: " + this.TestGroupName);
                 },
                 InitTest: function () {
                 },

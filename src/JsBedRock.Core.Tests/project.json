@@ -1,8 +1,6 @@
 {
   "Name": "JsBedRock.Core.Tests",
   "SourceFiles": [
-    "src/AsmConfig.js",
-    
     "src/TestData/ITestInterface1.js",
     "src/TestData/BaseTestObject1.js",
     "src/TestData/BaseTestObject2.js",
@@ -14,6 +12,9 @@
     "src/TestGroupControllers/InheritTests.js",
     "src/TestGroupControllers/IsOfTypeTests.js",
     "src/TestGroupControllers/ReflectionGetMethodNameTests.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.UnitTesting"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.Tests.js",
   "ProjectType": "TestRunner"

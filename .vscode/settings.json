@@ -4,8 +4,6 @@
 		"**/.git": true,
 		"**/.DS_Store": true,
 		"**/.vscode": true,
-   		"**/BuildTools": true,
-   		"**/bin": true,
    		".gitignore": true,
    		".travis.yml": true
 	}

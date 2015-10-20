@@ -1,5 +1,6 @@
 (function () {
 	new JsBedRock.Assemblies.AssemblyDef({
-		Name: 'JsBedRock.Core'
+		Name: '{{Name}}',
+		Dependencies: [ {{Dependencies}} ]
 	});
 })();

@@ -1,12 +1,14 @@
 {
   "Name": "JsBedRock.Collections",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/IEnumerable.js",
     "src/IList.js",
     "src/List.js",
     "src/IDictionary.js",
     "src/Dictionary.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Collections.js",
   "ProjectType": "ClassLibrary"

@@ -9,11 +9,17 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             },
             Members: {
                 _BuildProject: function () {
-                    return this._ConcatFile(
-                        this.Base(),
-                        this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js"
-                    );
-                }
+                    var asmConfig = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                    
+                    return this._ResolveAsmConfig(asmConfig) +
+                        this._ConcatFile(
+                            this.Base(),
+                            this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js"
+                        );
+                },
+                _ResolveAsmConfig: function(asmConfig) {
+                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
+                },
             }
         });
     });

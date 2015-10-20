@@ -1,8 +1,10 @@
 {
   "Name": "JsBedRock.Node.IO",
   "SourceFiles": [
-    "src/AsmConfig.js",
     "src/FileSystem.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Node.IO.js",
   "ProjectType": "ClassLibrary"

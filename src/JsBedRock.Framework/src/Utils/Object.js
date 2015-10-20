@@ -6,8 +6,14 @@ JsBedRock.Utils = JsBedRock.Utils || {};
 	var PrivateMembers = {};
 	
 	JsBedRock.Utils.Object.MergeObjects = function (defaults, overrides) {
+		var ret = {};
+		
+		for(var prop in defaults)
+			ret[prop] = defaults[prop];
+			
 		for(var prop in overrides)
-			defaults[prop] = overrides[prop];
-		return defaults;
+			ret[prop] = overrides[prop];
+			
+		return ret;
 	};
 })();
