@@ -1,0 +1,12 @@
+{
+  "Name": "JsBedRock.Web",
+  "SourceFiles": [
+    "src/Dom.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
+  ],
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Web.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

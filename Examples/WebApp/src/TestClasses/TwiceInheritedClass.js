@@ -1,3 +1,4 @@
+window.WebApp = window.WebApp ||{};
 WebApp.TestClasses = WebApp.TestClasses || {};
 
 (function (asm) {

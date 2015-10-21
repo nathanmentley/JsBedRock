@@ -19,13 +19,16 @@
     "./src/JsBedRock.Collections/project.json",
     "./src/JsBedRock.UnitTesting/project.json",
     "./src/JsBedRock.Node.IO/project.json",
+    "./src/JsBedRock.Web/project.json",
+    
     "./src/JsBedRock.Compiler/project.json",
     
     "./src/JsBedRock.Framework.Tests/project.json",
     "./src/JsBedRock.Core.Tests/project.json",
     "./src/JsBedRock.Collections.Tests/project.json",
     "./src/JsBedRock.UnitTesting.Tests/project.json",
-    "./src/JsBedRock.Node.IO.Tests/project.json"
+    "./src/JsBedRock.Node.IO.Tests/project.json",
+    "./src/JsBedRock.Web.Tests/project.json"
   ],
   "FrameworkVersion": "{{Version}}",
   "SDKLocationOverride": "./bin/sdk/{{Version}}/"
