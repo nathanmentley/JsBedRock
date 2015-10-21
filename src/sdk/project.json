@@ -5,7 +5,8 @@
     "AssemblyWrappers/BrowserExecutable.js",
     "AssemblyWrappers/ClassLibrary.js",
     "AssemblyWrappers/NodeExecutable.js",
-    "AssemblyWrappers/TestRunner.js"
+    "AssemblyWrappers/TestRunner.js",
+    "AssemblyAssets/BrowserExecutable/index.html"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/",
   "ProjectType": "Assets"

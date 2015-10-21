@@ -38,6 +38,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                                     return JsBedRock.Utils.String.Empty;
                                 else
                                     return ret.substring(0, ret.length - 1);
+                            case 'OutputFileName':
+                                return require("path").basename(projectData.OutputFile);
                             default:
                                 return projectData[settingKey];
                         }
