@@ -61,4 +61,8 @@ JsBedRock.Assemblies = JsBedRock.Assemblies || {};
         
         PrivateMembers.LoadAssemblyClasses(asmDef);
     };
+    
+    JsBedRock.Assemblies.GlobalAssemblyCache.GetLoadedAssemblies = function () {
+        return PrivateMembers._GAC;
+    };
 })();

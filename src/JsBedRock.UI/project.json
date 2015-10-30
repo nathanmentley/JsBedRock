@@ -1,0 +1,19 @@
+{
+  "Name": "JsBedRock.UI",
+  "SourceFiles": [
+    "src/Utils.js",
+    "src/Service.js",
+    "src/ServiceCache.js",
+    "src/ServiceFactory.js",
+    "src/Component.js",
+    "src/ComponentCache.js",
+    "src/ComponentFactory.js",
+    "src/ComponentRenderer.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
+  ],
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UI.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

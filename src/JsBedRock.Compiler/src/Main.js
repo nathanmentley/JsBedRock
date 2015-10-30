@@ -2,22 +2,32 @@
     asm.OnLoad(function () {
         JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
+                this.__Path = require("path");
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
 				Main: function () {
                     var settingResolver = new JsBedRock.Compiler.SettingResolver();
                     
+                    var solutionDir = this.__Path.dirname(process.argv[2]);
                     var solutionFile = process.argv[2];
+                    
                     var solutionData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(solutionFile).toString());
                     
-                    for(var i = 0; i < solutionData.Projects.length; i++){
-                        var projectFile = settingResolver.ResolveSolutionSetting(solutionData, solutionData.Projects[i]);
-                        var projectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
-                        
-                        var projectCompiler = this.ProjectCompilerFactory(solutionData, solutionFile, projectData, projectFile);
-                        
-                        projectCompiler.CompileProject();
+                    try{
+                        for(var i = 0; i < solutionData.Projects.length; i++){
+                            var projectFile = this.__Path.join(solutionDir, settingResolver.ResolveSolutionSetting(solutionData, solutionData.Projects[i]));
+                            var projectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
+                            
+                            var projectCompiler = this.ProjectCompilerFactory(solutionData, solutionFile, projectData, projectFile);
+                            
+                            projectCompiler.CompileProject();
+                        }
+                    }
+                    catch(e)
+                    {
+                        JsBedRock.Console.Write(JsBedRock.Console.Dump(e));
+                        throw e;
                     }
                 },
                 ProjectCompilerFactory: function (solutionData, solutionFile, projectData, projectFile) {
@@ -41,7 +51,8 @@
                             return new JsBedRock.Compiler.ProjectCompilerBase(solutionData, solutionFile, projectData, projectFile);
                             break;
                     };
-                }
+                },
+                __Path: null
             }
         });
     });

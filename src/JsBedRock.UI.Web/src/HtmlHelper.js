@@ -1,10 +1,9 @@
-JsBedRock.Web = JsBedRock.Web || {};
+JsBedRock.UI = JsBedRock.UI || {};
+JsBedRock.UI.Web = JsBedRock.UI.Web || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-		//Private Static fs object.
-		
-        JsBedRock.Web.Dom = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.UI.Web.HtmlHelper = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },

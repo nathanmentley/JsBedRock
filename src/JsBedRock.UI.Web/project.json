@@ -1,0 +1,13 @@
+{
+  "Name": "JsBedRock.UI.Web",
+  "SourceFiles": [
+    "src/HtmlHelper.js",
+    "src/HtmlComponentRenderer.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.UI"
+  ],
+  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.UI.Web.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

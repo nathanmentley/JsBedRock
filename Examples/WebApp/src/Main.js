@@ -7,7 +7,7 @@
             Members: {
 				Main: function () {
                     var action = "new WebApp.TestClasses.TwiceInheritedClass().TestMethod();";
-                    var element = (new JsBedRock.Web.Dom()).CreateElement("Button", { onclick: action });
+                    var element = (new JsBedRock.UI.Web.Dom()).CreateElement("Button", { onclick: action });
                     document.body.appendChild(element);
                 }
             }
