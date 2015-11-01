@@ -5,9 +5,10 @@
   ],
   "Dependencies": [
     "JsBedRock.UnitTesting",
-    "JsBedRock.Collections"
+    "JsBedRock.Collections",
+    "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/Tests/JsBedRock.Framework.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

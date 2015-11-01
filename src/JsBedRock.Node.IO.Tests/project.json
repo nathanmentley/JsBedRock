@@ -6,7 +6,7 @@
     "JsBedRock.Node.IO",
     "JsBedRock.UnitTesting"
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Node.IO.Tests.js",
+  "OutputFile": "../../bin/sdk/{{Version}}/Tests/JsBedRock.Node.IO.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

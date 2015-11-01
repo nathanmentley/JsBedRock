@@ -27,9 +27,19 @@
 		}
 	});
 	
+	var fs = require('fs');
+	var appConfgJson = JSON.parse(fs.readFileSync(__dirname + "/config.json", 'utf8').toString());
+	
+	JsBedRock.Assemblies.AssemblyConfig.LoadConfig(
+		JsBedRock.Utils.Object.MergeObjects(
+			appConfgJson,
+			appConfgJson
+		)
+	);
+	
 	//TODO: This is awful.
 	JsBedRock.Assemblies.LoaderLogic = function (u, c){
-		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		eval(fs.readFileSync(__dirname + "/" + u + ".js", 'utf8'));
 		
 		setTimeout( function() { c(); }, 0 );
 	}

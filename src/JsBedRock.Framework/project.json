@@ -10,7 +10,9 @@
     
     "src/Assemblies/GlobalAsmCache.js",
     "src/Assemblies/AssemblyDef.js",
-    "src/Assemblies/AssemblyDependency.js"
+    "src/Assemblies/AssemblyDependency.js",
+    
+    "src/Assemblies/AssemblyConfig.js"
   ],
   "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Framework.js",
   "DebugSourceRoot": "../",

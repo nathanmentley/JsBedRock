@@ -23,7 +23,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     return ret;
                 },
                 __ExecuteUnitTests: function (projectData) {
-                    this.__ChildProcess.exec('node ' + this._OutputFile, function (error, stdout, stderr) { 
+                    this.__ChildProcess.exec(JsBedRock.AppConfig.NodeConfig.NodeExecutable + ' ' + this._OutputFile, function (error, stdout, stderr) { 
                         if (error) {
                             JsBedRock.Console.Write(error.stack);
                             JsBedRock.Console.Write('Error code: '+error.code);

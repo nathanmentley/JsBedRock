@@ -4,9 +4,29 @@
 		(new JsBedRock.Main()).Main();
 	});
 	
+	var fs = require('fs');
+	
+	var sdkConfgJson = {};
+	
+	if (process.env.JSBEDROCK_SDK_PATH)
+		sdkConfgJson = JSON.parse(fs.readFileSync(process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/config.json", 'utf8').toString());
+	var appConfgJson = JSON.parse(fs.readFileSync(__dirname + "/config.json", 'utf8').toString());
+	
+	JsBedRock.Assemblies.AssemblyConfig.LoadConfig(
+		JsBedRock.Utils.Object.MergeObjects(
+			sdkConfgJson,
+			appConfgJson
+		)
+	);
+	
 	//TODO: This is awful.
 	JsBedRock.Assemblies.LoaderLogic = function (u, c){
-		eval(require('fs').readFileSync(__dirname + "/" + u + ".js", 'utf8'));
+		var file = __dirname + "/" + u + ".js";
+		
+		//if no file
+		//file = process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/" + u + ".js";
+		
+		eval(fs.readFileSync(file, 'utf8'));
 		
 		setTimeout( function() { c(); }, 0 );
 	}

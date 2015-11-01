@@ -33,6 +33,11 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                             targetFile
                         );
                     }
+                    
+                    (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                        this._ProjectDir + "/config.json",
+                        this.__Path.dirname(this._OutputFile) + "/config.json"
+                    );
                 }
             },
             Name: 'ExecutableProjectCompilerBase'
