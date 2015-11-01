@@ -12,6 +12,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     this.Base();
                     
                     this._CopyDependencies();
+                    this._CopyConfig();
                 },
                 _GetSourceFiles: function () {
                     var ret = this.Base();
@@ -21,19 +22,9 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     return ret;
                 },
                 _CopyDependencies: function() {
-                    //TODO: Support non framework dependencies.
-                    var outputPath = this.__Path.dirname(this._OutputFile);
-                    
-                    for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
-                        var sourceFile = this._GetSdkLocation(this._SolutionData) + this._ProjectData.Dependencies[i] + ".js";
-                        var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
-                        
-                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                            sourceFile,
-                            targetFile
-                        );
-                    }
-                    
+                    //TODO: copy non framework libraries.
+                },
+                _CopyConfig: function() {
                     (new JsBedRock.Node.IO.FileSystem()).CopyFile(
                         this._ProjectDir + "/config.json",
                         this.__Path.dirname(this._OutputFile) + "/config.json"

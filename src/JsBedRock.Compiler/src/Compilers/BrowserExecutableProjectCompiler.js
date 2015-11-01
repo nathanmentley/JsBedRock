@@ -20,6 +20,22 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     
                     return ret;
                 },
+                _CopyDependencies: function() {
+                    //copy framework libraries.
+                    var outputPath = this.__Path.dirname(this._OutputFile);
+                    
+                    for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
+                        var sourceFile = this._GetSdkLocation(this._SolutionData) + this._ProjectData.Dependencies[i] + ".js";
+                        var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
+                        
+                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                            sourceFile,
+                            targetFile
+                        );
+                    }
+                    
+                    this.Base();
+                },
                 _CreateHtmlIndexFile: function () {
                     var htmlContent = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyAssets/BrowserExecutable/index.html").toString();
                     var tempFile = new JsBedRock.Compiler.TempFile(this._ResolveHtmlTemplate(htmlContent));

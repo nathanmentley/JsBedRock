@@ -8,8 +8,14 @@
 	
 	var sdkConfgJson = {};
 	
-	if (process.env.JSBEDROCK_SDK_PATH)
-		sdkConfgJson = JSON.parse(fs.readFileSync(process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/config.json", 'utf8').toString());
+	if (process.env.JSBEDROCK_SDK_PATH) {
+		try{
+			sdkConfgJson = JSON.parse(fs.readFileSync(process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/config.json", 'utf8').toString());
+		}
+		catch(err){
+			
+		}
+	}
 	var appConfgJson = JSON.parse(fs.readFileSync(__dirname + "/config.json", 'utf8').toString());
 	
 	JsBedRock.Assemblies.AssemblyConfig.LoadConfig(
