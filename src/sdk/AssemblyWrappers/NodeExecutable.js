@@ -19,13 +19,17 @@
 		)
 	);
 	
-	//TODO: This is awful.
 	JsBedRock.Assemblies.LoaderLogic = function (u, c){
 		var file = __dirname + "/" + u + ".js";
 		
-		//if no file
-		//file = process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/" + u + ".js";
+		try{
+			fs.statSync(file);
+		}catch(err){
+			if (process.env.JSBEDROCK_SDK_PATH)
+				file = process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/" + u + ".js";
+		}
 		
+		//TODO: This is awful.
 		eval(fs.readFileSync(file, 'utf8'));
 		
 		setTimeout( function() { c(); }, 0 );
