@@ -1,0 +1,14 @@
+{
+  "Name": "JsBedRock.WebServer",
+  "SourceFiles": [
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Web"
+  ],
+  "NodeDependencies": [
+  ],
+  "OutputFile": "../../bin/{{Version}}/sdk/tools/webserver/JsBedRock.WebServer.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "NodeExecutable"
+}

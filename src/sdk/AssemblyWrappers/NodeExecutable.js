@@ -8,9 +8,9 @@
 	
 	var sdkConfgJson = {};
 	
-	if (process.env.JSBEDROCK_SDK_PATH) {
+	if (process.env.JSBEDROCK_FRAMEWORK_PATH) {
 		try{
-			sdkConfgJson = JSON.parse(fs.readFileSync(process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/config.json", 'utf8').toString());
+			sdkConfgJson = JSON.parse(fs.readFileSync(process.env.JSBEDROCK_FRAMEWORK_PATH + '/' + JsBedRock.FrameworkVersion + "/config.json", 'utf8').toString());
 		}
 		catch(err){
 			
@@ -31,8 +31,8 @@
 		try{
 			fs.statSync(file);
 		}catch(err){
-			if (process.env.JSBEDROCK_SDK_PATH)
-				file = process.env.JSBEDROCK_SDK_PATH + '/' + JsBedRock.FrameworkVersion + "/" + u + ".js";
+			if (process.env.JSBEDROCK_FRAMEWORK_PATH)
+				file = process.env.JSBEDROCK_FRAMEWORK_PATH + '/' + JsBedRock.FrameworkVersion + "/" + u + ".js";
 		}
 		
 		//TODO: This is awful.
