@@ -6,8 +6,6 @@
 		"**/.vscode": true,
    		"**/BuildTools": true,
 		"**/node_modules/**/*": true,
-   		"**/bin": true,
-   		".gitignore": true,
-   		".travis.yml": true
+   		"**/bin": true
 	}
 }

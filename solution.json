@@ -33,5 +33,5 @@
     "./src/JsBedRock.UI.Web.Tests/project.json"
   ],
   "FrameworkVersion": "{{Version}}",
-  "SDKLocationOverride": "./bin/sdk/{{Version}}/"
+  "SDKLocationOverride": "./bin/{{Version}}/sdk/"
 }

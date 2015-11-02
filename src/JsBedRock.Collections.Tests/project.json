@@ -8,7 +8,7 @@
     "JsBedRock.UnitTesting",
     "JsBedRock.Collections"
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/Tests/JsBedRock.Collections/JsBedRock.Collections.Tests.js",
+  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.Collections/JsBedRock.Collections.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

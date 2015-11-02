@@ -25,7 +25,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     var outputPath = this.__Path.dirname(this._OutputFile);
                     
                     for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
-                        var sourceFile = this._GetSdkLocation(this._SolutionData) + this._ProjectData.Dependencies[i] + ".js";
+                        var sourceFile = this._GetSdkLocation(this._SolutionData) + "../" + this._ProjectData.Dependencies[i] + ".js";
                         var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
                         
                         (new JsBedRock.Node.IO.FileSystem()).CopyFile(

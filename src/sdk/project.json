@@ -1,7 +1,7 @@
 {
   "Name": "JsBedRock SDK",
   "SourceFiles": [
-    "config.json",
+    "../config.json",
     "AssemblyWrappers/AsmConfig.js",
     "AssemblyWrappers/BrowserExecutable.js",
     "AssemblyWrappers/ClassLibrary.js",
@@ -9,6 +9,6 @@
     "AssemblyWrappers/TestRunner.js",
     "AssemblyAssets/BrowserExecutable/index.html"
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/",
+  "OutputFile": "../../bin/{{Version}}/sdk/",
   "ProjectType": "Assets"
 }

@@ -6,7 +6,7 @@
   "Dependencies": [
     "JsBedRock.UnitTesting"
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/Tests/JsBedRock.UnitTesting/JsBedRock.UnitTesting.Tests.js",
+  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.UnitTesting/JsBedRock.UnitTesting.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

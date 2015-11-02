@@ -8,7 +8,7 @@
   ],
   "Dependencies": [
   ],
-  "OutputFile": "../../bin/sdk/{{Version}}/JsBedRock.Core.js",
+  "OutputFile": "../../bin/{{Version}}/JsBedRock.Core.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }
