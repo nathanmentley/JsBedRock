@@ -26,7 +26,6 @@
     "./src/libs/JsBedRock.Web.Rest/project.json",
     
     "./src/tools/JsBedRock.Compiler/project.json",
-    "./src/tools/JsBedRock.UnitTestRunner/project.json",
     "./src/tools/JsBedRock.WebServer/project.json",
     
     "./src/tests/JsBedRock.Framework.Tests/project.json",
