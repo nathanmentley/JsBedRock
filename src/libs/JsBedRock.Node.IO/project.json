@@ -1,12 +1,12 @@
 {
-  "Name": "JsBedRock.UnitTesting",
+  "Name": "JsBedRock.Node.IO",
   "SourceFiles": [
-    "src/TestGroup.js"
+    "src/FileSystem.js"
   ],
   "Dependencies": [
     "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.UnitTesting.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.IO.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

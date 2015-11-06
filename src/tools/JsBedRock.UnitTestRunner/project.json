@@ -1,0 +1,15 @@
+{
+  "Name": "JsBedRock.UnitTestRunner",
+  "SourceFiles": [
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.IO",
+    "JsBedRock.Core"
+  ],
+  "NodeDependencies": [
+  ],
+  "OutputFile": "../../../bin/{{Version}}/sdk/tools/unittestrunner/JsBedRock.UnitTestRunner.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "NodeExecutable"
+}
