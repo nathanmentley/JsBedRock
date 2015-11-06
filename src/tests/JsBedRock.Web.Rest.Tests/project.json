@@ -6,7 +6,7 @@
     "JsBedRock.Web.Rest",
     "JsBedRock.UnitTesting"
   ],
-  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.Web.MVC/JsBedRock.Web.Rest.Tests.js",
+  "OutputFile": "../../../bin/{{Version}}/Tests/JsBedRock.Web.Rest/JsBedRock.Web.Rest.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

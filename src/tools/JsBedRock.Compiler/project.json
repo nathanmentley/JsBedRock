@@ -21,7 +21,7 @@
   "NodeDependencies": [
     "uglify-js"
   ],
-  "OutputFile": "../../bin/{{Version}}/sdk/tools/compiler/JsBedRock.Compiler.js",
+  "OutputFile": "../../../bin/{{Version}}/sdk/tools/compiler/JsBedRock.Compiler.js",
   "DebugSourceRoot": "../",
   "ProjectType": "NodeExecutable"
 }

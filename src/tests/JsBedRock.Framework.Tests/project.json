@@ -8,7 +8,7 @@
     "JsBedRock.Collections",
     "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.Framework/JsBedRock.Framework.Tests.js",
+  "OutputFile": "../../../bin/{{Version}}/Tests/JsBedRock.Framework/JsBedRock.Framework.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }

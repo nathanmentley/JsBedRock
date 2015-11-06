@@ -25,19 +25,19 @@
     "./src/JsBedRock.Web/project.json",
     "./src/JsBedRock.Web.Rest/project.json",
     
-    "./src/JsBedRock.Compiler/project.json",
-    "./src/JsBedRock.WebServer/project.json",
+    "./src/tools/JsBedRock.Compiler/project.json",
+    "./src/tools/JsBedRock.WebServer/project.json",
     
-    "./src/JsBedRock.Framework.Tests/project.json",
-    "./src/JsBedRock.Core.Tests/project.json",
-    "./src/JsBedRock.Collections.Tests/project.json",
-    "./src/JsBedRock.UnitTesting.Tests/project.json",
-    "./src/JsBedRock.Node.IO.Tests/project.json",
-    "./src/JsBedRock.Node.Network.Tests/project.json",
-    "./src/JsBedRock.UI.Tests/project.json",
-    "./src/JsBedRock.UI.Web.Tests/project.json",
-    "./src/JsBedRock.Web.Tests/project.json",
-    "./src/JsBedRock.Web.Rest.Tests/project.json"
+    "./src/tests/JsBedRock.Framework.Tests/project.json",
+    "./src/tests/JsBedRock.Core.Tests/project.json",
+    "./src/tests/JsBedRock.Collections.Tests/project.json",
+    "./src/tests/JsBedRock.UnitTesting.Tests/project.json",
+    "./src/tests/JsBedRock.Node.IO.Tests/project.json",
+    "./src/tests/JsBedRock.Node.Network.Tests/project.json",
+    "./src/tests/JsBedRock.UI.Tests/project.json",
+    "./src/tests/JsBedRock.UI.Web.Tests/project.json",
+    "./src/tests/JsBedRock.Web.Tests/project.json",
+    "./src/tests/JsBedRock.Web.Rest.Tests/project.json"
   ],
   "FrameworkVersion": "{{Version}}",
   "SDKLocationOverride": "./bin/{{Version}}/sdk/"

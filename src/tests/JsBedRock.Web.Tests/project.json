@@ -1,12 +1,12 @@
 {
-  "Name": "JsBedRock.UI.Tests",
+  "Name": "JsBedRock.Web.Tests",
   "SourceFiles": [
   ],
   "Dependencies": [
-    "JsBedRock.UI",
+    "JsBedRock.Web",
     "JsBedRock.UnitTesting"
   ],
-  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.UI/JsBedRock.UI.Tests.js",
+  "OutputFile": "../../../bin/{{Version}}/Tests/JsBedRock.Web/JsBedRock.Web.Tests.js",
   "DebugSourceRoot": "../",
   "ProjectType": "TestRunner"
 }
