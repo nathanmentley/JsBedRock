@@ -1,6 +1,6 @@
 {
   "Name": "JsBedRock",
-  "Version": "0.0.1",
+  "Version": "0.16.2",
   "License": "CC-BY-SA-4.0",
   "Description": "An object oriented framework for JavaScript.",
   "Author": "Nathan Mentley <NathanMentley@gmail.com>",
