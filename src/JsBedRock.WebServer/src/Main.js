@@ -6,9 +6,10 @@
             },
             Members: {
 				Main: function () {
-                    JsBedRock.Console.Write("Starting Web Server");
+                    JsBedRock.Console.Write("Init Web Server");
+                    var webServer = new JsBedRock.Web.Rest.RestWebServer(JsBedRock.AppConfig.WebServer.PortNumber);
                     
-                    var webServer = new JsBedRock.Web.WebServerBase(8080);
+                    JsBedRock.Console.Write("Starting Web Server");
                     webServer.ServerStart();
                 }
             }

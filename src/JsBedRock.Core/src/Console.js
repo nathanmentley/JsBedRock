@@ -12,14 +12,12 @@
                 if (PrivateMembers.Initialized)
                     JsBedRock.Console.Error("JsBedRock.Console is a singleton. You cannot create a second instance.");
                 PrivateMembers.Initialized = true;
+                
+                PrivateMembers.EnableConsole = false;
     
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Init: function () {
-                    PrivateMembers.EnableConsole = false;
-                    this.Base();
-                },
                 Error: function (_message) {
                     if (!JsBedRock.Utils.String.IsEmptyOrSpaces(_message)) {
                         throw new Error(_message);

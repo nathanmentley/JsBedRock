@@ -1,0 +1,12 @@
+{
+  "Name": "JsBedRock.Web.Rest.Tests",
+  "SourceFiles": [
+  ],
+  "Dependencies": [
+    "JsBedRock.Web.MVC",
+    "JsBedRock.UnitTesting"
+  ],
+  "OutputFile": "../../bin/{{Version}}/Tests/JsBedRock.Web.MVC/JsBedRock.Web.Rest.Tests.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "TestRunner"
+}

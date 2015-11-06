@@ -6,7 +6,6 @@ JsBedRock.Types = JsBedRock.Types || {};
         JsBedRock.Types.Object = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
                 /// <summary>Base Object Type. All JsBedRock Object Types must Inherit from this object.</summary>
-                this.Init();
             },
             Implements: [
                 JsBedRock.Types.Interface
@@ -44,8 +43,18 @@ JsBedRock.Types = JsBedRock.Types || {};
         
                     return ret;
                 },
-                Init: function () {
-                },
+                ToJson: function () {
+                    var jsonObject = {};
+                    
+                    for(var prop in this){
+                        if (prop.lastIndexOf('_', 0) === 0)
+                            continue;
+                        
+                        jsonObject[prop] = this[prop];
+                    }
+                    
+                    return JSON.stringify(jsonObject);
+                }
             }
         });
     });

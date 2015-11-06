@@ -4,7 +4,9 @@ JsBedRock.Web = JsBedRock.Web || {};
     asm.OnLoad(function () {
 		JsBedRock.Web.WebServerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function (portNumber) {
-                this._HttpServer = new JsBedRock.Node.Network.HttpServer(this._HandleRequest, portNumber);
+                var context = this;
+                
+                this._HttpServer = new JsBedRock.Node.Network.HttpServer(function (req,res) { context._HandleRequest(req, res); }, portNumber);
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
@@ -16,8 +18,8 @@ JsBedRock.Web = JsBedRock.Web || {};
                     this._HttpServer.End(callback);
                 },
                 _HandleRequest: function(req, res) {
-                    res.writeHead(200, {'Content-Type': 'text/plain'});
-                    res.end("Response From Node Server");
+                    res.writeHead(404, {'Content-Type': 'text/plain'});
+                    res.end("404");
                 },
                 _HttpServer: null
             }

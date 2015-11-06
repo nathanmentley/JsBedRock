@@ -1,10 +1,12 @@
 {
   "Name": "JsBedRock.WebServer",
   "SourceFiles": [
+    "src/Models/TestResult.js",
+    "src/Controllers/TestController.js",
     "src/Main.js"
   ],
   "Dependencies": [
-    "JsBedRock.Web"
+    "JsBedRock.Web.Rest"
   ],
   "NodeDependencies": [
   ],

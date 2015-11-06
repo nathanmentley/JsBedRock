@@ -23,6 +23,7 @@
     "./src/JsBedRock.UI/project.json",
     "./src/JsBedRock.UI.Web/project.json",
     "./src/JsBedRock.Web/project.json",
+    "./src/JsBedRock.Web.Rest/project.json",
     
     "./src/JsBedRock.Compiler/project.json",
     "./src/JsBedRock.WebServer/project.json",
@@ -35,7 +36,8 @@
     "./src/JsBedRock.Node.Network.Tests/project.json",
     "./src/JsBedRock.UI.Tests/project.json",
     "./src/JsBedRock.UI.Web.Tests/project.json",
-    "./src/JsBedRock.Web.Tests/project.json"
+    "./src/JsBedRock.Web.Tests/project.json",
+    "./src/JsBedRock.Web.Rest.Tests/project.json"
   ],
   "FrameworkVersion": "{{Version}}",
   "SDKLocationOverride": "./bin/{{Version}}/sdk/"
