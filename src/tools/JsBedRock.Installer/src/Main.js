@@ -9,15 +9,33 @@
             },
             Members: {
 				Main: function () {
-                    process.env.JSBEDROCK_FRAMEWORK_PATH = "/usr/lib/JsBedRock";
                     JsBedRock.Console.Write("Installing JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
                     
-                    this._Fs.CreateReadStream(__dirname + "/Content.tar").pipe(this._Tar.Extract({
-                        path: process.env.JSBEDROCK_FRAMEWORK_PATH
-                    }));
+                    this.ParseParameters();
+                    this.UnpackContent();
+                    this.SetEnviormentVariables();
                     
-                    this._Fs.WriteFileSync("/etc/profile.d/JsBedRock.sh", "export JSBEDROCK_FRAMEWORK_PATH='" + process.env.JSBEDROCK_FRAMEWORK_PATH + "/'");
+                    JsBedRock.Console.Write("Installation Complete - JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
                 },
+                ParseParameters: function () {
+                    this._InstallLocation = "/usr/lib/JsBedRock";
+                },
+                UnpackContent: function () {
+                    this._Fs.CreateReadStream(__dirname + "/Content.tar").pipe(
+                        this._Tar.Extract({
+                            path: this._InstallLocation
+                        })
+                    );
+                },
+                SetEnviormentVariables: function () {
+                    process.env.JSBEDROCK_FRAMEWORK_PATH = this._InstallLocation;
+                    
+                    this._Fs.WriteFileSync(
+                        "/etc/profile.d/JsBedRock.sh",
+                        "export JSBEDROCK_FRAMEWORK_PATH='" + this._InstallLocation + "/'"
+                    );
+                },
+                _InstallLocation: null,
                 _Tar: null,
                 _Fs: null
             }
