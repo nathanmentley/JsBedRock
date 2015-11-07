@@ -1,0 +1,18 @@
+{
+  "Name": "JsBedRock.Installer",
+  "SourceFiles": [
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.IO",
+    "JsBedRock.Core"
+  ],
+  "NodeDependencies": [
+    "fstream",
+    "tar"
+  ],
+  "OutputFile": "../../../bin/installer-{{Version}}/JsBedRock.Installer.js",
+  "DebugSourceRoot": "../",
+  "InstallContentDirectory": "../../../bin/{{Version}}/",
+  "ProjectType": "NodeInstallerExecutable"
+}

@@ -1,6 +1,6 @@
 {
   "Name": "JsBedRock",
-  "Version": "0.16.2",
+  "Version": "0.16.02",
   "License": "CC-BY-SA-4.0",
   "Description": "An object oriented framework for JavaScript.",
   "Author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -37,7 +37,9 @@
     "./src/tests/JsBedRock.UI.Tests/project.json",
     "./src/tests/JsBedRock.UI.Web.Tests/project.json",
     "./src/tests/JsBedRock.Web.Tests/project.json",
-    "./src/tests/JsBedRock.Web.Rest.Tests/project.json"
+    "./src/tests/JsBedRock.Web.Rest.Tests/project.json",
+    
+    "./src/tools/JsBedRock.Installer/project.json"
   ],
   "FrameworkVersion": "{{Version}}",
   "SDKLocationOverride": "./bin/{{Version}}/sdk/"

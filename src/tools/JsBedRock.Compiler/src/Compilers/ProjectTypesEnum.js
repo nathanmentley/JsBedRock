@@ -8,7 +8,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             ClassLibrary: "ClassLibrary",
             TestRunner: "TestRunner",
             BrowserExecutable: "BrowserExecutable",
-            NodeExecutable: "NodeExecutable"
+            NodeExecutable: "NodeExecutable",
+            NodeInstallerExecutable: "NodeInstallerExecutable"
         };
 	});
 })(JsBedRock.CurrentAssembly);
