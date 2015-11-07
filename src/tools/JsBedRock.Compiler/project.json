@@ -11,6 +11,7 @@
     "src/Compilers/BrowserExecutableProjectCompiler.js",
     "src/Compilers/ClassLibraryProjectCompiler.js",
     "src/Compilers/NodeExecutableProjectCompiler.js",
+    "src/Compilers/NodeInstallerExecutableProjectCompiler.js",
     "src/Compilers/TestRunnerProjectCompiler.js",
     "src/Main.js"
   ],
@@ -19,7 +20,9 @@
     "JsBedRock.Core"
   ],
   "NodeDependencies": [
-    "uglify-js"
+    "uglify-js",
+    "fstream",
+    "tar"
   ],
   "OutputFile": "../../../bin/{{Version}}/sdk/tools/compiler/JsBedRock.Compiler.js",
   "DebugSourceRoot": "../",

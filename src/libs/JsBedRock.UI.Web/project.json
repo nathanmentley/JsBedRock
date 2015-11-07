@@ -7,7 +7,7 @@
   "Dependencies": [
     "JsBedRock.UI"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.UI.Web.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.UI.Web.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

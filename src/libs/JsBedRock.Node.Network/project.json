@@ -1,12 +1,12 @@
 {
-  "Name": "JsBedRock.Node.IO",
+  "Name": "JsBedRock.Node.Network",
   "SourceFiles": [
-    "src/FileSystem.js"
+    "src/HttpServer.js"
   ],
   "Dependencies": [
     "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.Node.IO.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Network.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

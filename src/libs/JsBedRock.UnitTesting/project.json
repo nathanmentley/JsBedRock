@@ -1,12 +1,12 @@
 {
-  "Name": "JsBedRock.Node.Network",
+  "Name": "JsBedRock.UnitTesting",
   "SourceFiles": [
-    "src/HttpServer.js"
+    "src/TestGroup.js"
   ],
   "Dependencies": [
     "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.Node.Network.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.UnitTesting.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

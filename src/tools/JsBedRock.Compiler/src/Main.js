@@ -44,6 +44,9 @@
                         case JsBedRock.Compiler.ProjectTypes.NodeExecutable:
                             return new JsBedRock.Compiler.NodeExecutableProjectCompiler(solutionData, solutionFile, projectData, projectFile);
                             break;
+                        case JsBedRock.Compiler.ProjectTypes.NodeInstallerExecutable:
+                            return new JsBedRock.Compiler.NodeInstallerExecutableProjectCompiler(solutionData, solutionFile, projectData, projectFile);
+                            break;
                         case JsBedRock.Compiler.ProjectTypes.TestRunner:
                             return new JsBedRock.Compiler.TestRunnerProjectCompiler(solutionData, solutionFile, projectData, projectFile);
                             break;

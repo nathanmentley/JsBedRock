@@ -10,7 +10,7 @@
   "Dependencies": [
     "JsBedRock.Core"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.Collections.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Collections.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

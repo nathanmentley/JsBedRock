@@ -18,9 +18,6 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             }),
             Members: {
 				CompileProject: function () {
-                    //this._WriteOutputFile(
-                    //    this._BuildProject()
-                    //);
                     this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));
                 },
                 _GetSourceFiles: function () {

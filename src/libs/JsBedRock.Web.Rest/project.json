@@ -11,7 +11,7 @@
     "JsBedRock.Web",
     "JsBedRock.Collections"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.Web.Rest.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Web.Rest.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }

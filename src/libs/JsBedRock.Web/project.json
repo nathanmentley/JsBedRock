@@ -7,7 +7,7 @@
     "JsBedRock.Node.IO",
     "JsBedRock.Node.Network"
   ],
-  "OutputFile": "../../bin/{{Version}}/JsBedRock.Web.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Web.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }
