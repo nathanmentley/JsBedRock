@@ -54,6 +54,12 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 				DeleteSync: function(file) {
 					this.__FS.unlinkSync(file);
 				},
+				CreateReadStream : function (file) {
+					return this.__FS.createReadStream(file);
+				},
+				CreateWriteStream: function (file) {
+					return this.__FS.createWriteStream(file);
+				},
 				__FS: null
             }
         });

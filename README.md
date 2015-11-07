@@ -9,7 +9,9 @@ An object oriented framework for JavaScript.
 ## Development Status
 
 ### Build Status
+
 Master: [![Build Status](https://travis-ci.org/nathanmentley/JsBedRock.svg?branch=master)](https://travis-ci.org/nathanmentley/JsBedRock)
+
 0.16.02 - "Against Me!" Development Branch: [![Build Status](https://travis-ci.org/nathanmentley/JsBedRock.svg?branch=Development-AgainstMe)](https://travis-ci.org/nathanmentley/JsBedRock)
 
 ### Roadmap
