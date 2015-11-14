@@ -12,14 +12,16 @@
     "Url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "Projects": [
-    "./src/JsBedRock.Framework/project.json",
+    "./src/sdk/JsBedRock.Framework/project.json",
     "./src/sdk/project.json",
     
     "./src/libs/JsBedRock.Core/project.json",
     "./src/libs/JsBedRock.Collections/project.json",
     "./src/libs/JsBedRock.UnitTesting/project.json",
+    "./src/libs/JsBedRock.Db/project.json",
     "./src/libs/JsBedRock.Node.IO/project.json",
     "./src/libs/JsBedRock.Node.Network/project.json",
+    "./src/libs/JsBedRock.Node.Mongo/project.json",
     "./src/libs/JsBedRock.UI/project.json",
     "./src/libs/JsBedRock.UI.Web/project.json",
     "./src/libs/JsBedRock.Web/project.json",
@@ -32,8 +34,10 @@
     "./src/tests/JsBedRock.Core.Tests/project.json",
     "./src/tests/JsBedRock.Collections.Tests/project.json",
     "./src/tests/JsBedRock.UnitTesting.Tests/project.json",
+    "./src/tests/JsBedRock.Db.Tests/project.json",
     "./src/tests/JsBedRock.Node.IO.Tests/project.json",
     "./src/tests/JsBedRock.Node.Network.Tests/project.json",
+    "./src/tests/JsBedRock.Node.Mongo.Tests/project.json",
     "./src/tests/JsBedRock.UI.Tests/project.json",
     "./src/tests/JsBedRock.UI.Web.Tests/project.json",
     "./src/tests/JsBedRock.Web.Tests/project.json",
