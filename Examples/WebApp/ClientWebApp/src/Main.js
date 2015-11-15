@@ -8,7 +8,8 @@
 				Main: function () {
                     this._CompFactory = new JsBedRock.UI.ComponentFactory(new JsBedRock.UI.Web.HtmlComponentRenderer());
                     this._CompFactory.Init();
-                    this._CompFactory.GetComponent(JsBedRock.MainLayoutComponent, { TargetId: "#AppBody" }).Render();
+                    
+                    this._CompFactory.GetComponent(JsBedRock.Components.MainLayoutComponent, { TargetId: "#AppBody" }).Render();
                 },
                 _CompFactory: null
             }

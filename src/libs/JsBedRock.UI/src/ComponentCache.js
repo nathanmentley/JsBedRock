@@ -4,7 +4,7 @@ JsBedRock.UI = JsBedRock.UI || {};
     asm.OnLoad(function () {
         var PrivateMembers = {
             GetKeyFromComponentType: function (componentType) {
-                return componentType;
+                return componentType.prototype.Name;
             }
         };
         
@@ -30,8 +30,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                     }
                 },
                 GetComponent: function (key) {
-                    if(this._ComponentDictionary.Contains(key))
-                        return this._ComponentDictionary.Get(key);
+                    if(this._ComponentDictionary.Contains(PrivateMembers.GetKeyFromComponentType(key)))
+                        return this._ComponentDictionary.Get(PrivateMembers.GetKeyFromComponentType(key));
                     return null;
                 },
 				_ComponentDictionary: null

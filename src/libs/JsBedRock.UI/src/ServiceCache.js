@@ -12,7 +12,7 @@ JsBedRock.UI = JsBedRock.UI || {};
                 PopulateCache: function () {
                     var services = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(JsBedRock.CurrentAssembly, JsBedRock.UI.Service);
                         
-                    for(var i = 0; i < s.length; i++) {
+                    for(var i = 0; i < services.length; i++) {
                         var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
                             
                         if(key) {
@@ -23,8 +23,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                     }
                 },
                 GetService: function (key) {
-                    if(this._ServiceDictionary.Contains(key))
-                        return this._ServiceDictionary.Get(key);
+                    if(this._ServiceDictionary.Contains(JsBedRock.UI.Utils.GetKeyFromServiceType(key)))
+                        return this._ServiceDictionary.Get(JsBedRock.UI.Utils.GetKeyFromServiceType(key));
                     return null;
                 },
 				_ServiceDictionary: null

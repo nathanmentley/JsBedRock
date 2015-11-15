@@ -1,6 +1,8 @@
 {
   "Name": "ClientWebApp",
   "SourceFiles": [
+    "src/Services/BlogService.js",
+    "src/Components/BlogPostComponent.js",
     "src/Components/MainLayoutComponent.js",
     "src/Main.js"
   ],

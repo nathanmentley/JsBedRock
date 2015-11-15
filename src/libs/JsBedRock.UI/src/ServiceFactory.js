@@ -9,8 +9,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Register: function () {
-                   __ServiceCache.PopulateCache();
+                Init: function () {
+                   this.__ServiceCache.PopulateCache();
                 },
                 GetService: function (key) {
                     var compType = this.__ServiceCache.GetService(key);

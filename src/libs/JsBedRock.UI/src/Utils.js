@@ -5,7 +5,7 @@ JsBedRock.UI.Utils = JsBedRock.UI.Utils || {};
     asm.OnLoad(function () {
         JsBedRock.UI.Utils = {
             GetKeyFromServiceType: function (serviceType) {
-                return serviceType;
+                return serviceType.prototype.Name;
             }
         };
     });

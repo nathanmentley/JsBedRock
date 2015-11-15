@@ -5,10 +5,11 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
     asm.OnLoad(function () {
         JsBedRock.UI.Web.HtmlComponent = JsBedRock.Utils.ObjectOriented.CreateClass({
 			Inherit: JsBedRock.UI.Component,
-            Constructor: function (context, renderer) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Component, context, renderer);
+            Constructor: function (context, renderer, componentFactory) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Component, context, renderer, componentFactory);
             },
             Members: {
+                Name: "",
                 Init: function () {
                     var self = this;
                     this.Base();
