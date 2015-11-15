@@ -3,8 +3,10 @@
   "SourceFiles": [
     "src/ControllerCache.js",
     "src/Controller.js",
-    "src/RequestRouter.js",
     "src/RestResult.js",
+    "src/RestRequest.js",
+    "src/RequestRouterResult.js",
+    "src/RequestRouter.js",
     "src/RestWebServer.js"
   ],
   "Dependencies": [

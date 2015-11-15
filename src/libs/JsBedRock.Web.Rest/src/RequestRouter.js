@@ -12,10 +12,11 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                     //TODO: Parse against configured routes
                     var segments = uri.split("/");
                         
-                    return {
-                        Controller: segments[1],
-                        Action: segments[2]
-                    };
+                    return new JsBedRock.Web.Rest.RequestRouterResult(
+                        segments[1],
+                        segments[2],
+                        new JsBedRock.Web.Rest.RestRequest()
+                    );
                 }
             }
         });

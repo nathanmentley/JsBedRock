@@ -2,8 +2,8 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: (JsBedRock.Compiler.ProjectCompilerBase = function (soultionData, solutionFile, projectData, projectFile) {
+        JsBedRock.Compiler.ProjectCompilerBase = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Constructor: function (soultionData, solutionFile, projectData, projectFile) {
                 this.__Uglifyjs = require('uglify-js');
                 this.__Path = require('path');
                 this.__SettingResolver = new JsBedRock.Compiler.SettingResolver();
@@ -12,10 +12,12 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 this._SolutionDir = this.__Path.dirname(solutionFile);
                 this._ProjectData = projectData;
                 this._ProjectDir = this.__Path.dirname(projectFile);
-                this._OutputFile = this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.OutputFile));
+                
+                if(this._ProjectData)
+                    this._OutputFile = this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.OutputFile));
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-            }),
+            },
             Members: {
 				CompileProject: function () {
                     this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));

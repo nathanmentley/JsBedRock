@@ -6,11 +6,11 @@
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Main: function () {
+				Main: function (appArgs) {
                     var settingResolver = new JsBedRock.Compiler.SettingResolver();
                     
-                    var solutionDir = this.__Path.dirname(process.argv[2]);
-                    var solutionFile = process.argv[2];
+                    var solutionDir = this.__Path.dirname(appArgs.Solution);
+                    var solutionFile = appArgs.Solution;
                     
                     var solutionData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(solutionFile).toString());
                     

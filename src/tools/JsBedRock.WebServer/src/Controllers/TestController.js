@@ -9,7 +9,9 @@ JsBedRock.Controllers = JsBedRock.Controllers || {};
             },
             Members: {
                 Name: 'Test',
-                Index: function () { return new JsBedRock.Models.TestResult("one", "two"); }
+                Index: function () {
+                    return new JsBedRock.Models.TestResult("one", "two");
+                }
             }
         });
     });

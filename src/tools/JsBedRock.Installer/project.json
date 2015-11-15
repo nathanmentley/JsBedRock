@@ -1,10 +1,12 @@
 {
   "Name": "JsBedRock.Installer",
   "SourceFiles": [
+    "src/InstallerAppArguments.js",
     "src/Main.js"
   ],
   "Dependencies": [
     "JsBedRock.Node.IO",
+    "JsBedRock.Node",
     "JsBedRock.Core"
   ],
   "NodeDependencies": [

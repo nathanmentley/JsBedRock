@@ -4,7 +4,7 @@
     "src/FileSystem.js"
   ],
   "Dependencies": [
-    "JsBedRock.Core"
+    "JsBedRock.Node"
   ],
   "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.IO.js",
   "DebugSourceRoot": "../",

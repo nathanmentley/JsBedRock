@@ -6,12 +6,30 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
 		JsBedRock.Web.Rest.RestWebServer = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.Web.WebServerBase,
             Constructor: function (portNumber) {
-                this.__ControllerCache = new JsBedRock.Web.Rest.ControllerCache();
-                this.__Router = new JsBedRock.Web.Rest.RequestRouter();
-                
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Web.WebServerBase, portNumber);
             },
             Members: {
+                __ControllerCache: null,
+                __Router: null,
+                __RouterType: null,
+                __ControllerCacheType: null,
+                
+                ServerStart: function () {
+                    if(this.__ControllerCacheType)
+                        this.__ControllerCache = new __ControllerCacheType();
+                    else
+                        this.__ControllerCache = new JsBedRock.Web.Rest.ControllerCache();
+                        
+                    if(this.__RouterType)
+                        this.__Router = new __RouterType();
+                    else
+                        this.__Router = new JsBedRock.Web.Rest.RequestRouter();
+                
+                    this.Base();
+                },
+                ServerEnd: function (callback) {
+                    this.Base(callback);
+                },
                 _HandleRequest: function(req, res) {
                     try {
                         var routerResult = this.__Router.ParseRequest(req.url);
@@ -26,8 +44,12 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                         res.end("Exception:" + err.message + " " + err.stack);
                     }
                 },
-                __ControllerCache: null,
-                __Router: null
+                RegisterRouter: function (routerType) {
+                    this.__RouterType = routerType;
+                },
+                RegisterControllerCache: function (controllerCacheType) {
+                    this.__ControllerCache = controllerCacheType;
+                }
             }
         });
     });

@@ -8,17 +8,20 @@
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Main: function () {
+				Main: function (installerArgs) {
                     JsBedRock.Console.Write("Installing JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
                     
-                    this.ParseParameters();
+                    this.ParseParameters(installerArgs);
                     this.UnpackContent();
                     this.SetEnviormentVariables();
                     
                     JsBedRock.Console.Write("Installation Complete - JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
                 },
-                ParseParameters: function () {
-                    this._InstallLocation = "/usr/lib/JsBedRock";
+                ParseParameters: function (installerArgs) {
+                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(installerArgs.Path))
+                        JsBedRock.Console.Error("Invalid Install Path.");
+                        
+                    this._InstallLocation = installerArgs.Path;
                 },
                 UnpackContent: function () {
                     this._Fs.CreateReadStream(__dirname + "/Content.tar").pipe(

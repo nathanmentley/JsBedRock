@@ -1,6 +1,7 @@
 {
   "Name": "JsBedRock.Compiler",
   "SourceFiles": [
+    "src/CompilerAppArguments.js",
     "src/SettingResolver.js",
     "src/TempFile.js",
     "src/Compilers/ProjectTypesEnum.js",
@@ -17,6 +18,7 @@
   ],
   "Dependencies": [
     "JsBedRock.Node.IO",
+    "JsBedRock.Node",
     "JsBedRock.Core"
   ],
   "NodeDependencies": [
