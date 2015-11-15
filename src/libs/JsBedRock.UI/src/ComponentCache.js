@@ -17,17 +17,14 @@ JsBedRock.UI = JsBedRock.UI || {};
             Members: {
                 PopulateCache: function () {
                     //Reflection Get all components and add them to dictionary
-                    var gac = JsBedRock.Assemblies.GlobalAssemblyCache.GetLoadedAssemblies();
-                    for (var prop in gac) {
-                        var components = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(gac[prop], JsBedRock.UI.Component);
+                    var components = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(JsBedRock.CurrentAssembly, JsBedRock.UI.Component);
                         
-                        for(var i = 0; i < components.length; i++) {
-                            var key = PrivateMembers.GetKeyFromComponentType(components[i]);
+                    for(var i = 0; i < components.length; i++) {
+                        var key = PrivateMembers.GetKeyFromComponentType(components[i]);
                             
-                            if(key) {
-                                if (!this._ComponentDictionary.Contains(key)) {
-                                    this._ComponentDictionary.Add(key, components[i]);
-                                }
+                        if(key) {
+                            if (!this._ComponentDictionary.Contains(key)) {
+                                this._ComponentDictionary.Add(key, components[i]);
                             }
                         }
                     }

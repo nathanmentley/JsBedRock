@@ -3,12 +3,11 @@ JsBedRock.UI = JsBedRock.UI || {};
 (function (asm) {
     asm.OnLoad(function () {
         JsBedRock.UI.Component = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: function (context) {
+            Constructor: function (context, renderer) {
+                this._Renderer = renderer;
                 this._Context = context;
-                this._Model = {};
                 this._Service = {};
                 
-                //TODO: Where does this come from?
                 var serviceFactory = new JsBedRock.UI.ServiceFactory();
                 
                 var services = this._GetServices();
@@ -21,20 +20,26 @@ JsBedRock.UI = JsBedRock.UI || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                GetModel: function () {
-                    return this._Model;
+                Init: function () {
+                    
                 },
-                SetRenderer: function (renderer) {
-                    this._Renderer = renderer;
+                Render: function () {
+                    return this._Renderer.Render(this._GetTemplate(), this._GetModel(), this._Context);
                 },
                 _GetServices: function () {
                     return [];
                 },
+                _GetTemplate: function () {
+                    return "";
+                },
+                _GetModel: function () {
+                    return this._Model;
+                },
                 _Service: null,
                 _Context: null,
-                _Renderer: null
-            },
-            _Model: null
+                _Renderer: null,
+                _Model: {}
+            }
         });
     });
 })(JsBedRock.CurrentAssembly);

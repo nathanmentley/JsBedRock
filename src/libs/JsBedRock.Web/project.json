@@ -1,8 +1,10 @@
 {
   "Name": "JsBedRock.Web",
   "SourceFiles": [
-    "src/RestRequest.js",
-    "src/RestResult.js"
+    "src/Http/HttpClient.js",
+    "src/Rest/RestRequest.js",
+    "src/Rest/RestResult.js",
+    "src/Rest/RestHttpClient.js"
   ],
   "Dependencies": [
     "JsBedRock.Core"

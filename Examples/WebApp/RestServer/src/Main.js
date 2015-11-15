@@ -8,6 +8,8 @@
 				Main: function () {
                     var webServer = new JsBedRock.Node.Web.Rest.RestWebServer(JsBedRock.AppConfig.WebServer.PortNumber);
                     
+                    webServer.GetRouter().RegisterRoute({});
+                    
                     webServer.ServerStart();
                 }
             }

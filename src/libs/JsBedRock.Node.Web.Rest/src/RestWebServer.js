@@ -6,31 +6,23 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
     asm.OnLoad(function () {
 		JsBedRock.Node.Web.Rest.RestWebServer = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.Node.Web.WebServerBase,
-            Constructor: function (portNumber) {
+            Constructor: function (portNumber, routerType, controllerCacheType) {
+                if(controllerCacheType)
+                    this.__ControllerCache = new controllerCacheType();
+                else
+                    this.__ControllerCache = new JsBedRock.Node.Web.Rest.ControllerCache();
+                        
+                if(routerType)
+                    this.__Router = new routerType();
+                else
+                    this.__Router = new JsBedRock.Node.Web.Rest.RequestRouter();
+                
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.WebServerBase, portNumber);
             },
             Members: {
                 __ControllerCache: null,
                 __Router: null,
-                __RouterType: null,
-                __ControllerCacheType: null,
                 
-                ServerStart: function () {
-                    if(this.__ControllerCacheType)
-                        this.__ControllerCache = new __ControllerCacheType();
-                    else
-                        this.__ControllerCache = new JsBedRock.Node.Web.Rest.ControllerCache();
-                        
-                    if(this.__RouterType)
-                        this.__Router = new __RouterType();
-                    else
-                        this.__Router = new JsBedRock.Node.Web.Rest.RequestRouter();
-                
-                    this.Base();
-                },
-                ServerEnd: function (callback) {
-                    this.Base(callback);
-                },
                 _HandleRequest: function(req, res) {
                     try {
                         var routerResult = this.__Router.ParseRequest(req.url);
@@ -45,11 +37,8 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                         res.end("Exception:" + err.message + " " + err.stack);
                     }
                 },
-                RegisterRouter: function (routerType) {
-                    this.__RouterType = routerType;
-                },
-                RegisterControllerCache: function (controllerCacheType) {
-                    this.__ControllerCache = controllerCacheType;
+                GetRouter: function () {
+                    return this.__Router;
                 }
             }
         });

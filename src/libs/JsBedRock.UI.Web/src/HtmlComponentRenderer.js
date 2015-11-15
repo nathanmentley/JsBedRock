@@ -5,16 +5,14 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
     asm.OnLoad(function () {
 		JsBedRock.UI.Web.HtmlComponentRenderer = JsBedRock.Utils.ObjectOriented.CreateClass({
 			Inherit: JsBedRock.UI.ComponentRenderer,
-            Constructor: function (component) {
-                this._Html = new JsBedRock.UI.Web.HtmlHelper();
-                
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.ComponentRenderer, component);
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.ComponentRenderer);
             },
             Members: {
-                Render: function () {
-                    this.Base();
-                },
-                _Html: null
+                Render: function (template, model, context) {
+                    var compiledTemplate = Handlebars.compile(template);
+                    $(context.TargetId).html(compiledTemplate(model));
+                }
             }
         });
     });

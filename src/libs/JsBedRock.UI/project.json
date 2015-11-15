@@ -11,7 +11,7 @@
     "src/ComponentRenderer.js"
   ],
   "Dependencies": [
-    "JsBedRock.Core"
+    "JsBedRock.Collections"
   ],
   "OutputFile": "../../../bin/{{Version}}/JsBedRock.UI.js",
   "DebugSourceRoot": "../",

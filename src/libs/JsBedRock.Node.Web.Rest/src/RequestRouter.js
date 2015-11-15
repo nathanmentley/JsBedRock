@@ -6,9 +6,13 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
     asm.OnLoad(function () {
 		JsBedRock.Node.Web.Rest.RequestRouter = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
+                this._Routes = new JsBedRock.Collections.List();
+                
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
+                _Routes: null,
+                
                 ParseRequest: function(uri) {
                     //TODO: Parse against configured routes
                     var segments = uri.split("/");
@@ -18,7 +22,10 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                         segments[2],
                         new JsBedRock.Web.Rest.RestRequest()
                     );
-                }
+                },
+                RegisterRoute: function(routeConfig) {
+                    this._Routes.Add(routeConfig);
+                },
             }
         });
     });

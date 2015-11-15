@@ -1,7 +1,7 @@
 {
   "Name": "JsBedRock.UI.Web",
   "SourceFiles": [
-    "src/HtmlHelper.js",
+    "src/HtmlComponent.js",
     "src/HtmlComponentRenderer.js"
   ],
   "Dependencies": [

@@ -6,10 +6,11 @@
             }),
             Members: {
 				Main: function () {
-                    var action = "new WebApp.TestClasses.TwiceInheritedClass().TestMethod();";
-                    var element = (new JsBedRock.UI.Web.Dom()).CreateElement("Button", { onclick: action });
-                    document.body.appendChild(element);
-                }
+                    this._CompFactory = new JsBedRock.UI.ComponentFactory(new JsBedRock.UI.Web.HtmlComponentRenderer());
+                    this._CompFactory.Init();
+                    this._CompFactory.GetComponent(JsBedRock.MainLayoutComponent, { TargetId: "#AppBody" }).Render();
+                },
+                _CompFactory: null
             }
         });
     });

@@ -10,17 +10,14 @@ JsBedRock.UI = JsBedRock.UI || {};
             },
             Members: {
                 PopulateCache: function () {
-                    var gac = JsBedRock.Assemblies.GlobalAssemblyCache.GetLoadedAssemblies();
-                    for(var prop in gac) {
-                        var services = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(gac[prop], JsBedRock.UI.Service);
+                    var services = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(JsBedRock.CurrentAssembly, JsBedRock.UI.Service);
                         
-                        for(var i = 0; i < s.length; i++) {
-                            var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
+                    for(var i = 0; i < s.length; i++) {
+                        var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
                             
-                            if(key) {
-                                if (!this._ServiceDictionary.Contains(key)) {
-                                    this._ServiceDictionary.Add(key, services[i]);
-                                }
+                        if(key) {
+                            if (!this._ServiceDictionary.Contains(key)) {
+                                this._ServiceDictionary.Add(key, services[i]);
                             }
                         }
                     }
