@@ -1,0 +1,11 @@
+{
+  "Name": "JsBedRock.Node.Db",
+  "SourceFiles": [
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

@@ -1,4 +1,4 @@
 language: node_js
 node_js:
   - "4.2"
-script: export JSBEDROCK_FRAMEWORK_PATH='./bin';node ./BuildTools/JsBedRock.Compiler.js -Solution solution.json
+script: export JSBEDROCK_FRAMEWORK_PATH='./bin';node ./BuildTools/JsBedRock.Compiler.js -Solution solution.json;node ./bin/0.16.02/sdk/tools/compiler/JsBedRock.Compiler.js -Solution ./Examples/WebApp/solution.json

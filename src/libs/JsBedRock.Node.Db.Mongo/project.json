@@ -1,0 +1,11 @@
+{
+  "Name": "JsBedRock.Node.Db.Mongo",
+  "SourceFiles": [
+  ],
+  "Dependencies": [
+    "JsBedRock.Db"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.Mongo.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

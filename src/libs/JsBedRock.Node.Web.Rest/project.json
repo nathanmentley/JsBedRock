@@ -1,0 +1,19 @@
+{
+  "Name": "JsBedRock.Node.Web.Rest",
+  "SourceFiles": [
+    "src/ControllerCache.js",
+    "src/Controller.js",
+    "src/RestResult.js",
+    "src/RestRequest.js",
+    "src/RequestRouterResult.js",
+    "src/RequestRouter.js",
+    "src/RestWebServer.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Web",
+    "JsBedRock.Collections"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Web.Rest.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

@@ -1,0 +1,16 @@
+{
+  "Name": "ClientWebApp",
+  "SourceFiles": [
+    "src/TestClasses/BaseClass.js",
+    "src/TestClasses/OnceInheritedClass.js",
+    "src/TestClasses/TwiceInheritedClass.js",
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.UI.Web",
+    "JsBedRock.UI",
+    "JsBedRock.Core"
+  ],
+  "OutputFile": "../bin/ClientWebApp/ClientWebApp.js",
+  "ProjectType": "BrowserExecutable"
+}

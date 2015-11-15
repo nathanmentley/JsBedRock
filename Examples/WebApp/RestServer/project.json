@@ -1,0 +1,16 @@
+{
+  "Name": "RestServer",
+  "SourceFiles": [
+    "src/Models/TestResult.js",
+    "src/Controllers/TestController.js",
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.Web.Rest"
+  ],
+  "NodeDependencies": [
+  ],
+  "OutputFile": "../bin/RestServer/RestServer.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "NodeExecutable"
+}

@@ -50,7 +50,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 },
                 _GetSdkLocation: function () {
                     if(JsBedRock.Utils.String.IsEmptyOrSpaces(this._SolutionData.SDKLocationOverride))
-                        return __dirname + "/sdk/" + this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.FrameworkVersion) + "/";
+                        return __dirname + "/../../";
                         
                     return this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride);
                 },

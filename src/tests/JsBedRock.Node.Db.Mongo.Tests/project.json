@@ -1,0 +1,12 @@
+{
+  "Name": "JsBedRock.Node.Db.Mongo.Tests",
+  "SourceFiles": [
+  ],
+  "Dependencies": [
+    "JsBedRock.UnitTesting",
+    "JsBedRock.Node.Db.Mongo"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/Tests/JsBedRock.Node.Db.Mongo/JsBedRock.Node.Db.Mongo.Tests.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "TestRunner"
+}
