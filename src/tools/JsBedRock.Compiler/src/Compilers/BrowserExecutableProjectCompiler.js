@@ -28,10 +28,13 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                         var sourceFile = this._GetSdkLocation(this._SolutionData) + "../" + this._ProjectData.Dependencies[i] + ".js";
                         var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
                         
-                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                            sourceFile,
-                            targetFile
-                        );
+                        
+                        if ((new JsBedRock.Node.IO.FileSystem()).FileExistsSync(sourceFile)) {
+                            (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                                sourceFile,
+                                targetFile
+                            );
+                        }
                     }
                     
                     this.Base();

@@ -7,6 +7,8 @@
     "src/Main.js"
   ],
   "Dependencies": [
+    "WebAppCommon",
+    "JsBedRock.Web",
     "JsBedRock.UI.Web",
     "JsBedRock.UI",
     "JsBedRock.Core"

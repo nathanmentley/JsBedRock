@@ -37,6 +37,13 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 						return false;
 					}
 				},
+				FileExistsSync: function (path) {
+					try{
+						return this.__FS.statSync(path).isFile();
+					}catch(err){
+						return false;
+					}
+				},
 				CopyFile: function (fileFrom, fileTo) {
 					this.WriteFileSync(fileTo, this.ReadFileSync(fileFrom).toString());
 				},

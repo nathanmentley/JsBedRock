@@ -22,7 +22,29 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                     return ret;
                 },
                 _CopyDependencies: function() {
-                    //TODO: copy non framework libraries.
+                    var outputPath = this.__Path.dirname(this._OutputFile);
+                    
+                    for(var i = 0; i < this._ProjectData.Dependencies.length; i++) {
+                        for(var j = 0; j < this._SolutionData.Projects.length; j++) {
+                            var projectFile = this.__Path.join(this._SolutionDir,
+                                this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.Projects[j])
+                            );
+                            
+                            var projectData = JSON.parse((new JsBedRock.Node.IO.FileSystem()).ReadFileSync(projectFile).toString());
+                            
+                            if(this._ProjectData.Dependencies[i] === projectData.Name) {
+                                var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
+                                        
+                                (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                                    this.__Path.join(
+                                        this.__Path.dirname(projectFile),
+                                        this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, projectData.OutputFile)
+                                    ),
+                                    targetFile
+                                );
+                            }
+                        }
+                    }
                 },
                 _CopyConfig: function() {
                     (new JsBedRock.Node.IO.FileSystem()).CopyFile(

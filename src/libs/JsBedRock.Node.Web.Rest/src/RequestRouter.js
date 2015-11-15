@@ -16,7 +16,7 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                     return new JsBedRock.Node.Web.Rest.RequestRouterResult(
                         segments[1],
                         segments[2],
-                        new JsBedRock.Node.Web.Rest.RestRequest()
+                        new JsBedRock.Web.Rest.RestRequest()
                     );
                 }
             }

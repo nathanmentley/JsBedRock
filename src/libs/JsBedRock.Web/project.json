@@ -1,13 +1,13 @@
 {
-  "Name": "JsBedRock.Node.Web",
+  "Name": "JsBedRock.Web",
   "SourceFiles": [
-    "src/WebServerBase.js"
+    "src/RestRequest.js",
+    "src/RestResult.js"
   ],
   "Dependencies": [
-    "JsBedRock.Node.IO",
-    "JsBedRock.Node.Network"
+    "JsBedRock.Core"
   ],
-  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Web.js",
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Web.js",
   "DebugSourceRoot": "../",
   "ProjectType": "ClassLibrary"
 }
