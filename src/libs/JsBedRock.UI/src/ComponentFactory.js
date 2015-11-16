@@ -22,8 +22,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                         JsBedRock.Console.Error(key + " does not map to a registered component.");
                     
                     var comp = new compType(this._BuildComponentContext(context), this.__ComponentRenderer, this);
-                    
                     comp.Init();
+                    
                     return comp;
                 },
                 GetServiceFactory: function () {

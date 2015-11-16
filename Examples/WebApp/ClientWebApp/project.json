@@ -3,7 +3,8 @@
   "SourceFiles": [
     "src/Services/BlogService.js",
     "src/Services/LayoutService.js",
-    "src/Components/BlogPostComponent.js",
+    "src/Components/Blog/BlogPostComponent.js",
+    "src/Components/Blog/BlogWallComponent.js",
     "src/Components/MainLayoutComponent.js",
     "src/Main.js"
   ],

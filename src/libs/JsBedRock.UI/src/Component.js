@@ -8,6 +8,7 @@ JsBedRock.UI = JsBedRock.UI || {};
                 this._ComponentFactory = componentFactory;
                 this._Context = context;
                 this._Service = {};
+                this._Model = {};
                 this._Children = new JsBedRock.Collections.List();
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
@@ -21,6 +22,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                         var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
                         this._Service[key] = this._ComponentFactory.GetServiceFactory().GetService(services[i]);
                     }
+                    
+                    this._BuildModel();
                 },
                 Render: function () {
                     this._Renderer.Render(this._GetTemplate(), this._GetModel(), this._Context);
@@ -28,6 +31,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                     this._Children.ForEach(function (x) {
                         x.Render();
                     });
+                },
+                _BuildModel: function () {
                 },
                 _GetServices: function () {
                     return [];
@@ -43,7 +48,7 @@ JsBedRock.UI = JsBedRock.UI || {};
                 _Children: null,
                 _Renderer: null,
                 _ComponentFactory: null,
-                _Model: {}
+                _Model: null
             }
         });
     });

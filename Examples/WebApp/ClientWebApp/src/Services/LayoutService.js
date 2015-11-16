@@ -8,9 +8,9 @@ JsBedRock.Services = JsBedRock.Services || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Service, context);
             },
             Members: {
-                Name: "LayoutService",
+                Name: "Layout",
                 GetNavData: function (callback) {
-                    callback(new JsBedRock.Models.TestResult("value one Layhout", "value too Layhout"));
+                    callback(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
                 }
             }
         });

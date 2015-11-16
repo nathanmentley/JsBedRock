@@ -1,21 +1,22 @@
 JsBedRock.Components = JsBedRock.Components || {};
+JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Components.MainLayoutComponent = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Components.Blog.BlogWallComponent = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.UI.Web.HtmlComponent,
             Constructor: function (context, renderer, componentFactory) {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Web.HtmlComponent, context, renderer, componentFactory);
             },
             Members: {
-                Name: "MainLayout",
+                Name: "BlogWall",
                 //DI
                 _GetServices: function() {
-                    return [ JsBedRock.Services.LayoutService ];
+                    return [ JsBedRock.Services.BlogService ];
                 },
                 //Model
                 _BuildModel: function () {
-                    this._Model.Title = "";
+                    this._Model.Posts = [];
                 },
                 //Controller
                 Init: function () {
@@ -23,30 +24,26 @@ JsBedRock.Components = JsBedRock.Components || {};
                     
                     this.Base();
                     
-                    //Setup Children Components
-                    self._Children.Add(
-                        self._ComponentFactory.GetComponent(JsBedRock.Components.Blog.BlogWallComponent, { TargetId: "#blogBodyId" })
-                    );
-                    
-                    //Setup RestAPI Calls
-                    this._Service.Layout.GetNavData(function (navData) {
-                        self._Model.Title = navData.Value1 + " " + navData.Value2;
+                    this._Service.Blog.GetPosts(function (postData) {
+                        postData.ForEach(function (x) {    
+                            self._Children.Add(
+                                self._ComponentFactory.GetComponent(JsBedRock.Components.Blog.BlogPostComponent, { TargetId: "#blogpost_" + x.ID, PostData: x })
+                            );
+                            self._Model.Posts.push({ ID: x.ID });
+                        });
                     });
                 },
                 //View
                 _GetTemplate: function () { //ViewUI
                     return '\
-                        <div class="maincontianer">\
-                            <h1 id="testTitleId">{{Title}}</h1>\
-                            <div id="blogBodyId"></div>\
+                        <div class="blogWall">\
+                        {{#each Posts}}\
+                            <div id="blogpost_{{ID}}"></div>\
+                        {{/each}}\
                         </div>';
                 },
                 _InitListeners: function () { //ViewLogic
                     var self = this;
-                    
-                    $("#testTitleId").click(function () {
-                        self._Model.Title = self._Model.Title + "1";
-                    });
                 }
             }
         });

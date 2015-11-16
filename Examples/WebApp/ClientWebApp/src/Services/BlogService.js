@@ -8,9 +8,15 @@ JsBedRock.Services = JsBedRock.Services || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Service, context);
             },
             Members: {
-                Name: "BlogService",
+                Name: "Blog",
                 GetPosts: function (callback) {
-                    callback(new JsBedRock.Models.TestResult("value one", "value too"));
+                    var list = new JsBedRock.Collections.List();
+                    
+                    list.Add(new JsBedRock.Models.TestResult("1", "value one", "value too"));
+                    list.Add(new JsBedRock.Models.TestResult("2", "value 1", "value 2"));
+                    list.Add(new JsBedRock.Models.TestResult("3", "value ein", "value two"));
+                    
+                    callback(list);
                 }
             }
         });
