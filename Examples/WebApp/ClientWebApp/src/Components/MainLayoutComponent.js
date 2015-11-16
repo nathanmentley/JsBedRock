@@ -11,12 +11,18 @@ JsBedRock.Components = JsBedRock.Components || {};
                 Name: "MainLayout",
                 //Controller
                 Init: function () {
+                    var self = this;
                     this.Base();
                     
-                    this._Model.Title = "My New blog website";
+                    this._Service.LayoutService.GetNavData(function (navData) {
+                        self._Model.Title = navData.Value1 + " " + navData.Value2;
+                    });
                     
-                    var postData = this._Service[JsBedRock.Services.BlogService.prototype.Name].GetPosts();
-                    this._ComponentFactory.GetComponent(JsBedRock.Components.BlogPostComponent, { TargetId: "#blogBodyId", PostData: postData }).Render();
+                    this._Service.BlogService.GetPosts(function (postData) {
+                        self._Children.Add(
+                            self._ComponentFactory.GetComponent(JsBedRock.Components.BlogPostComponent, { TargetId: "#blogBodyId", PostData: postData })
+                        );
+                    });
                 },
                 //View
                 _GetTemplate: function () { //ViewUI
@@ -39,7 +45,7 @@ JsBedRock.Components = JsBedRock.Components || {};
                 },
                 //DI
                 _GetServices: function() {
-                    return [ JsBedRock.Services.BlogService ];
+                    return [ JsBedRock.Services.BlogService, JsBedRock.Services.LayoutService ];
                 }
             }
         });

@@ -13,7 +13,8 @@ JsBedRock.Collections = JsBedRock.Collections || {};
 				IndexOf: function (item) { },
 				Insert: function (index, item) { },
 				Remove: function (item) { },
-				RemoveAt: function (index) { }
+				RemoveAt: function (index) { },
+				ForEach: function (lambda) { }
 			}
 		});
 	});

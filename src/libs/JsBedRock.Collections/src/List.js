@@ -38,6 +38,10 @@ JsBedRock.Collections = JsBedRock.Collections || {};
 				RemoveAt: function (index) {
                     this._Values.splice(index, 1);
                 },
+				ForEach: function (lambda) {
+                    for(var i = 0; i < this._Values.length; i++)
+                        lambda(this._Values[i]);
+                },
                 _Values: null
             },
             Implements: [

@@ -23,7 +23,7 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                     
                     this._InitListeners();
                     
-                    return ret;
+                    ret;
                 },
                 _InitListeners: function() {
                     

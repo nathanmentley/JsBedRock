@@ -9,8 +9,8 @@ JsBedRock.Services = JsBedRock.Services || {};
             },
             Members: {
                 Name: "BlogService",
-                GetPosts: function () {
-                    return new JsBedRock.Models.TestResult("value one", "value too");
+                GetPosts: function (callback) {
+                    callback(new JsBedRock.Models.TestResult("value one", "value too"));
                 }
             }
         });

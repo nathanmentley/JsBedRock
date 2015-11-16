@@ -8,7 +8,7 @@
     "src/Component.js",
     "src/ComponentCache.js",
     "src/ComponentFactory.js",
-    "src/ComponentRenderer.js"
+    "src/IComponentRenderer.js"
   ],
   "Dependencies": [
     "JsBedRock.Collections"
