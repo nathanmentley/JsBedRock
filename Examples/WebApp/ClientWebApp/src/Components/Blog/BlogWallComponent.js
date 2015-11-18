@@ -17,6 +17,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                 //Model
                 _BuildModel: function () {
                     this._Model.Posts = [];
+                    this._Model.BlogPostModel = new JsBedRock.Types.Object();
                 },
                 //Controller
                 Init: function () {
@@ -25,10 +26,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                     this.Base();
                     
                     this._Service.Blog.GetPosts(function (postData) {
-                        postData.ForEach(function (x) {    
-                            self._Children.Add(
-                                self._ComponentFactory.GetComponent(JsBedRock.Components.Blog.BlogPostComponent, { TargetId: "#blogpost_" + x.ID, PostData: x })
-                            );
+                        postData.ForEach(function (x) {
                             self._Model.Posts.push({ ID: x.ID });
                         });
                     });
@@ -37,9 +35,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                 _GetTemplate: function () { //ViewUI
                     return '\
                         <div class="blogWall">\
-                        {{#each Posts}}\
-                            <div id="blogpost_{{ID}}"></div>\
-                        {{/each}}\
+                            <div id="blogpost">test {{BlogPost BlogPostModel}}</div>\
                         </div>';
                 },
                 _InitListeners: function () { //ViewLogic

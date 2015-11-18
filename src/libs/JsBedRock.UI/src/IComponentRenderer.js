@@ -4,7 +4,8 @@ JsBedRock.UI = JsBedRock.UI || {};
     asm.OnLoad(function () {
         JsBedRock.UI.IComponentRenderer = JsBedRock.Utils.ObjectOriented.CreateInterface({
             Members: {
-                Render: function (template, model, context) {}
+                Init: function (componentFactory) {},
+                Render: function (template, model, component) {}
             },
             Name: "IComponentRenderer"
         });

@@ -13,6 +13,7 @@ JsBedRock.UI = JsBedRock.UI || {};
             Members: {
                 Init: function () {
                     this.__ComponentCache.PopulateCache();
+                    this.__ComponentRenderer.Init(this);
                     this.__ServiceFactory.Init();
                 },
                 GetComponent: function (key, context) {

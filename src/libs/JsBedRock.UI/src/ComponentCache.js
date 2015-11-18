@@ -29,10 +29,18 @@ JsBedRock.UI = JsBedRock.UI || {};
                         }
                     }
                 },
-                GetComponent: function (key) {
-                    if(this._ComponentDictionary.Contains(PrivateMembers.GetKeyFromComponentType(key)))
-                        return this._ComponentDictionary.Get(PrivateMembers.GetKeyFromComponentType(key));
+                GetComponent: function (compType) {
+                    if(this._ComponentDictionary.Contains(PrivateMembers.GetKeyFromComponentType(compType)))
+                        return this._ComponentDictionary.Get(PrivateMembers.GetKeyFromComponentType(compType));
                     return null;
+                },
+                GetComponentFromKey: function (key) {
+                    if(this._ComponentDictionary.Contains(key))
+                        return this._ComponentDictionary.Get(key);
+                    return null;
+                },
+                GetComponents: function () {
+                    return this._ComponentDictionary.GetEnumerator();
                 },
 				_ComponentDictionary: null
             }

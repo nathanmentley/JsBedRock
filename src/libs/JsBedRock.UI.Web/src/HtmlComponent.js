@@ -14,20 +14,33 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                     var self = this;
                     this.Base();
                     
-                    watch(this._Model, function(){
-                        self.Render();
-                    });                    
+                    watch(this._Model, function(prop, action, newvalue, oldvalue){
+                        self.Refresh();
+                    });
                 },
                 Render: function () {
+                    var self = this;
+                    this.__ListenerRefreshQueue.Add(function () { self._InitListeners(); });
+                    
+                    return new Handlebars.SafeString(this.Base());
+                },
+                Refresh: function () {
                     var ret = this.Base();
                     
-                    this._InitListeners();
+                    $("#" + this.GetDivID()).replaceWith(ret.toString());
                     
-                    ret;
+                    this.__ListenerRefreshQueue.ForEach(function (x) { x(); });
+                    this.__ListenerRefreshQueue.Clear();
+                    
+                    return ret;
+                },
+                GetDivID: function () {
+                    return "JsBedRockComponent_" + this._Guid.ToString();
                 },
                 _InitListeners: function() {
                     
-                }
+                },
+                __ListenerRefreshQueue: new JsBedRock.Collections.List()
             }
         });
     });

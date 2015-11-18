@@ -16,9 +16,9 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                 },
                 //Model
                 _BuildModel: function () {
-                    this._Model.ID = this._Context.PostData.ID;
-                    this._Model.Title = this._Context.PostData.Value1;
-                    this._Model.Body = this._Context.PostData.Value2;
+                    this._Model.ID = "test";
+                    this._Model.Title = "<p>test</p>";
+                    this._Model.Body = "test";
                 },
                 //Controller
                 Init: function () {

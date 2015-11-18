@@ -5,7 +5,7 @@
     "src/Services/LayoutService.js",
     "src/Components/Blog/BlogPostComponent.js",
     "src/Components/Blog/BlogWallComponent.js",
-    "src/Components/MainLayoutComponent.js",
+    "src/Components/HomePageComponent.js",
     "src/Main.js"
   ],
   "Dependencies": [
