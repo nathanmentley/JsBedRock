@@ -25,7 +25,16 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                     if(!this._CompiledTemplateCache.Contains(template)) {
                         this._CompiledTemplateCache.Add(template, Handlebars.compile(template));
                     }
+                    
                     return this._WrapRenderedTemplate((this._CompiledTemplateCache.Get(template))(model), component);
+                },
+                ClearUnusedCachedComponents: function () {
+                    var self = this;
+                    
+                    this._ComponentInstanceCache.ForEach(function (key, value) {
+                        if($("#" + value.GetDivID()).length === 0)
+                            self._ComponentInstanceCache.Remove(key);
+                    });
                 },
                 _WrapRenderedTemplate: function (template, component) {
                     return "<div id='" + component.GetDivID() + "'>" + template + "</div>";

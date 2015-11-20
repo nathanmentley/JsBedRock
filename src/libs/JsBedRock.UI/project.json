@@ -3,6 +3,7 @@
   "SourceFiles": [
     "src/Utils.js",
     "src/Service.js",
+    "src/RestClientService.js",
     "src/ServiceCache.js",
     "src/ServiceFactory.js",
     "src/Component.js",

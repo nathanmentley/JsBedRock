@@ -2,13 +2,13 @@ JsBedRock.Components = JsBedRock.Components || {};
 
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Components.HomePageComponent = JsBedRock.Utils.ObjectOriented.CreateClass({
+        JsBedRock.Components.OtherPageComponent = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.UI.Web.HtmlComponent,
             Constructor: function (context, renderer, componentFactory) {
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Web.HtmlComponent, context, renderer, componentFactory);
             },
             Members: {
-                Name: "HomePage",
+                Name: "OtherPage",
                 //DI
                 _GetServices: function() {
                     return [ JsBedRock.Services.LayoutService ];
@@ -22,9 +22,11 @@ JsBedRock.Components = JsBedRock.Components || {};
                 Init: function () {
                     this.Base();
                     
+                    alert(this._Context.BTestValue1 + "-" + this._Context.BTestValue2);
+                    
                     var self = this;
                     this._Service.Layout.GetNavData(function (navData) {
-                        self._Model.Title = navData.Value1 + " " + navData.Value2;
+                        self._Model.Title = "Other Page";
                     });
                 },
                 //View
@@ -32,7 +34,6 @@ JsBedRock.Components = JsBedRock.Components || {};
                     return '\
                         <div class="maincontianer">\
                             <h1 id="testTitleId">{{Model.Title}}</h1>\
-                            <div id="blogBodyId">{{BlogWall Model.BlogWallModel}}</div>\
                         </div>';
                 },
                 _InitListeners: function () { //ViewLogic

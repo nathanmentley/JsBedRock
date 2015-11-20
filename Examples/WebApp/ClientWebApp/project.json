@@ -6,6 +6,7 @@
     "src/Components/Blog/BlogPostComponent.js",
     "src/Components/Blog/BlogWallComponent.js",
     "src/Components/HomePageComponent.js",
+    "src/Components/OtherPageComponent.js",
     "src/Main.js"
   ],
   "Dependencies": [

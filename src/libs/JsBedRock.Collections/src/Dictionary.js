@@ -28,6 +28,18 @@ JsBedRock.Collections = JsBedRock.Collections || {};
 				Remove: function (key) {
                     delete this._Values[key];
                 },
+                ToList: function () {
+                    var ret = new JsBedRock.Collections.List();
+                    
+                    for(var prop in this.GetEnumerator())
+                        ret.Add(this.Get(prop));
+                    
+                    return ret;
+                },
+				ForEach: function (lambda) {
+                    for(var prop in this.GetEnumerator())
+                        lambda(prop, this.Get(prop));
+                },
                 _Values: null
             },
             Implements: [

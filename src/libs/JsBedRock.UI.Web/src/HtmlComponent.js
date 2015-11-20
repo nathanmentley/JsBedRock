@@ -32,10 +32,12 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                     this.__ListenerRefreshQueue.ForEach(function (x) { x(); });
                     this.__ListenerRefreshQueue.Clear();
                     
+                    this._Renderer.ClearUnusedCachedComponents();
+                    
                     return ret;
                 },
                 GetDivID: function () {
-                    return "JsBedRockComponent_" + this._Guid.ToString();
+                    return "JsBedRockComponent_" + this.ObjectGuid.ToString();
                 },
                 _InitListeners: function() {
                     

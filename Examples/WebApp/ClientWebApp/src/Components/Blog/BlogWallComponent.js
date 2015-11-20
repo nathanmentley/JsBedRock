@@ -35,7 +35,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                 _GetTemplate: function () { //ViewUI
                     return '\
                         <div class="blogWall">\
-                            <div id="blogpost">test {{BlogPost BlogPostModel}}</div>\
+                            <div id="blogpost">test {{BlogPost Model.BlogPostModel}}</div>\
                         </div>';
                 },
                 _InitListeners: function () { //ViewLogic

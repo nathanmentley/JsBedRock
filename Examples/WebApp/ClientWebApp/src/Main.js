@@ -1,25 +1,29 @@
 (function (asm) {
     asm.OnLoad(function () {
-        JsBedRock.Utils.ObjectOriented.CreateClass({
-            Constructor: (JsBedRock.Main = function () {
-                this._CompFactory = new JsBedRock.UI.ComponentFactory(
-                    new JsBedRock.UI.Web.HtmlComponentRenderer(),
-                    new JsBedRock.UI.ServiceFactory()
-                );
-                    
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
-            }),
+        JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.UI.Web.WebAppStart,
+            Constructor: function () {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Web.WebAppStart);
+            },
             Members: {
-				Main: function () {
-                    this._CompFactory.Init();
+                GetRoutes: function () {
+                    var ret = this.Base();
                     
-                    var self = this;
-                    $(document).ready(function () {
-                        document.getElementById("AppBody").innerHTML = 
-                            self._CompFactory.GetComponent(JsBedRock.Components.HomePageComponent, {}).Refresh();
-                    });
+                    ret.Add("Default", 
+                        new JsBedRock.UI.Web.WebAppRouteDef(
+                            JsBedRock.Components.HomePageComponent,
+                            { 0: "TestValue1", 1: "TestValue2" }
+                        )
+                    );
+                    ret.Add("Other",
+                        new JsBedRock.UI.Web.WebAppRouteDef(
+                            JsBedRock.Components.OtherPageComponent,
+                            { 0: "BTestValue1", 1: "BTestValue2" }
+                        )
+                    );
+                    
+                    return ret;
                 },
-                _CompFactory: null
             }
         });
     });

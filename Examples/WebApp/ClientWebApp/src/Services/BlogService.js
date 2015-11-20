@@ -3,9 +3,9 @@ JsBedRock.Services = JsBedRock.Services || {};
 (function (asm) {
     asm.OnLoad(function () {
         JsBedRock.Services.BlogService = JsBedRock.Utils.ObjectOriented.CreateClass({
-            Inherit: JsBedRock.UI.Service,
+            Inherit: JsBedRock.UI.RestClientService,
             Constructor: function (context) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Service, context);
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.RestClientService, context);
             },
             Members: {
                 Name: "Blog",

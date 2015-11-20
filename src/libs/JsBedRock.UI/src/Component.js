@@ -9,15 +9,12 @@ JsBedRock.UI = JsBedRock.UI || {};
                 this._Context = context;
                 this._Service = {};
                 this._Model = {};
-                this._Guid = new JsBedRock.Types.Guid();
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
                 Name: "",
                 Init: function () {
-                    this._Guid.Generate();
-                    
                     var services = this._GetServices();
                     
                     for(var i = 0; i < services.length; i++) {
@@ -28,7 +25,7 @@ JsBedRock.UI = JsBedRock.UI || {};
                     this._BuildModel();
                 },
                 Render: function () {
-                    return this._Renderer.Render(this._GetTemplate(), this._GetModel(), this);
+                    return this._Renderer.Render(this._GetTemplate(), { Model: this._GetModel() }, this);
                 },
                 Refresh: function () {
                     return this.Render();
@@ -48,7 +45,6 @@ JsBedRock.UI = JsBedRock.UI || {};
                 _Context: null,
                 _Renderer: null,
                 _ComponentFactory: null,
-                _Guid: null,
                 _Model: null
             }
         });
