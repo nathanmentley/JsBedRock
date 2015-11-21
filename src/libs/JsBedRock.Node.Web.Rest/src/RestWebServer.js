@@ -30,10 +30,20 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                         var controllerType = this.__ControllerCache.GetController(routerResult.Controller);
                         var controller = new controllerType();
                         
-                        res.writeHead(200, {'Content-Type': 'text/plain'});
+                        res.writeHead(200, {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                            'Access-Control-Allow-Headers': 'Content-Type'
+                        });
                         res.end(controller[routerResult.Action]().ToJson());
                     } catch(err) {
-                        res.writeHead(500, {'Content-Type': 'text/plain'});
+                        res.writeHead(500, {
+                            'Content-Type': 'application/json',
+                            'Access-Control-Allow-Origin': '*',
+                            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+                            'Access-Control-Allow-Headers': 'Content-Type'
+                        });
                         res.end("Exception:" + err.message + " " + err.stack);
                     }
                 },

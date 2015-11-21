@@ -22,21 +22,26 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                 },
                 //Controller
                 Init: function () {
+                    var self = this;
                     this.Base();
+                    
+                    this._Service.Blog.GetPostData("testId", function (postData) {
+                        self._Model.Body = postData.BodyText;
+                    });
                 },
                 //View
                 _GetTemplate: function () { //ViewUI
                     return '\
                         <div class="entry">\
                             <h2 id="testTitleId{{Model.ID}}">{{Model.Title}}</h2>\
-                            <div class="body">{{Model.Body}}</div>\
+                            <div id="testBodyId{{Model.ID}}" class="body">{{Model.Body}}</div>\
                         </div>';
                 },
                 _InitListeners: function () { //ViewLogic
                     var self = this;
                     
-                    $("#testTitleId" + self._Model.ID).click(function () {
-                        self._Model.Title = self._Model.Title + "1";
+                    $("#testBodyId" + self._Model.ID).click(function () {
+                        self._Model.Body = self._Model.Body + "2";
                     });
                 }
             }
