@@ -9,9 +9,9 @@ JsBedRock.Controllers = JsBedRock.Controllers || {};
             },
             Members: {
                 Name: 'Blog',
-                Data: function () {
-                    return new JsBedRock.Models.GetPostDataResult("Data From Rest Server");
-                }
+                Data: [JsBedRock.Models.GetPostDataRequest, function (request) {
+                    return new JsBedRock.Models.GetPostDataResult("Data From Rest Server - " + request.PostID);
+                }]
             }
         });
     });

@@ -8,12 +8,6 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                FromJson: function (json) {
-                    var obj = JSON.parse(json);
-                    
-                    for(var key in obj)
-                        this[key] = obj[key];
-                }
             }
         });
     });

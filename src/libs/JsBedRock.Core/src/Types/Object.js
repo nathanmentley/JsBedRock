@@ -57,6 +57,17 @@ JsBedRock.Types = JsBedRock.Types || {};
                     
                     return JSON.stringify(jsonObject);
                 },
+                FromJson: function (json) {
+                    var obj = null;
+                    
+                    if (typeof json === 'string' || json instanceof String)
+                        obj = JSON.parse(json);
+                    else
+                        obj = json;
+                    
+                    for(var key in obj)
+                        this[key] = obj[key];
+                },
                 ObjectGuid: null
             }
         });

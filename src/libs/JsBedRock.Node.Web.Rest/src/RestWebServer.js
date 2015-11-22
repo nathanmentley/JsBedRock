@@ -25,18 +25,37 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                 
                 _HandleRequest: function(req, res) {
                     try {
-                        var routerResult = this.__Router.ParseRequest(req.url);
-                        
-                        var controllerType = this.__ControllerCache.GetController(routerResult.Controller);
-                        var controller = new controllerType();
-                        
+                        var self = this;
                         res.writeHead(200, {
                             'Content-Type': 'application/json',
                             'Access-Control-Allow-Origin': '*',
                             'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
                             'Access-Control-Allow-Headers': 'Content-Type'
                         });
-                        res.end(controller[routerResult.Action]().ToJson());
+                        
+                        var fullBody = '';
+                        req.on('data', function(chunk) {
+                            
+                            fullBody += chunk.toString();
+                        });
+                        
+                        req.on('end', function() {
+                            var routerResult = self.__Router.ParseRequest(req.url);
+                            
+                            var controllerType = self.__ControllerCache.GetController(routerResult.Controller);
+                            var controller = new controllerType();
+                            
+                            var actionDataType = controller[routerResult.Action][0];
+                            var actionData = new actionDataType();
+                            
+                            if(!JsBedRock.Utils.String.IsEmptyOrSpaces(fullBody))
+                                actionData.FromJson(fullBody);
+                            
+                            var action = controller[routerResult.Action][1];
+                            
+                            res.end(action(actionData).ToJson());
+                        });
+                        
                     } catch(err) {
                         res.writeHead(500, {
                             'Content-Type': 'application/json',
