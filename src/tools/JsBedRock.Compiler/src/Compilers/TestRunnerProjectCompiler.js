@@ -10,33 +10,39 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
             }),
             Members: {
-				CompileProject: function () {
-					this.Base();
-                    
-                    this.__ExecuteUnitTests(this._ProjectData);
+				CompileProject: {
+                    Def: function () {
+                        this.Base();
+                        
+                        this.__ExecuteUnitTests(this._ProjectData);
+                    }
                 },
-                _GetSourceFiles: function () {
-                    var ret = this.Base();
-                    
-                    ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js");
-                    
-                    return ret;
+                _GetSourceFiles: {
+                    Def: function () {
+                        var ret = this.Base();
+                        
+                        ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.TestRunner + ".js");
+                        
+                        return ret;
+                    }
                 },
-                __ExecuteUnitTests: function (projectData) {
-                    this.__ChildProcess.exec(JsBedRock.AppConfig.NodeConfig.NodeExecutable + ' ' + this._OutputFile, function (error, stdout, stderr) { 
-                        if (error) {
-                            JsBedRock.Console.Write(error.stack);
-                            JsBedRock.Console.Write('Error code: '+error.code);
-                            JsBedRock.Console.Write('Signal received: '+error.signal);
-                            throw error;
-                        }
-                        if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stdout))
-                            JsBedRock.Console.Write('Child Process STDOUT: '+stdout);
-                        if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stderr))
-                            JsBedRock.Console.Write('Child Process STDERR: '+stderr);
-                    });
+                __ExecuteUnitTests: {
+                    Def: function (projectData) {
+                        this.__ChildProcess.exec(JsBedRock.AppConfig.NodeConfig.NodeExecutable + ' ' + this._OutputFile, function (error, stdout, stderr) { 
+                            if (error) {
+                                JsBedRock.Console.Write(error.stack);
+                                JsBedRock.Console.Write('Error code: '+error.code);
+                                JsBedRock.Console.Write('Signal received: '+error.signal);
+                                throw error;
+                            }
+                            if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stdout))
+                                JsBedRock.Console.Write('Child Process STDOUT: '+stdout);
+                            if(!JsBedRock.Utils.String.IsEmptyOrSpaces(stderr))
+                                JsBedRock.Console.Write('Child Process STDERR: '+stderr);
+                        });
+                    }
                 },
-                __ChildProcess: null
+                __ChildProcess: { Def: null }
             },
             Name: 'TestRunnerProjectCompiler'
         });

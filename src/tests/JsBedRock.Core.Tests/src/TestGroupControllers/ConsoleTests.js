@@ -9,17 +9,19 @@ JsBedRock.Core.Tests = JsBedRock.Core.Tests || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
             },
             Members: {
-                TestGroupName: 'ConsoleTests',
-				Test: function () {
-                    JsBedRock.Console.DisableDebugging();
-                    this.Assert(!JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns Off");
-                
-                    //assert.throws(function () { JsBedRock.Console.Error("Without Debugging"); }, Error, "Error throws exception with debugging turned off.");
-                
-                    JsBedRock.Console.EnableDebugging();
-                    this.Assert(JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns On");
-                
-                    //assert.throws(function () { JsBedRock.Console.Error("With Debugging"); }, Error, "Error throws exception with debugging turned on.");
+                TestGroupName: { Def: 'ConsoleTests' },
+				Test: {
+                    Def: function () {
+                        JsBedRock.Console.DisableDebugging();
+                        this.Assert(!JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns Off");
+                    
+                        //assert.throws(function () { JsBedRock.Console.Error("Without Debugging"); }, Error, "Error throws exception with debugging turned off.");
+                    
+                        JsBedRock.Console.EnableDebugging();
+                        this.Assert(JsBedRock.Console.IsDebuggingOn(), "Console Debugging Turns On");
+                    
+                        //assert.throws(function () { JsBedRock.Console.Error("With Debugging"); }, Error, "Error throws exception with debugging turned on.");
+                    }
                 }
             }
         });

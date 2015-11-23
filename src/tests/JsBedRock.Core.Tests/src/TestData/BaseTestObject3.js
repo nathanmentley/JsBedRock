@@ -13,12 +13,14 @@ JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {
                     JsBedRock.Tests.Utils.ObjectOriented.ITestInterface1
                 ],
                 Members: {
-                    Name: "BaseTestObject3",
-                    TestMethod: function (var1) {
-                        var1 = this.Base(var1);
-                        return var1 + 10;
+                    Name: { Def: "BaseTestObject3" },
+                    TestMethod: {
+                        Def: function (var1) {
+                            var1 = this.Base(var1);
+                            return var1 + 10;
+                        }
                     },
-                    TestMethod3: function () { return 'b'; }
+                    TestMethod3: { Def: function () { return 'b'; } }
                 }
             });
     });

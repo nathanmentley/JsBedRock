@@ -8,39 +8,47 @@
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Main: function (installerArgs) {
-                    JsBedRock.Console.Write("Installing JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
-                    
-                    this.ParseParameters(installerArgs);
-                    this.UnpackContent();
-                    this.SetEnviormentVariables();
-                    
-                    JsBedRock.Console.Write("Installation Complete - JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
-                },
-                ParseParameters: function (installerArgs) {
-                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(installerArgs.Path))
-                        JsBedRock.Console.Error("Invalid Install Path.");
+				Main: {
+                    Def: function (installerArgs) {
+                        JsBedRock.Console.Write("Installing JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
                         
-                    this._InstallLocation = installerArgs.Path;
+                        this.ParseParameters(installerArgs);
+                        this.UnpackContent();
+                        this.SetEnviormentVariables();
+                        
+                        JsBedRock.Console.Write("Installation Complete - JsBedRock Version [" + JsBedRock.FrameworkVersion + "]");
+                    }
                 },
-                UnpackContent: function () {
-                    this._Fs.CreateReadStream(__dirname + "/Content.tar").pipe(
-                        this._Tar.Extract({
-                            path: this._InstallLocation
-                        })
-                    );
+                ParseParameters: {
+                    Def: function (installerArgs) {
+                        if(JsBedRock.Utils.String.IsEmptyOrSpaces(installerArgs.Path))
+                            JsBedRock.Console.Error("Invalid Install Path.");
+                            
+                        this._InstallLocation = installerArgs.Path;
+                    }
                 },
-                SetEnviormentVariables: function () {
-                    process.env.JSBEDROCK_FRAMEWORK_PATH = this._InstallLocation;
-                    
-                    this._Fs.WriteFileSync(
-                        "/etc/profile.d/JsBedRock.sh",
-                        "export JSBEDROCK_FRAMEWORK_PATH='" + this._InstallLocation + "/'"
-                    );
+                UnpackContent: {
+                    Def: function () {
+                        this._Fs.CreateReadStream(__dirname + "/Content.tar").pipe(
+                            this._Tar.Extract({
+                                path: this._InstallLocation
+                            })
+                        );
+                    }
                 },
-                _InstallLocation: null,
-                _Tar: null,
-                _Fs: null
+                SetEnviormentVariables: {
+                    Def: function () {
+                        process.env.JSBEDROCK_FRAMEWORK_PATH = this._InstallLocation;
+                        
+                        this._Fs.WriteFileSync(
+                            "/etc/profile.d/JsBedRock.sh",
+                            "export JSBEDROCK_FRAMEWORK_PATH='" + this._InstallLocation + "/'"
+                        );
+                    }
+                },
+                _InstallLocation: { Def: null },
+                _Tar: { Def: null },
+                _Fs: { Def: null }
             }
         });
     });

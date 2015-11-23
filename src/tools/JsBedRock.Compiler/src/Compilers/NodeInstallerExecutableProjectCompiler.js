@@ -10,25 +10,29 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.NodeExecutableProjectCompiler, soultionData, solutionFile, projectData, projectFile);
             }),
             Members: {
-				CompileProject: function () {
-                    this.Base();
-                    
-                    this._BuildContentArchive();
+				CompileProject: {
+                    Def: function () {
+                        this.Base();
+                        
+                        this._BuildContentArchive();
+                    }
                 },
-                _BuildContentArchive: function () {
-                    var fstream = require("fstream");
-                    var tar = require('tar');
-                    
-                    var dirDest = this._Fs.CreateWriteStream(this.__Path.dirname(this._OutputFile) + '/Content.tar');
-                    var packer = tar.Pack({ noProprietary: true });
-                    fstream.Reader({
-                        path: this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.InstallContentDirectory)),
-                        type: "Directory" 
-                    }).pipe(packer).pipe(dirDest);
-                }
+                _BuildContentArchive: {
+                    Def: function () {
+                        var fstream = require("fstream");
+                        var tar = require('tar');
+                        
+                        var dirDest = this._Fs.CreateWriteStream(this.__Path.dirname(this._OutputFile) + '/Content.tar');
+                        var packer = tar.Pack({ noProprietary: true });
+                        fstream.Reader({
+                            path: this.__Path.join(this._ProjectDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._ProjectData.InstallContentDirectory)),
+                            type: "Directory" 
+                        }).pipe(packer).pipe(dirDest);
+                    }
+                },
+                _Fs: { Def: null }
             },
-            Name: 'NodeInstallerExecutableProjectCompiler',
-            _Fs: null
+            Name: 'NodeInstallerExecutableProjectCompiler'
         });
     });
 })(JsBedRock.CurrentAssembly);

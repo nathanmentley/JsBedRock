@@ -11,31 +11,39 @@ JsBedRock.UI = JsBedRock.UI || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Init: function () {
-                    this.__ComponentCache.PopulateCache();
-                    this.__ComponentRenderer.Init(this);
-                    this.__ServiceFactory.Init();
+                Init: {
+                    Def: function () {
+                        this.__ComponentCache.PopulateCache();
+                        this.__ComponentRenderer.Init(this);
+                        this.__ServiceFactory.Init();
+                    }
                 },
-                GetComponent: function (key, context) {
-                    var compType = this.__ComponentCache.GetComponent(key);
-                    
-                    if(!compType)
-                        JsBedRock.Console.Error(key + " does not map to a registered component.");
-                    
-                    var comp = new compType(this._BuildComponentContext(context), this.__ComponentRenderer, this);
-                    comp.Init();
-                    
-                    return comp;
+                GetComponent: {
+                    Def: function (key, context) {
+                        var compType = this.__ComponentCache.GetComponent(key);
+                        
+                        if(!compType)
+                            JsBedRock.Console.Error(key + " does not map to a registered component.");
+                        
+                        var comp = new compType(this._BuildComponentContext(context), this.__ComponentRenderer, this);
+                        comp.Init();
+                        
+                        return comp;
+                    }
                 },
-                GetServiceFactory: function () {
-                    return this.__ServiceFactory;
+                GetServiceFactory: {
+                    Def: function () {
+                        return this.__ServiceFactory;
+                    }
                 },
-                _BuildComponentContext: function (context) {
-                    return JsBedRock.Utils.Object.MergeObjects({}, context);
+                _BuildComponentContext: {
+                    Def: function (context) {
+                        return JsBedRock.Utils.Object.MergeObjects({}, context);
+                    }
                 },
-                __ComponentCache: null,
-                __ServiceFactory: null,
-                __ComponentRenderer: null
+                __ComponentCache: { Def: null },
+                __ServiceFactory: { Def: null },
+                __ComponentRenderer: { Def: null }
             }
         });
     });

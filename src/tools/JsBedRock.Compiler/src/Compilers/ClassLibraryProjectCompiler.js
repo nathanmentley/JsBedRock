@@ -8,12 +8,14 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.AssemblyProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
             }),
             Members: {
-                _GetSourceFiles: function () {
-                    var ret = this.Base();
-                    
-                    ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js");
-                    
-                    return ret;
+                _GetSourceFiles: {
+                    Def: function () {
+                        var ret = this.Base();
+                        
+                        ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.ClassLibrary + ".js");
+                        
+                        return ret;
+                    }
                 }
             },
             Name: 'ClassLibraryProjectCompiler'

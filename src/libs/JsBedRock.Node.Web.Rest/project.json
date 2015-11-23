@@ -1,6 +1,7 @@
 {
   "Name": "JsBedRock.Node.Web.Rest",
   "SourceFiles": [
+    "src/ResponseTypeAttribute.js",
     "src/ControllerCache.js",
     "src/Controller.js",
     "src/RequestRouterResult.js",

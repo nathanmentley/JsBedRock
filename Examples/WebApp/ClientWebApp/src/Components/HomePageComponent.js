@@ -8,39 +8,49 @@ JsBedRock.Components = JsBedRock.Components || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Web.HtmlComponent, context, renderer, componentFactory);
             },
             Members: {
-                Name: "HomePage",
+                Name: { Def: "HomePage" },
                 //DI
-                _GetServices: function() {
-                    return [ JsBedRock.Services.LayoutService ];
+                _GetServices: {
+                    Def: function() {
+                        return [ JsBedRock.Services.LayoutService ];
+                    }
                 },
                 //Model
-                _BuildModel: function () {
-                    this._Model.Title = "";
-                    this._Model.BlogWallModel = new JsBedRock.Types.Object();
+                _BuildModel: {
+                    Def: function () {
+                        this._Model.Title = "";
+                        this._Model.BlogWallModel = new JsBedRock.Types.Object();
+                    }
                 },
                 //Controller
-                Init: function () {
-                    this.Base();
-                    
-                    var self = this;
-                    this._Service.Layout.GetNavData(function (navData) {
-                        self._Model.Title = navData.Value1 + " " + navData.Value2;
-                    });
+                Init: {
+                    Def: function () {
+                        this.Base();
+                        
+                        var self = this;
+                        this._Service.Layout.GetNavData(function (navData) {
+                            self._Model.Title = navData.Value1 + " " + navData.Value2;
+                        });
+                    }
                 },
                 //View
-                _GetTemplate: function () { //ViewUI
-                    return '\
-                        <div class="maincontianer">\
-                            <h1 id="testTitleId">{{Model.Title}}</h1>\
-                            <div id="blogBodyId">{{BlogWall Model.BlogWallModel}}</div>\
-                        </div>';
+                _GetTemplate: {
+                    Def: function () { //ViewUI
+                        return '\
+                            <div class="maincontianer">\
+                                <h1 id="testTitleId">{{Model.Title}}</h1>\
+                                <div id="blogBodyId">{{BlogWall Model.BlogWallModel}}</div>\
+                            </div>';
+                    }
                 },
-                _InitListeners: function () { //ViewLogic
-                    var self = this;
-                    
-                    $("#testTitleId").click(function () {
-                        self._Model.Title = self._Model.Title + "1";
-                    });
+                _InitListeners: {
+                    Def: function () { //ViewLogic
+                        var self = this;
+                        
+                        $("#testTitleId").click(function () {
+                            self._Model.Title = self._Model.Title + "1";
+                        });
+                    }
                 }
             }
         });

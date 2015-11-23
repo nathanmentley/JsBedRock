@@ -19,58 +19,70 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				CompileProject: function () {
-                    this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));
-                },
-                _GetSourceFiles: function () {
-                    var ret = [];
-                    for (var j = 0; j < this._ProjectData.SourceFiles.length; j++)
-                        ret.push(this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
-                    return ret;
-                },
-                _WriteOutputFile: function(compiledFile) {
-                    this._EnsureDirectoryExists(this.__Path.dirname(this._OutputFile));
-                    
-                    if(!JsBedRock.Utils.String.IsEmptyOrSpaces(this._OutputFile)){
-                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile, compiledFile.code);   
-                        (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile + ".map", compiledFile.map);   
+				CompileProject: {
+                    Def: function () {
+                        this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));
                     }
                 },
-                _EnsureDirectoryExists: function(directory) {
-                    var paths = directory.split(this.__Path.sep);
-                    
-                    if(paths.length > 1) {
-                        paths.pop();
-                        this._EnsureDirectoryExists(paths.join(this.__Path.sep));
-                    }
-                    
-                    if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(directory)) {
-                       (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
+                _GetSourceFiles: {
+                    Def:  function () {
+                        var ret = [];
+                        for (var j = 0; j < this._ProjectData.SourceFiles.length; j++)
+                            ret.push(this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
+                        return ret;
                     }
                 },
-                _GetSdkLocation: function () {
-                    if(JsBedRock.Utils.String.IsEmptyOrSpaces(this._SolutionData.SDKLocationOverride))
-                        return __dirname + "/../../";
+                _WriteOutputFile: {
+                    Def: function(compiledFile) {
+                        this._EnsureDirectoryExists(this.__Path.dirname(this._OutputFile));
                         
-                    return this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride);
+                        if(!JsBedRock.Utils.String.IsEmptyOrSpaces(this._OutputFile)){
+                            (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile, compiledFile.code);   
+                            (new JsBedRock.Node.IO.FileSystem()).WriteFileSync(this._OutputFile + ".map", compiledFile.map);   
+                        }
+                    }
                 },
-                _GetUglifyJsOptions: function () {
-                    var ret = {
-                        outSourceMap: this._OutputFile + ".map"
-                    };
-                    
-                    if('DebugSourceRoot' in this._ProjectData)
-                        ret.sourceRoot = this._ProjectData['DebugSourceRoot'];
-                    
-                    return ret;
+                _EnsureDirectoryExists: {
+                    Def: function(directory) {
+                        var paths = directory.split(this.__Path.sep);
+                        
+                        if(paths.length > 1) {
+                            paths.pop();
+                            this._EnsureDirectoryExists(paths.join(this.__Path.sep));
+                        }
+                        
+                        if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(directory)) {
+                        (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
+                        }
+                    }
                 },
-                _SolutionData: null,
-                _SolutionDir: null,
-                _ProjectData: null,
-                _ProjectDir: null,
-                _OutputFile: null,
-                __Path: null,
-                __Uglifyjs: null
+                _GetSdkLocation: {
+                    Def: function () {
+                        if(JsBedRock.Utils.String.IsEmptyOrSpaces(this._SolutionData.SDKLocationOverride))
+                            return __dirname + "/../../";
+                            
+                        return this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride);
+                    }
+                },
+                _GetUglifyJsOptions: {
+                    Def: function () {
+                        var ret = {
+                            outSourceMap: this._OutputFile + ".map"
+                        };
+                        
+                        if('DebugSourceRoot' in this._ProjectData)
+                            ret.sourceRoot = this._ProjectData['DebugSourceRoot'];
+                        
+                        return ret;
+                    }
+                },
+                _SolutionData: { Def: null },
+                _SolutionDir: { Def: null },
+                _ProjectData: { Def: null },
+                _ProjectDir: { Def: null },
+                _OutputFile: { Def: null },
+                __Path: { Def: null },
+                __Uglifyjs: { Def: null }
             },
             Name: 'ProjectCompilerBase'
         });

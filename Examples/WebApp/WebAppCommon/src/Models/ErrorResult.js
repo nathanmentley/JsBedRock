@@ -10,7 +10,7 @@ JsBedRock.Models = JsBedRock.Models || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Web.Rest.RestResult);
             },
             Members: {
-                ErrorMessage: null
+                ErrorMessage: { Def: null }
             }
         });
     });

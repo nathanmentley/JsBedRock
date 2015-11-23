@@ -10,39 +10,59 @@ JsBedRock.Collections = JsBedRock.Collections || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				GetEnumerator: function () {
-                    return this._Values;
+				GetEnumerator: {
+                    Def: function () {
+                        return this._Values;
+                    }
                 },
-				Add: function (item) {
-                    this._Values.push(item);
+				Add: {
+                    Def: function (item) {
+                        this._Values.push(item);
+                    }
                 },
-				Clear: function () {
-                    this._Values = [];
+				Clear: {
+                    Def: function () {
+                        this._Values = [];
+                    }
                 },
-				Count: function () {
-                    return this._Values.length;
+				Count: {
+                    Def: function () {
+                        return this._Values.length;
+                    }
                 },
-				Contains: function (item) {
-                    return this._Values.indexOf(item) !== -1;
+				Contains: {
+                    Def: function (item) {
+                        return this._Values.indexOf(item) !== -1;
+                    }
                 },
-				IndexOf: function (item) {
-                    return this._Values.indexOf(item);
+				IndexOf: {
+                    Def: function (item) {
+                        return this._Values.indexOf(item);
+                    }
                 },
-				Insert: function (index, item) {
-                    this._Values.splice(index, 0, item);
+				Insert: {
+                    Def: function (index, item) {
+                        this._Values.splice(index, 0, item);
+                    }
                 },
-				Remove: function (item) {
-                    if(this.Contains(item))
-                        this.RemoveAt(this.IndexOf(item));
+				Remove: {
+                    Def: function (item) {
+                        if(this.Contains(item))
+                            this.RemoveAt(this.IndexOf(item));
+                    }
                 },
-				RemoveAt: function (index) {
-                    this._Values.splice(index, 1);
+				RemoveAt: {
+                    Def: function (index) {
+                        this._Values.splice(index, 1);
+                    }
                 },
-				ForEach: function (lambda) {
-                    for(var i = 0; i < this._Values.length; i++)
-                        lambda(this._Values[i]);
+				ForEach: {
+                    Def: function (lambda) {
+                        for(var i = 0; i < this._Values.length; i++)
+                            lambda(this._Values[i]);
+                    }
                 },
-                _Values: null
+                _Values: { Def: null }
             },
             Implements: [
                 JsBedRock.Collections.IEnumerable,

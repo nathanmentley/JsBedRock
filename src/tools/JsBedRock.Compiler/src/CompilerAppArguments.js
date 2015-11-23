@@ -8,7 +8,7 @@
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.AppArgumentsBase);
             },
             Members: {
-                Solution:  null
+                Solution:  { Def: null }
             }
         });
     });

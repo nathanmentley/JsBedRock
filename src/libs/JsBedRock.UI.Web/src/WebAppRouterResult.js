@@ -11,8 +11,8 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Component: null,
-                Context: null
+                Component: { Def: null },
+                Context: { Def: null }
             }
         });
     });

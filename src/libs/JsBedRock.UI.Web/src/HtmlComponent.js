@@ -9,40 +9,49 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.Component, context, renderer, componentFactory);
             },
             Members: {
-                Name: "",
-                Init: function () {
-                    var self = this;
-                    this.Base();
-                    
-                    watch(this._Model, function(prop, action, newvalue, oldvalue){
-                        self.Refresh();
-                    });
+                Name: { Def: "" },
+                Init: {
+                    Def: function () {
+                        var self = this;
+                        this.Base();
+                        
+                        watch(this._Model, function(prop, action, newvalue, oldvalue){
+                            self.Refresh();
+                        });
+                    }
                 },
-                Render: function () {
-                    var self = this;
-                    this.__ListenerRefreshQueue.Add(function () { self._InitListeners(); });
-                    
-                    return new Handlebars.SafeString(this.Base());
+                Render: {
+                    Def: function () {
+                        var self = this;
+                        this.__ListenerRefreshQueue.Add(function () { self._InitListeners(); });
+                        
+                        return new Handlebars.SafeString(this.Base());
+                    }
                 },
-                Refresh: function () {
-                    var ret = this.Base();
-                    
-                    $("#" + this.GetDivID()).replaceWith(ret.toString());
-                    
-                    this.__ListenerRefreshQueue.ForEach(function (x) { x(); });
-                    this.__ListenerRefreshQueue.Clear();
-                    
-                    this._Renderer.ClearUnusedCachedComponents();
-                    
-                    return ret;
+                Refresh: {
+                    Def: function () {
+                        var ret = this.Base();
+                        
+                        $("#" + this.GetDivID()).replaceWith(ret.toString());
+                        
+                        this.__ListenerRefreshQueue.ForEach(function (x) { x(); });
+                        this.__ListenerRefreshQueue.Clear();
+                        
+                        this._Renderer.ClearUnusedCachedComponents();
+                        
+                        return ret;
+                    }
                 },
-                GetDivID: function () {
-                    return "JsBedRockComponent_" + this.ObjectGuid.ToString();
+                GetDivID: {
+                    Def: function () {
+                        return "JsBedRockComponent_" + this.ObjectGuid.ToString();
+                    }
                 },
-                _InitListeners: function() {
-                    
+                _InitListeners: {
+                    Def: function() {
+                    }
                 },
-                __ListenerRefreshQueue: new JsBedRock.Collections.List()
+                __ListenerRefreshQueue: { Def: new JsBedRock.Collections.List() }
             }
         });
     });

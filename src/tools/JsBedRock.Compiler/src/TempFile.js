@@ -11,20 +11,28 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				_WriteFile: function (content) {
-					this.__FileSystem.WriteFileSync(this.__FileName, content);
-				},
-				_CleanUpFile: function () {
-					this.__FileSystem.DeleteSync(this.__FileName);
-				},
-				GetFileName: function () {
-					return this.__FileName;
-				},
-                __CreateFileName: function () {
-                    return __dirname + "\\" + (Math.random().toString(36)+'00000000000000000').slice(2, 12) + ".temp";
+				_WriteFile: {
+                    Def: function (content) {
+					   this.__FileSystem.WriteFileSync(this.__FileName, content);
+				    }
                 },
-				__FileSystem: null,
-				__FileName: null
+				_CleanUpFile: {
+                    Def: function () {
+					   this.__FileSystem.DeleteSync(this.__FileName);
+				    }
+                },
+				GetFileName: {
+                    Def: function () {
+					   return this.__FileName;
+				    }
+                },
+                __CreateFileName: { 
+                    Def: function () {
+                        return __dirname + "\\" + (Math.random().toString(36)+'00000000000000000').slice(2, 12) + ".temp";
+                    }
+                },
+				__FileSystem: { Def: null },
+				__FileName: { Def: null }
             }
         });
     });

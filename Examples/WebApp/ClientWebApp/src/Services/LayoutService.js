@@ -8,11 +8,13 @@ JsBedRock.Services = JsBedRock.Services || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UI.RestClientService, context);
             },
             Members: {
-                Name: "Layout",
-                GetNavData: function (callback) {
-                    callback(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
+                Name: { Def: "Layout" },
+                GetNavData: {
+                    Def: function (callback) {
+                        callback(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
+                    }
                 },
-                _RootUrl: "http://localhost:8080/Layout"
+                _RootUrl: { Def: "http://localhost:8080/Layout" }
             }
         });
     });

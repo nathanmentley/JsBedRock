@@ -8,25 +8,31 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
             }),
             Members: {
-                CompileProject: function () {
-                    var asmConfigTemplate = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
-                    this.__AsmConfigTempFile = new JsBedRock.Compiler.TempFile(this._ResolveAsmConfig(asmConfigTemplate));
-                    
-                    this.Base();
-                    
-                    this.__AsmConfigTempFile._CleanUpFile();
+                CompileProject: {
+                    Def: function () {
+                        var asmConfigTemplate = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/AsmConfig.js").toString();
+                        this.__AsmConfigTempFile = new JsBedRock.Compiler.TempFile(this._ResolveAsmConfig(asmConfigTemplate));
+                        
+                        this.Base();
+                        
+                        this.__AsmConfigTempFile._CleanUpFile();
+                    }
                 },
-                _GetSourceFiles: function () {
-                    var ret = this.Base();
-                    
-                    ret.unshift(this.__AsmConfigTempFile.GetFileName());
-                    
-                    return ret;
+                _GetSourceFiles: {
+                    Def: function () {
+                        var ret = this.Base();
+                        
+                        ret.unshift(this.__AsmConfigTempFile.GetFileName());
+                        
+                        return ret;
+                    }
                 },
-                _ResolveAsmConfig: function(asmConfig) {
-                    return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
+                _ResolveAsmConfig: {
+                    Def: function(asmConfig) {
+                        return this.__SettingResolver.ResolveProjectSetting(this._ProjectData, asmConfig);
+                    }
                 },
-                __AsmConfigTempFile: null
+                __AsmConfigTempFile: { Def: null }
             },
             Name: 'AssemblyProjectCompilerBase'
         });

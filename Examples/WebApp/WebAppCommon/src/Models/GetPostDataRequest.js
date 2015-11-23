@@ -10,10 +10,12 @@ JsBedRock.Models = JsBedRock.Models || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Web.Rest.RestRequest);
             },
             Members: {
-                PostID: null,
+                PostID: { Def: null },
                 
-                GetRestUrl: function () {
-                    return this.Base() + "Data";
+                GetRestUrl: {
+                    Def: function () {
+                        return this.Base() + "Data";
+                    }
                 }
             }
         });

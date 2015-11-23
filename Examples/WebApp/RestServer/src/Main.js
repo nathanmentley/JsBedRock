@@ -5,12 +5,14 @@
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Main: function () {
-                    var webServer = new JsBedRock.Node.Web.Rest.RestWebServer(JsBedRock.AppConfig.WebServer.PortNumber);
-                    
-                    webServer.GetRouter().RegisterRoute({});
-                    
-                    webServer.ServerStart();
+				Main: {
+                    Def: function () {
+                        var webServer = new JsBedRock.Node.Web.Rest.RestWebServer(JsBedRock.AppConfig.WebServer.PortNumber);
+                        
+                        webServer.GetRouter().RegisterRoute({});
+                        
+                        webServer.ServerStart();
+                    }
                 }
             }
         });

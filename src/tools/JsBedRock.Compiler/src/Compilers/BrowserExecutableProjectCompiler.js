@@ -8,50 +8,60 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Compiler.ExecutableProjectCompilerBase, soultionData, solutionFile, projectData, projectFile);
             }),
             Members: {
-                CompileProject: function () {
-                    this.Base();
-                    
-                    this._CreateHtmlIndexFile();
-                },
-                _GetSourceFiles: function () {
-                    var ret = this.Base();
-                    
-                    ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js");
-                    
-                    return ret;
-                },
-                _CopyDependencies: function() {
-                    //copy framework libraries.
-                    var outputPath = this.__Path.dirname(this._OutputFile);
-                    
-                    for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
-                        var sourceFile = this._GetSdkLocation(this._SolutionData) + "../" + this._ProjectData.Dependencies[i] + ".js";
-                        var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
+                CompileProject: {
+                    Def: function () {
+                        this.Base();
                         
-                        
-                        if ((new JsBedRock.Node.IO.FileSystem()).FileExistsSync(sourceFile)) {
-                            (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                                sourceFile,
-                                targetFile
-                            );
-                        }
+                        this._CreateHtmlIndexFile();
                     }
-                    
-                    this.Base();
                 },
-                _CreateHtmlIndexFile: function () {
-                    var htmlContent = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyAssets/BrowserExecutable/index.html").toString();
-                    var tempFile = new JsBedRock.Compiler.TempFile(this._ResolveHtmlTemplate(htmlContent));
-                    
-                    (new JsBedRock.Node.IO.FileSystem()).CopyFile(
-                        tempFile.GetFileName(),
-                        this.__Path.dirname(this._OutputFile) + "/index.html"
-                    );
-                    
-                    tempFile._CleanUpFile();
+                _GetSourceFiles: {
+                    Def: function () {
+                        var ret = this.Base();
+                        
+                        ret.push(this._GetSdkLocation(this._SolutionData) + "AssemblyWrappers/" + JsBedRock.Compiler.ProjectTypes.BrowserExecutable + ".js");
+                        
+                        return ret;
+                    }
                 },
-                _ResolveHtmlTemplate: function(content) {
-                    return (new JsBedRock.Compiler.SettingResolver()).ResolveProjectSetting(this._ProjectData, content);
+                _CopyDependencies: {
+                    Def: function() {
+                        //copy framework libraries.
+                        var outputPath = this.__Path.dirname(this._OutputFile);
+                        
+                        for(var i =0; i < this._ProjectData.Dependencies.length; i++) {
+                            var sourceFile = this._GetSdkLocation(this._SolutionData) + "../" + this._ProjectData.Dependencies[i] + ".js";
+                            var targetFile = outputPath + '/' + this._ProjectData.Dependencies[i] + ".js";
+                            
+                            
+                            if ((new JsBedRock.Node.IO.FileSystem()).FileExistsSync(sourceFile)) {
+                                (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                                    sourceFile,
+                                    targetFile
+                                );
+                            }
+                        }
+                        
+                        this.Base();
+                    }
+                },
+                _CreateHtmlIndexFile: {
+                    Def: function () {
+                        var htmlContent = (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(this._GetSdkLocation(this._SolutionData) + "AssemblyAssets/BrowserExecutable/index.html").toString();
+                        var tempFile = new JsBedRock.Compiler.TempFile(this._ResolveHtmlTemplate(htmlContent));
+                        
+                        (new JsBedRock.Node.IO.FileSystem()).CopyFile(
+                            tempFile.GetFileName(),
+                            this.__Path.dirname(this._OutputFile) + "/index.html"
+                        );
+                        
+                        tempFile._CleanUpFile();
+                    }
+                },
+                _ResolveHtmlTemplate: {
+                    Def: function(content) {
+                        return (new JsBedRock.Compiler.SettingResolver()).ResolveProjectSetting(this._ProjectData, content);
+                    }
                 }
             },
             Name: 'BrowserExecutableProjectCompiler'

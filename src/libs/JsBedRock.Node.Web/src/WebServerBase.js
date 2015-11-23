@@ -12,17 +12,23 @@ JsBedRock.Node.Web = JsBedRock.Node.Web || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                ServerStart: function () {
-                    this._HttpServer.Start();
+                ServerStart: {
+                    Def: function () {
+                        this._HttpServer.Start();
+                    }
                 },
-                ServerEnd: function (callback) {
-                    this._HttpServer.End(callback);
+                ServerEnd: {
+                    Def: function (callback) {
+                        this._HttpServer.End(callback);
+                    }
                 },
-                _HandleRequest: function(req, res) {
-                    res.writeHead(404, {'Content-Type': 'text/plain'});
-                    res.end("404");
+                _HandleRequest: {
+                    Def: function(req, res) {
+                        res.writeHead(404, {'Content-Type': 'text/plain'});
+                        res.end("404");
+                    }
                 },
-                _HttpServer: null
+                _HttpServer: { Def: null }
             }
         });
     });

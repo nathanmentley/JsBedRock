@@ -94,9 +94,15 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             PrivateMembers.Inherit(classDef, values.Inherit);
         }
         
-        for(var prop in values.Members)
-            classDef.prototype[prop] = values.Members[prop];
+        for(var prop in values.Members) {
+            classDef.prototype[prop] = values.Members[prop].Def;
             
+            if(values.Members[prop].Attributes) {
+                for(var i = 0; i < values.Members[prop].Attributes.length; i++) {
+                    classDef.prototype.__Attributes.push(values.Members[prop].Attributes[i]);
+                }
+            }
+        }
         classDef.prototype.__ClassName = values.Name;
         
         for(var i = 0; i < values.Implements.length; i++)

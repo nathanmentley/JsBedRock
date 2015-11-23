@@ -9,9 +9,11 @@ JsBedRock.Node.Web = JsBedRock.Node.Web || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.WebServerBase, portNumber);
             },
             Members: {
-                _HandleRequest: function(req, res) {
-                    res.writeHead(200, {'Content-Type': 'text/plain'});
-                    res.end("response");
+                _HandleRequest: {
+                    Def: function(req, res) {
+                        res.writeHead(200, {'Content-Type': 'text/plain'});
+                        res.end("response");
+                    }
                 }
             }
         });

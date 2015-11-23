@@ -8,43 +8,58 @@ JsBedRock.UnitTesting = JsBedRock.UnitTesting || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                TestGroupName: 'DefaultTestGroup',
-                InitTestGroup: function () {
-                    JsBedRock.Console.Write("Running Test Group: " + this.TestGroupName);
-                },
-                DeinitTestGroup: function () {
-                    JsBedRock.Console.Write("Finished Test Group: " + this.TestGroupName);
-                },
-                InitTest: function () {
-                },
-                DeinitTest: function () {
-                },
-                Assert: function(condition, message) {
-                    var methodName = JsBedRock.Utils.ObjectOriented.Reflection.GetMethodName(this, arguments.callee.caller);
-                    this.__Attempts++;
-                    
-                    if(!condition){
-                        JsBedRock.Console.Info(this.TestGroupName + "->" + methodName + "->" + message + " failed");
-                        this.__Failures++;
-                    }else{
-                        JsBedRock.Console.Info(this.TestGroupName + "->" + methodName + "->" + message + " passed");
-                        this.__Successes++;
+                TestGroupName: { Def: 'DefaultTestGroup' },
+                InitTestGroup: {
+                    Def: function () {
+                        JsBedRock.Console.Write("Running Test Group: " + this.TestGroupName);
                     }
+                },
+                DeinitTestGroup: {
+                    Def: function () {
+                        JsBedRock.Console.Write("Finished Test Group: " + this.TestGroupName);
+                    }
+                },
+                InitTest: {
+                    Def: function () {
+                    }
+                },
+                DeinitTest: { Def: function () {
+                    }
+                },
+                Assert: {
+                    Def: function(condition, message) {
+                        var methodName = JsBedRock.Utils.ObjectOriented.Reflection.GetMethodName(this, arguments.callee.caller);
+                        this.__Attempts++;
                         
-                    return condition;
+                        if(!condition){
+                            JsBedRock.Console.Info(this.TestGroupName + "->" + methodName + "->" + message + " failed");
+                            this.__Failures++;
+                        }else{
+                            JsBedRock.Console.Info(this.TestGroupName + "->" + methodName + "->" + message + " passed");
+                            this.__Successes++;
+                        }
+                            
+                        return condition;
+                    }
                 },
-                GetAttempts: function () {
-                    return this.__Attempts;
+                GetAttempts: {
+                    Def: function () {
+                        return this.__Attempts;
+                    }
                 },
-                GetFailures: function () {
-                    return this.__Failures;
+                GetFailures: {
+                    Def: function () {
+                        return this.__Failures;
+                    }
                 },
-                GetSuccesses: function () {
-                    return this.__Successes;
+                GetSuccesses: {
+                    Def: function () {
+                        return this.__Successes;
+                    }
                 },
-                __Attempts: 0,
-                __Failures: 0,
-                __Successes: 0
+                __Attempts: { Def: 0 },
+                __Failures: { Def: 0 },
+                __Successes: { Def: 0 }
             }
         });
     });

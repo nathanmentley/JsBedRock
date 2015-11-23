@@ -13,9 +13,9 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				Controller: null,
-				Action: null,
-                Request: null
+				Controller: { Def: null },
+				Action: { Def: null },
+                Request: { Def: null }
             }
         });
     });

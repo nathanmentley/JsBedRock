@@ -13,61 +13,89 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				ReadFileSync: function (fileName) {
-					return this.__FS.readFileSync(fileName);
-				},
-				WriteFileSync: function (fileName, data) {
-					return this.__FS.writeFileSync(fileName, data);
-				},
-				ReadFile: function (fileName, callback) {
-					return this.__FS.readFile(fileName, callback);
-				},
-				MkDir: function (path, callback) {
-					this.__FS.mkdir(path, callback);
-				},
-				MkDirSync: function (path) {
-					this.__FS.mkdirSync(path);
-				},
-				DirectoryExistsSync: function (path) {
-					try {
-						var stats = this.__FS.lstatSync(path);
-						return stats.isDirectory();
-					}
-					catch (e) {
-						return false;
+				ReadFileSync: {
+					Def: function (fileName) {
+						return this.__FS.readFileSync(fileName);
 					}
 				},
-				FileExistsSync: function (path) {
-					try{
-						return this.__FS.statSync(path).isFile();
-					}catch(err){
-						return false;
+				WriteFileSync: {
+					Def : function (fileName, data) {
+						return this.__FS.writeFileSync(fileName, data);
 					}
 				},
-				CopyFile: function (fileFrom, fileTo) {
-					this.WriteFileSync(fileTo, this.ReadFileSync(fileFrom).toString());
+				ReadFile: {
+					Def: function (fileName, callback) {
+						return this.__FS.readFile(fileName, callback);
+					}
 				},
-				Rename: function (oldName, newName) {
-					this.__FS.renameSync(oldName, newName);
+				MkDir: {
+					Def: function (path, callback) {
+						this.__FS.mkdir(path, callback);
+					}
 				},
-				RenameAsync: function (oldName, newName, callback) {
-					this.__FS.rename(oldName, newName, function (err) {
-						callback(err);
-					});
+				MkDirSync: {
+					Def: function (path) {
+						this.__FS.mkdirSync(path);
+					}
 				},
-				Delete: function(file, callback) {
-					this.__FS.unlinkSync(file, callback);
+				DirectoryExistsSync: {
+					Def: function (path) {
+						try {
+							var stats = this.__FS.lstatSync(path);
+							return stats.isDirectory();
+						}
+						catch (e) {
+							return false;
+						}
+					}
 				},
-				DeleteSync: function(file) {
-					this.__FS.unlinkSync(file);
+				FileExistsSync: {
+					Def: function (path) {
+						try{
+							return this.__FS.statSync(path).isFile();
+						}catch(err){
+							return false;
+						}
+					}
 				},
-				CreateReadStream : function (file) {
-					return this.__FS.createReadStream(file);
+				CopyFile: {
+					Def: function (fileFrom, fileTo) {
+						this.WriteFileSync(fileTo, this.ReadFileSync(fileFrom).toString());
+					}
 				},
-				CreateWriteStream: function (file) {
-					return this.__FS.createWriteStream(file);
+				Rename: {
+					Def: function (oldName, newName) {
+						this.__FS.renameSync(oldName, newName);
+					}
 				},
-				__FS: null
+				RenameAsync: {
+					Def: function (oldName, newName, callback) {
+						this.__FS.rename(oldName, newName, function (err) {
+							callback(err);
+						});
+					}
+				},
+				Delete: {
+					Def: function(file, callback) {
+						this.__FS.unlinkSync(file, callback);
+					}
+				},
+				DeleteSync: {
+					Def: function(file) {
+						this.__FS.unlinkSync(file);
+					}
+				},
+				CreateReadStream: {
+					Def: function (file) {
+						return this.__FS.createReadStream(file);
+					}
+				},
+				CreateWriteStream: {
+					Def: function (file) {
+						return this.__FS.createWriteStream(file);
+					}
+				},
+				__FS: { Def: null }
             }
         });
     });

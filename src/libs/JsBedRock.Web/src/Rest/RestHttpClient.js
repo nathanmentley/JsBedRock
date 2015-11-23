@@ -11,20 +11,23 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Web.Http.HttpClient);
             },
             Members: {
-                _RootUrl: null,
+                _RootUrl: { Def: null },
                 
-                Post: function(data, callback) {
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.open("POST", this._RootUrl + data.GetRestUrl(), true);
-                    xhttp.setRequestHeader("Content-type", "application/json");
-                    xhttp.send(data.ToJson());
-                    
-                    xhttp.onreadystatechange = function() {
-                        callback(xhttp);
+                Post: {
+                    Def: function(data, callback) {
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.open("POST", this._RootUrl + data.GetRestUrl(), true);
+                        xhttp.setRequestHeader("Content-type", "application/json");
+                        xhttp.send(data.ToJson());
+                        
+                        xhttp.onreadystatechange = function() {
+                            callback(xhttp);
+                        }
                     }
                 },
-                Get: function(url, data, callback) {
-                    
+                Get: {
+                    Def: function(url, data, callback) {
+                    }
                 }
             }
         });

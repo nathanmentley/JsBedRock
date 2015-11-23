@@ -8,17 +8,19 @@ JsBedRock.Web.Http = JsBedRock.Web.Http || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                _Request: function (requestType, url, data, callback) {
-                    xmlhttp = new XMLHttpRequest();
-                    xmlhttp.open(requestType, url, true);
-                    xmlhttp.onreadystatechange=function(){
-                        if (xmlhttp.readyState==4 && xmlhttp.status==200){
-                            callback(xmlhttp);
-                        }else{
-                            JsBedRock.Console.Write("error");
+                _Request: {
+                    Def: function (requestType, url, data, callback) {
+                        xmlhttp = new XMLHttpRequest();
+                        xmlhttp.open(requestType, url, true);
+                        xmlhttp.onreadystatechange=function(){
+                            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                                callback(xmlhttp);
+                            }else{
+                                JsBedRock.Console.Write("error");
+                            }
                         }
+                        xmlhttp.send();
                     }
-                    xmlhttp.send();
                 }
             }
         });

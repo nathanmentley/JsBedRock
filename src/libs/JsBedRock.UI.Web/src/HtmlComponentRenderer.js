@@ -12,51 +12,63 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Init: function (componentFactory) {
-                    var self = this;
-                    this._ComponentCache.PopulateCache();
-                    this._ComponentFactory = componentFactory;
-                    
-                    for(var prop in this._ComponentCache.GetComponents()){
-                        Handlebars.registerHelper(prop, this._GenerateHelperFunction(self, prop));
+                Init: {
+                    Def: function (componentFactory) {
+                        var self = this;
+                        this._ComponentCache.PopulateCache();
+                        this._ComponentFactory = componentFactory;
+                        
+                        for(var prop in this._ComponentCache.GetComponents()){
+                            Handlebars.registerHelper(prop, this._GenerateHelperFunction(self, prop));
+                        }
                     }
                 },
-                Render: function (template, model, component) {
-                    if(!this._CompiledTemplateCache.Contains(template)) {
-                        this._CompiledTemplateCache.Add(template, Handlebars.compile(template));
+                Render: {
+                    Def: function (template, model, component) {
+                        if(!this._CompiledTemplateCache.Contains(template)) {
+                            this._CompiledTemplateCache.Add(template, Handlebars.compile(template));
+                        }
+                        
+                        return this._WrapRenderedTemplate((this._CompiledTemplateCache.Get(template))(model), component);
                     }
-                    
-                    return this._WrapRenderedTemplate((this._CompiledTemplateCache.Get(template))(model), component);
                 },
-                ClearUnusedCachedComponents: function () {
-                    var self = this;
-                    
-                    this._ComponentInstanceCache.ForEach(function (key, value) {
-                        if($("#" + value.GetDivID()).length === 0)
-                            self._ComponentInstanceCache.Remove(key);
-                    });
-                },
-                _WrapRenderedTemplate: function (template, component) {
-                    return "<div id='" + component.GetDivID() + "'>" + template + "</div>";
-                },
-                _GenerateHelperFunction: function (self, prop) {
-                    return function (model) {
-                        return self._GetOrCreateComponentInstance(model.ObjectGuid.ToString(), prop, model).Render();
-                    };
-                },
-                _GetOrCreateComponentInstance: function (instanceKey, componentKey, model){
-                    if(!this._ComponentInstanceCache.Contains(componentKey + "_" + instanceKey)){
-                        this._ComponentInstanceCache.Add(
-                            componentKey + "_" + instanceKey,
-                            this._ComponentFactory.GetComponent(this._ComponentCache.GetComponentFromKey(componentKey), model)
-                        );
+                ClearUnusedCachedComponents: {
+                    Def: function () {
+                        var self = this;
+                        
+                        this._ComponentInstanceCache.ForEach(function (key, value) {
+                            if($("#" + value.GetDivID()).length === 0)
+                                self._ComponentInstanceCache.Remove(key);
+                        });
                     }
-                    return this._ComponentInstanceCache.Get(componentKey + "_" + instanceKey);
                 },
-                _ComponentCache: null,
-                _ComponentFactory: null,
-                _ComponentInstanceCache: null,
-                _CompiledTemplateCache: null
+                _WrapRenderedTemplate: {
+                    Def: function (template, component) {
+                        return "<div id='" + component.GetDivID() + "'>" + template + "</div>";
+                    }
+                },
+                _GenerateHelperFunction: {
+                    Def: function (self, prop) {
+                        return function (model) {
+                            return self._GetOrCreateComponentInstance(model.ObjectGuid.ToString(), prop, model).Render();
+                        };
+                    }
+                },
+                _GetOrCreateComponentInstance: {
+                    Def: function (instanceKey, componentKey, model){
+                        if(!this._ComponentInstanceCache.Contains(componentKey + "_" + instanceKey)){
+                            this._ComponentInstanceCache.Add(
+                                componentKey + "_" + instanceKey,
+                                this._ComponentFactory.GetComponent(this._ComponentCache.GetComponentFromKey(componentKey), model)
+                            );
+                        }
+                        return this._ComponentInstanceCache.Get(componentKey + "_" + instanceKey);
+                    }
+                },
+                _ComponentCache: { Def: null },
+                _ComponentFactory: { Def: null },
+                _ComponentInstanceCache: { Def: null },
+                _CompiledTemplateCache: { Def: null }
             },
             Implements: [ JsBedRock.UI.IComponentRenderer ]
         });

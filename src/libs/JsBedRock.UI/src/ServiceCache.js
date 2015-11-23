@@ -9,25 +9,29 @@ JsBedRock.UI = JsBedRock.UI || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                PopulateCache: function () {
-                    var services = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(JsBedRock.CurrentAssembly, JsBedRock.UI.Service);
-                        
-                    for(var i = 0; i < services.length; i++) {
-                        var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
+                PopulateCache: {
+                    Def: function () {
+                        var services = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(JsBedRock.CurrentAssembly, JsBedRock.UI.Service);
                             
-                        if(key) {
-                            if (!this._ServiceDictionary.Contains(key)) {
-                                this._ServiceDictionary.Add(key, services[i]);
+                        for(var i = 0; i < services.length; i++) {
+                            var key = JsBedRock.UI.Utils.GetKeyFromServiceType(services[i]);
+                                
+                            if(key) {
+                                if (!this._ServiceDictionary.Contains(key)) {
+                                    this._ServiceDictionary.Add(key, services[i]);
+                                }
                             }
                         }
                     }
                 },
-                GetService: function (key) {
-                    if(this._ServiceDictionary.Contains(JsBedRock.UI.Utils.GetKeyFromServiceType(key)))
-                        return this._ServiceDictionary.Get(JsBedRock.UI.Utils.GetKeyFromServiceType(key));
-                    return null;
+                GetService: {
+                    Def: function (key) {
+                        if(this._ServiceDictionary.Contains(JsBedRock.UI.Utils.GetKeyFromServiceType(key)))
+                            return this._ServiceDictionary.Get(JsBedRock.UI.Utils.GetKeyFromServiceType(key));
+                        return null;
+                    }
                 },
-				_ServiceDictionary: null
+				_ServiceDictionary: { Def: null }
             }
         });
     });
