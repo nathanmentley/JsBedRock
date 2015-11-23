@@ -1,0 +1,11 @@
+{
+  "Name": "JsBedRock.Node.Db.MySql",
+  "SourceFiles": [
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.Db"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.MySql.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}
