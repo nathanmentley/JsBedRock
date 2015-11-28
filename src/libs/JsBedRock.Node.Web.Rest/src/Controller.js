@@ -8,12 +8,19 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
             Constructor: function (request, response) {
                 this._Request = request;
                 this._Response = response;
+                this._WriteHeader();
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
                 Name: { Def: 'controller' },
-                _WriteHeader: { Def: function () {} },
+                _WriteHeader: {
+                    Def: function () {
+                        if(this._Response) {
+                            this._Response.writeHead(200, { });
+                        }
+                    }
+                 },
                 _Request: { Def: null },
                 _Response: { Def: null }
             }

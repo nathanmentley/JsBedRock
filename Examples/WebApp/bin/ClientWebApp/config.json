@@ -1,5 +1,5 @@
 {
 	"ClientWebApp" : {
-		"RestServerUrlRoot": "http://localhost:8080/"
+		"RestServerUrlRoot": "http://localhost:8080"
 	}
 }

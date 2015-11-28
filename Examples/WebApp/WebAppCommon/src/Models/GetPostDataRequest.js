@@ -4,7 +4,7 @@ JsBedRock.Models = JsBedRock.Models || {};
     asm.OnLoad(function () {
 		JsBedRock.Models.GetPostDataRequest = JsBedRock.Utils.ObjectOriented.CreateClass({
             Attributes: [
-                new JsBedRock.Web.Rest.RestRequestRouteAttribute("Blog/Data")
+                new JsBedRock.Web.Rest.RestRequestRouteAttribute("/Blog/Data")
             ],
             Inherit: JsBedRock.Web.Rest.RestRequest,
             Constructor: function (postID) {

@@ -33,12 +33,15 @@ JsBedRock.Utils.ObjectOriented.Reflection = JsBedRock.Utils.ObjectOriented.Refle
     JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType = function (_assembly, _type) {
         var ret = [];
         
-        for(var i = 0; i < _assembly.Classes.length; i++){
-            try{
-                var instance = new _assembly.Classes[i]();
-                if(JsBedRock.Utils.ObjectOriented.IsOfType(instance, _type))
-                    ret.push(_assembly.Classes[i]);
-            } catch(err) {
+        if(_assembly.Classes) {
+            for(var i = 0; i < _assembly.Classes.length; i++){
+                try{
+                    var instance = new _assembly.Classes[i]();
+                    if(JsBedRock.Utils.ObjectOriented.IsOfType(instance, _type))
+                        ret.push(_assembly.Classes[i]);
+                } catch(err) {
+                    
+                }
             }
         }
         

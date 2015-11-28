@@ -1,6 +1,7 @@
 {
   "Name": "RestServer",
   "SourceFiles": [
+    "src/Controllers/BaseController.js",
     "src/Controllers/BlogController.js",
     "src/Main.js"
   ],
