@@ -2,7 +2,8 @@
   "Name": "JsBedRock.Node.Web",
   "SourceFiles": [
     "src/WebServerBase.js",
-    "src/StaticFileWebServer.js"
+    "src/StaticFileWebServer.js",
+    "src/WebServerStart.js"
   ],
   "Dependencies": [
     "JsBedRock.Node.IO",

@@ -36,7 +36,7 @@ JsBedRock.Services = JsBedRock.Services || {};
                         );
                     }
                 },
-                _RootUrl: { Def: "http://localhost:8080/Blog" }
+                _RootUrl: { Def: "http://localhost:8080/" }
             }
         });
     });

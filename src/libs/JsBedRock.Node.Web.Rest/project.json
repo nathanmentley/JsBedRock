@@ -6,7 +6,8 @@
     "src/Controller.js",
     "src/RequestRouterResult.js",
     "src/RequestRouter.js",
-    "src/RestWebServer.js"
+    "src/RestWebServer.js",
+    "src/RestServerStart.js"
   ],
   "Dependencies": [
     "JsBedRock.Web",

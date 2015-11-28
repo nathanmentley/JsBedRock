@@ -2,6 +2,7 @@
   "Name": "JsBedRock.Web",
   "SourceFiles": [
     "src/Http/HttpClient.js",
+    "src/Rest/RestRequestRouteAttribute.js",
     "src/Rest/RestRequest.js",
     "src/Rest/RestResult.js",
     "src/Rest/RestHttpClient.js"

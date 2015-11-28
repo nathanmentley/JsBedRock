@@ -16,7 +16,7 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                 Post: {
                     Def: function(data, callback) {
                         var xhttp = new XMLHttpRequest();
-                        xhttp.open("POST", this._RootUrl + data.GetRestUrl(), true);
+                        xhttp.open("POST", this._RootUrl + this._GetUrlFromRequest(data), true);
                         xhttp.setRequestHeader("Content-type", "application/json");
                         xhttp.send(data.ToJson());
                         
@@ -27,6 +27,11 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                 },
                 Get: {
                     Def: function(url, data, callback) {
+                    }
+                },
+                _GetUrlFromRequest: {
+                    Def: function(request) {
+                        return request.GetClassAttribute(JsBedRock.Web.Rest.RestRequestRouteAttribute).Route;
                     }
                 }
             }

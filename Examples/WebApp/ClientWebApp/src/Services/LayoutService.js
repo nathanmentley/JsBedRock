@@ -14,7 +14,7 @@ JsBedRock.Services = JsBedRock.Services || {};
                         callback(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
                     }
                 },
-                _RootUrl: { Def: "http://localhost:8080/Layout" }
+                _RootUrl: { Def: "http://localhost:8080/" }
             }
         });
     });

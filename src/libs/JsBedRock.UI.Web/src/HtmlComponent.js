@@ -51,7 +51,9 @@ JsBedRock.UI.Web = JsBedRock.UI.Web || {};
                     Def: function() {
                     }
                 },
-                __ListenerRefreshQueue: { Def: new JsBedRock.Collections.List() }
+                __ListenerRefreshQueue: {
+                    Def: new JsBedRock.Collections.List()
+                }
             }
         });
     });

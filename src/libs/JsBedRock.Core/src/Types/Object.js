@@ -74,13 +74,19 @@ JsBedRock.Types = JsBedRock.Types || {};
                             this[key] = obj[key];
                     }
                 },
+                GetClassAttribute: {
+                    Def: function (attributeType) {
+                        return this.GetAttribute("", attributeType);
+                    }
+                },
                 GetAttribute: {
                     Def: function (target, attributeType) {
                         if(!this.__Attributes[target])
                             return null;
                         for(var i = 0; i < this.__Attributes[target].length; i++) {
-                            if(JsBedRock.Utils.ObjectOriented.IsOfType(this.__Attributes[target][i], attributeType))
-                                return this.__Attributes[target][i];
+                            if(this.__Attributes[target][i])
+                                if(JsBedRock.Utils.ObjectOriented.IsOfType(this.__Attributes[target][i], attributeType))
+                                    return this.__Attributes[target][i];
                         }
                         return null;
                     }

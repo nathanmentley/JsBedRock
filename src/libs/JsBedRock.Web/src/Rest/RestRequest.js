@@ -8,11 +8,6 @@ JsBedRock.Web.Rest = JsBedRock.Web.Rest || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                GetRestUrl: {
-                    Def: function () {
-                        return '/';
-                    }
-                }
             }
         });
     });

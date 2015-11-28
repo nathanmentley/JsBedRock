@@ -10,15 +10,15 @@ JsBedRock.Web.Http = JsBedRock.Web.Http || {};
             Members: {
                 _Request: {
                     Def: function (requestType, url, data, callback) {
-                        xmlhttp = new XMLHttpRequest();
+                        var xmlhttp = new XMLHttpRequest();
                         xmlhttp.open(requestType, url, true);
-                        xmlhttp.onreadystatechange=function(){
+                        xmlhttp.onreadystatechange= function(){
                             if (xmlhttp.readyState==4 && xmlhttp.status==200){
                                 callback(xmlhttp);
                             }else{
                                 JsBedRock.Console.Write("error");
                             }
-                        }
+                        };
                         xmlhttp.send();
                     }
                 }

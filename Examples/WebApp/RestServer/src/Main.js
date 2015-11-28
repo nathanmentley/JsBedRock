@@ -1,18 +1,13 @@
 (function (asm) {
     asm.OnLoad(function () {
         JsBedRock.Main = JsBedRock.Utils.ObjectOriented.CreateClass({
+            Inherit: JsBedRock.Node.Web.Rest.RestServerStart,
             Constructor: function () {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.Rest.RestServerStart);
             },
             Members: {
-				Main: {
-                    Def: function () {
-                        var webServer = new JsBedRock.Node.Web.Rest.RestWebServer(JsBedRock.AppConfig.WebServer.PortNumber);
-                        
-                        webServer.GetRouter().RegisterRoute({});
-                        
-                        webServer.ServerStart();
-                    }
+                _PortNumber: {
+                    Def: JsBedRock.AppConfig.WebServer.PortNumber
                 }
             }
         });

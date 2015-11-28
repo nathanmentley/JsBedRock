@@ -11,7 +11,6 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                _Routes: { Def: null },
                 ParseRequest: {
                     Def: function(uri) {
                         //TODO: Parse against configured routes
@@ -25,8 +24,7 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                     }
                 },
                 RegisterRoute: {
-                    Def: function(routeConfig) {
-                        this._Routes.Add(routeConfig);
+                    Def: function() {
                     }
                 },
             }

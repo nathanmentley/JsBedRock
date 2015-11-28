@@ -21,7 +21,13 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
             Members: {
 				CompileProject: {
                     Def: function () {
-                        this._WriteOutputFile(this.__Uglifyjs.minify(this._GetSourceFiles(), this._GetUglifyJsOptions()));
+                        var sourceFiles = this._GetSourceFiles();
+                        
+                        for(var i = 0; i < sourceFiles.length; i++){
+                            this._LintFile(sourceFiles[i]);
+                        }
+                        
+                        this._WriteOutputFile(this.__Uglifyjs.minify(sourceFiles, this._GetUglifyJsOptions()));
                     }
                 },
                 _GetSourceFiles: {
@@ -30,6 +36,27 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                         for (var j = 0; j < this._ProjectData.SourceFiles.length; j++)
                             ret.push(this.__Path.join(this._ProjectDir, this._ProjectData.SourceFiles[j]));
                         return ret;
+                    }
+                },
+                _LintFile: {
+                    Def: function(file){
+                        var jshint = require('jshint').JSHINT;
+                        
+                        jshint(
+                            (new JsBedRock.Node.IO.FileSystem()).ReadFileSync(file).toString(),
+                            {
+                                undef: true
+                            },
+                            {
+                                JsBedRock: true
+                            }
+                        );
+                        
+                        var data = jshint.data();
+                        if(data && data.errors && data.errors.length > 0){
+                            //JsBedRock.Console.Write(file);
+                            //console.log(data.errors);
+                        }
                     }
                 },
                 _WriteOutputFile: {

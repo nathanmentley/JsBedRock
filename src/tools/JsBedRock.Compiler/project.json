@@ -24,7 +24,8 @@
   "NodeDependencies": [
     "uglify-js",
     "fstream",
-    "tar"
+    "tar",
+    "jshint"
   ],
   "OutputFile": "../../../bin/{{Version}}/sdk/tools/compiler/JsBedRock.Compiler.js",
   "DebugSourceRoot": "../",

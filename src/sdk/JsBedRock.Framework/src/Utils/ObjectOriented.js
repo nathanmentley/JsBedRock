@@ -74,11 +74,16 @@ JsBedRock.Utils = JsBedRock.Utils || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {},
+            Attributes: [],
             Name: ''
         },
         InterfaceDefaults: {
             Name: '',
             Members: {}
+        },
+        MethodDefaults: {
+            Def: null,
+            Attributes: []
         }
     };
     
@@ -95,12 +100,14 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         }
         
         for(var prop in values.Members) {
-            classDef.prototype[prop] = values.Members[prop].Def;
+            var methodValues = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.MethodDefaults, values.Members[prop]);
+            classDef.prototype[prop] = methodValues.Def;
             
-            if(values.Members[prop].Attributes) {
-                for(var i = 0; i < values.Members[prop].Attributes.length; i++) {
-                    classDef.prototype.__Attributes.push(values.Members[prop].Attributes[i]);
-                }
+            //Push Method Attributes
+            for(var i = 0; i < methodValues.Attributes.length; i++) {
+                if(!classDef.prototype.__Attributes[prop])
+                    classDef.prototype.__Attributes[prop] = [];
+                classDef.prototype.__Attributes[prop].push(methodValues.Attributes[i]);
             }
         }
         classDef.prototype.__ClassName = values.Name;
@@ -108,6 +115,14 @@ JsBedRock.Utils = JsBedRock.Utils || {};
         for(var i = 0; i < values.Implements.length; i++)
             PrivateMembers.Implement(classDef, values.Implements[i]);
             
+        //Push Class Attributes
+        for(var i = 0; i < values.Attributes.length; i++) {
+            if(!classDef.prototype.__Attributes[""])
+                classDef.prototype.__Attributes[""] = [];
+                
+            classDef.prototype.__Attributes[""].push(values.Attributes[i]);
+        }
+        
         //LinkClass To Assembly
         JsBedRock.CurrentAssembly.Classes.push(classDef);
         
