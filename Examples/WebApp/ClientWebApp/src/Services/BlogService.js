@@ -10,29 +10,26 @@ JsBedRock.Services = JsBedRock.Services || {};
             Members: {
                 Name: { Def: "Blog" },
                 GetPosts: {
-                    Def: function (callback) {
-                        var list = new JsBedRock.Collections.List();
+                    Def: function () {
+                        var promise = new JsBedRock.Promise();
                         
+                        var list = new JsBedRock.Collections.List();
                         
                         list.Add(new JsBedRock.Models.TestResult("1", "value one", "value too"));
                         list.Add(new JsBedRock.Models.TestResult("2", "value 1", "value 2"));
                         list.Add(new JsBedRock.Models.TestResult("3", "value ein", "value two"));
                         
-                        callback(list);
+                        promise.Resolve(list);
+                        
+                        return promise;
                     }
                 },
                 GetPostData: {
-                    Def: function (postID, callback) {
-                        this._Post(
+                    Def: function (postID) {
+                        return this._Post(
                             new JsBedRock.Models.GetPostDataRequest(postID),
                             JsBedRock.Models.GetPostDataResult,
-                            function(result) {
-                                callback(result);
-                            },
-                            JsBedRock.Models.ErrorResult,
-                            function(result) {
-                                alert(result.ErrorMessage);
-                            }
+                            JsBedRock.Models.ErrorResult
                         );
                     }
                 },

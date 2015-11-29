@@ -30,7 +30,7 @@ JsBedRock.Components = JsBedRock.Components || {};
                         alert(this._Context.BTestValue1 + "-" + this._Context.BTestValue2);
                         
                         var self = this;
-                        this._Service.Layout.GetNavData(function (navData) {
+                        this._Service.Layout.GetNavData().Success(function (navData) {
                             self._Model.Title = "Other Page";
                         });
                     }

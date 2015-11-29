@@ -17,22 +17,16 @@ JsBedRock.WebAppExample.Controllers = JsBedRock.WebAppExample.Controllers || {};
                         new JsBedRock.Node.Web.Rest.ResponseTypeAttribute(JsBedRock.Models.GetPostDataRequest)
                     ],
                     Def: function (request) {
-                        
-                        this._Db = new JsBedRock.Node.Db.MySql.MySqlConnection(
-                            JsBedRock.AppConfig.DbServer.Host,
-                            JsBedRock.AppConfig.DbServer.User,
-                            JsBedRock.AppConfig.DbServer.Password,
-                            JsBedRock.AppConfig.DbServer.Database
-                        );
-                        this._Db.Connect();
-                        
                         var promise = new JsBedRock.Promise();
                         
-                        (new JsBedRock.WebAppExample.DAL.BlogPostManager()).GetBlogPosts(this._Db, function (err, rows, fields) {
+                        var blogManager = new JsBedRock.WebAppExample.DAL.BlogPostManager();
+                        blogManager._Init();
+                        
+                        blogManager.GetBlogPosts(function (err, rows, fields) {
                             promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - " + rows[0].Subject));
                         });
                         
-                        this._Db.Disconnect();
+                        blogManager._Deinit();
                         
                         return promise;
                     }

@@ -28,7 +28,7 @@ JsBedRock.Components = JsBedRock.Components || {};
                         this.Base();
                         
                         var self = this;
-                        this._Service.Layout.GetNavData(function (navData) {
+                        this._Service.Layout.GetNavData().Success(function (navData) {
                             self._Model.Title = navData.Value1 + " " + navData.Value2;
                         });
                     }

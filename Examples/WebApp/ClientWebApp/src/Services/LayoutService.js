@@ -10,8 +10,12 @@ JsBedRock.Services = JsBedRock.Services || {};
             Members: {
                 Name: { Def: "Layout" },
                 GetNavData: {
-                    Def: function (callback) {
-                        callback(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
+                    Def: function () {
+                        var promise = new JsBedRock.Promise();
+                        
+                        promise.Resolve(new JsBedRock.Models.TestResult("idvalue", "value one Layhout", "value too Layhout"));
+                        
+                        return promise;
                     }
                 },
                 _RootUrl: { Def: "http://localhost:8080" }// JsBedRock.AppConfig.ClientWebApp.RestServerUrlRoot }

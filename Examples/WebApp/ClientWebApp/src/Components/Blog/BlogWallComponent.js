@@ -30,7 +30,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                         
                         this.Base();
                         
-                        this._Service.Blog.GetPosts(function (postData) {
+                        this._Service.Blog.GetPosts().Success(function (postData) {
                             postData.ForEach(function (x) {
                                 self._Model.Posts.push({ ID: x.ID });
                             });

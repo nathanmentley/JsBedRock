@@ -30,7 +30,7 @@ JsBedRock.Components.Blog = JsBedRock.Components.Blog || {};
                         var self = this;
                         this.Base();
                         
-                        this._Service.Blog.GetPostData("testId", function (postData) {
+                        this._Service.Blog.GetPostData("testId").Success(function (postData) {
                             self._Model.Body = postData.BodyText;
                         });
                     }

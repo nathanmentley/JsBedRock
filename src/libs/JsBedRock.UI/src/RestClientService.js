@@ -11,25 +11,29 @@ JsBedRock.UI = JsBedRock.UI || {};
             },
             Members: {
                 _Post: {
-                    Def: function (data, successType, successCallback, errorType, errorCallback) {
+                    Def: function (data, successType, errorType) {
                         var self = this;
+                        var promise = new JsBedRock.Promise();
                         
                         this.__Client.Post(data, function(xhttp) {
                             if(xhttp.readyState == 4){
                                 if(xhttp.status == 200){
-                                    self.__ProcessResult(xhttp.responseText, successType, successCallback);
+                                    promise.Resolve(self.__ProcessResult(xhttp.responseText, successType));
                                 }else{
-                                    self.__ProcessResult(xhttp.responseText, errorType, errorCallback);
+                                    promise.Reject(self.__ProcessResult(xhttp.responseText, errorType));
                                 }
                             }
                         });
+                        
+                        return promise;
                     }
                 },
                 __ProcessResult: {
-                    Def: function (respData, respType, respCallback) {
+                    Def: function (respData, respType) {
                         var result = new respType();
                         result.FromJson(respData);
-                        respCallback(result);
+                        
+                        return result;
                     }
                 },
                 _RootUrl: { Def: "" },
