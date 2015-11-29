@@ -1,5 +1,11 @@
 {
 	"WebServer" : {
 		"PortNumber": 8080
+	},
+	"DbServer": {
+		"Host": "devserver.local",
+		"User": "root",
+		"Password": "password",
+		"Database": "WebAppExample"
 	}
 }

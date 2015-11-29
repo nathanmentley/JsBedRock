@@ -29,6 +29,7 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                             var routerResult = this.__Router.ParseRequest(req.url);
                             
                             var controller = new (this.__ControllerCache.GetController(routerResult.Controller))(req, res);
+                            controller._Init();
                             
                             var action = controller[routerResult.Action];
                             var actionData = new (this._GetRequestDataTypeFromAction(controller, action))();
@@ -41,8 +42,12 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                             req.on('end', function() {
                                 if(!JsBedRock.Utils.String.IsEmptyOrSpaces(fullBody))
                                     actionData.FromJson(fullBody);
+                                
+                                action(actionData).Success(function (data) {
+                                    controller._Deinit();
                                     
-                                res.end(action(actionData).ToJson());
+                                    res.end(data.ToJson());
+                                });
                             });
                         } catch(err) {
                             res.end("Exception:" + err.message + " " + err.stack);

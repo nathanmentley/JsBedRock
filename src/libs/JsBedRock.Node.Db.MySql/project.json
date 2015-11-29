@@ -1,6 +1,7 @@
 {
   "Name": "JsBedRock.Node.Db.MySql",
   "SourceFiles": [
+    "src/MySqlConnection.js"
   ],
   "Dependencies": [
     "JsBedRock.Node.Db"

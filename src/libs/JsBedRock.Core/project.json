@@ -6,7 +6,8 @@
     "src/Types/Attribute.js",
     "src/Types/Guid.js",
     
-    "src/Console.js"
+    "src/Console.js",
+    "src/Promise.js"
   ],
   "Dependencies": [
   ],

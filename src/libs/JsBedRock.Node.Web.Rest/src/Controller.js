@@ -14,6 +14,16 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
             },
             Members: {
                 Name: { Def: 'controller' },
+                _Init: {
+                    Def: function () {
+                        
+                    }
+                },
+                _Deinit: {
+                    Def: function () {
+                        
+                    }
+                },
                 _WriteHeader: {
                     Def: function () {
                         if(this._Response) {

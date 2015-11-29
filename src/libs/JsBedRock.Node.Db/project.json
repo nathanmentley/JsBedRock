@@ -1,6 +1,8 @@
 {
   "Name": "JsBedRock.Node.Db",
   "SourceFiles": [
+    "src/IQuery.js",
+    "src/IQueryResult.js"
   ],
   "Dependencies": [
     "JsBedRock.Core"
