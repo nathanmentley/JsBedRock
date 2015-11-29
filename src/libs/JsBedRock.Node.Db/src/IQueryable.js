@@ -4,8 +4,8 @@ JsBedRock.Node.Db = JsBedRock.Node.Db || {};
 //JsBedRock.Node.Db
 (function (asm) {
 	asm.OnLoad(function () {
-		JsBedRock.Node.Db.IQuery = JsBedRock.Utils.ObjectOriented.CreateInterface({
-			Name: "IQuery",
+		JsBedRock.Node.Db.IQueryable = JsBedRock.Utils.ObjectOriented.CreateInterface({
+			Name: "IQueryable",
 			Members: {
 				Execute: function () { }
 			}

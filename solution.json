@@ -16,6 +16,7 @@
     "./src/sdk/project.json",
     
     "./src/libs/JsBedRock.Core/project.json",
+    "./src/libs/JsBedRock.Reflection/project.json",
     "./src/libs/JsBedRock.Collections/project.json",
     "./src/libs/JsBedRock.UnitTesting/project.json",
     "./src/libs/JsBedRock.Web/project.json",
@@ -34,6 +35,7 @@
     
     "./src/tests/JsBedRock.Framework.Tests/project.json",
     "./src/tests/JsBedRock.Core.Tests/project.json",
+    "./src/tests/JsBedRock.Reflection.Tests/project.json",
     "./src/tests/JsBedRock.Collections.Tests/project.json",
     "./src/tests/JsBedRock.UnitTesting.Tests/project.json",
     "./src/tests/JsBedRock.Web.Tests/project.json",

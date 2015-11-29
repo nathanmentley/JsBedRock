@@ -16,12 +16,12 @@ JsBedRock.UI = JsBedRock.UI || {};
                 },
                 GetService: {
                     Def: function (key) {
-                        var compType = this.__ServiceCache.GetService(key);
+                        var servType = this.__ServiceCache.GetService(key);
                         
-                        if(!compType)
+                        if(!servType)
                             JsBedRock.Console.Error(key + " does not map to a registered Service.");
                         
-                        return new compType(this._BuildServiceContext());
+                        return new servType(this._BuildServiceContext());
                     }
                 },
                 _BuildServiceContext: {

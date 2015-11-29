@@ -1,0 +1,12 @@
+{
+  "Name": "JsBedRock.Reflection",
+  "SourceFiles": [
+    "src/Utils.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Collections"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Reflection.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

@@ -1,11 +1,11 @@
 {
   "Name": "JsBedRock.Node.Db",
   "SourceFiles": [
-    "src/IQuery.js",
+    "src/IQueryable.js",
     "src/IQueryResult.js"
   ],
   "Dependencies": [
-    "JsBedRock.Core"
+    "JsBedRock.Collections"
   ],
   "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.js",
   "DebugSourceRoot": "../",

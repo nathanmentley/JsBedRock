@@ -10,13 +10,7 @@ JsBedRock.WebAppExample.DAL = JsBedRock.WebAppExample.DAL || {};
             Members: {
                 _Init: {
                     Def: function () {
-                        this._Db = new JsBedRock.Node.Db.MySql.MySqlConnection(
-                            JsBedRock.AppConfig.DbServer.Host,
-                            JsBedRock.AppConfig.DbServer.User,
-                            JsBedRock.AppConfig.DbServer.Password,
-                            JsBedRock.AppConfig.DbServer.Database
-                        );
-                        this._Db.Connect();
+                        this._Db = new JsBedRock.WebAppExample.DAL.BlogDatabase();
                     }
                 },
                 _Deinit: {

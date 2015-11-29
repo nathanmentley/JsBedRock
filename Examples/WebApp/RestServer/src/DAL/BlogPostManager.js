@@ -10,8 +10,8 @@ JsBedRock.WebAppExample.DAL = JsBedRock.WebAppExample.DAL || {};
             },
             Members: {
                 GetBlogPosts: {
-                    Def: function (callback) {
-                        this._Db.Query("SELECT id, Subject, Content FROM BlogPosts", callback);
+                    Def: function () {
+                        return this._Db.BlogPosts().Execute();
                     }
                 }
             }

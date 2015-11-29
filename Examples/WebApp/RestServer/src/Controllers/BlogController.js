@@ -22,8 +22,10 @@ JsBedRock.WebAppExample.Controllers = JsBedRock.WebAppExample.Controllers || {};
                         var blogManager = new JsBedRock.WebAppExample.DAL.BlogPostManager();
                         blogManager._Init();
                         
-                        blogManager.GetBlogPosts(function (err, rows, fields) {
-                            promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - " + rows[0].Subject));
+                        blogManager.GetBlogPosts().Success(function (data) {
+                            promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - " + data.GetEnumerator()[0].Subject));
+                        }).Error(function (data) {
+                            promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - DB Error"));
                         });
                         
                         blogManager._Deinit();

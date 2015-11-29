@@ -1,6 +1,8 @@
 {
   "Name": "RestServer",
   "SourceFiles": [
+    "src/DAL/Models/BlogPost.js",
+    "src/DAL/BlogDatabase.js",
     "src/DAL/BaseManager.js",
     "src/DAL/BlogPostManager.js",
     "src/Controllers/BaseController.js",

@@ -12,28 +12,53 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
 				this._User = user;
 				this._Password = password;
 				this._Database = database;
+				
+				this.IsConnected = false;
+				
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
                 Connect: {
                     Def: function () {
-						this.__Connection = this.__MySql.createConnection({
-							host: this._Host,
-							user: this._User,
-							password: this._Password,
-							database: this._Database
-						});
-						this.__Connection.connect();
+						if (!this.IsConnected) {
+							this.IsConnected = true;
+							
+							this.__Connection = this.__MySql.createConnection({
+								host: this._Host,
+								user: this._User,
+								password: this._Password,
+								database: this._Database
+							});
+							this.__Connection.connect();
+						}
                     }
                 },
 				Query: {
-					Def: function (query, callback) {
-						this.__Connection.query(query, callback);
+					Def: function (query) {
+						var promise = new JsBedRock.Promise();
+						
+						this.__Connection.query(query, function (err, rows, fields) {
+							if(!err){
+								promise.Resolve(new JsBedRock.Node.Db.MySql.MySqlQueryResult(rows, fields));
+							}else{
+								promise.Reject(error);
+							}
+						});
+						
+						return promise;
 					}
 				},
 				Disconnect: {
 					Def: function () {
-						this.__Connection.end();
+						if(this.IsConnected) {
+							this.IsConnected = false;
+							
+							this.__Connection.end();
+						}
 					}
+				},
+				IsConnected: {
+					Def: null
 				},
 				_Host: {
 					Def: null
