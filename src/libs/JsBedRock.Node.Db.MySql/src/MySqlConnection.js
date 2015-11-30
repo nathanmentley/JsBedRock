@@ -5,6 +5,9 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
 (function (asm) {
     asm.OnLoad(function () {
         JsBedRock.Node.Db.MySql.MySqlConnection = JsBedRock.Utils.ObjectOriented.CreateClass({
+			Implements: [
+				JsBedRock.IDisposable
+			],
             Constructor: function (host, user, password, database) {
 				this.__MySql = require('mysql');
 				
@@ -56,6 +59,11 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
 							this.__Connection.end();
 						}
 					}
+				},
+				Dispose: {
+					Def: function () {
+						this.Dissconnect();
+					}	
 				},
 				IsConnected: {
 					Def: null

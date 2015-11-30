@@ -6,7 +6,7 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
     asm.OnLoad(function () {
 		JsBedRock.Node.Web.Rest.RestWebServer = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.Node.Web.WebServerBase,
-            Constructor: function (portNumber, routerType, controllerCacheType) {
+            Constructor: function (portNumber, routerType, controllerCacheType, managerCacheType) {
                 if(controllerCacheType)
                     this.__ControllerCache = new controllerCacheType();
                 else
@@ -16,23 +16,36 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                     this.__Router = new routerType();
                 else
                     this.__Router = new JsBedRock.Node.Web.Rest.RequestRouter();
+                 
+                if(managerCacheType)
+                    this.__ManagerCache = new managerCacheType(new JsBedRock.Node.Db.Accessors.AccessorLoader());
+                else
+                    this.__ManagerCache = new JsBedRock.Node.Web.Rest.ManagerCache(new JsBedRock.Node.Db.Accessors.AccessorLoader());
                 
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.WebServerBase, portNumber);
             },
             Members: {
                 __ControllerCache: { Def: null },
+                __ManagerCache: { Def: null },
                 __Router: { Def: null },
                 
+                ServerStart: {
+                    Def: function () {
+                        this.__Router.RegisterRoute();
+                        this.__ManagerCache.PopulateCache();
+                        
+                        this.Base();
+                    }
+                },
                 _HandleRequest: {
                     Def: function(req, res) {
                         try {
                             var routerResult = this.__Router.ParseRequest(req.url);
                             
-                            var controller = new (this.__ControllerCache.GetController(routerResult.Controller))(req, res);
+                            var controller = new (this.__ControllerCache.GetController(routerResult.Controller))(this.__ManagerCache, req, res);
                             controller._Init();
                             
-                            var action = controller[routerResult.Action];
-                            var actionData = new (this._GetRequestDataTypeFromAction(controller, action))();
+                            var actionData = new (this._GetRequestDataTypeFromAction(controller, routerResult.Action))();
                             
                             var fullBody = '';
                             req.on('data', function(chunk) {
@@ -43,7 +56,7 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                                 if(!JsBedRock.Utils.String.IsEmptyOrSpaces(fullBody))
                                     actionData.FromJson(fullBody);
                                 
-                                action(actionData).Success(function (data) {
+                                controller[routerResult.Action](actionData).Success(function (data) {
                                     controller._Deinit();
                                     
                                     res.end(data.ToJson());
@@ -62,11 +75,6 @@ JsBedRock.Node.Web.Rest = JsBedRock.Node.Web.Rest || {};
                             return attr.Type;
                         
                         return JsBedRock.Web.Rest.RestRequest;
-                    }
-                },
-                GetRouter: {
-                    Def: function () {
-                        return this.__Router;
                     }
                 }
             }

@@ -5,6 +5,9 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
 (function (asm) {
     asm.OnLoad(function () {
         JsBedRock.Node.Db.MySql.MySqlEntityDatabaseBase = JsBedRock.Utils.ObjectOriented.CreateClass({
+			Implements: [
+				JsBedRock.IDisposable
+			],
             Constructor: function (host, user, password, database) {
 				this.__Connection = new JsBedRock.Node.Db.MySql.MySqlConnection(host, user, password, database);
                 this.__QueryableDictionary = new JsBedRock.Collections.Dictionary();
@@ -12,7 +15,7 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Disconnect: {
+                Dispose: {
                     Def: function () {
                         this.__Connection.Disconnect();
                     }

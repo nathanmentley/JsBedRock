@@ -7,6 +7,7 @@
     "src/Types/Guid.js",
     
     "src/Console.js",
+    "src/IDisposable.js",
     "src/Promise.js"
   ],
   "Dependencies": [

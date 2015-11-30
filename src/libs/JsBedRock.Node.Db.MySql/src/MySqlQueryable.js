@@ -62,7 +62,6 @@ JsBedRock.Node.Db.MySql = JsBedRock.Node.Db.MySql || {};
                                 
                                 if(fieldAttr) {
                                     if(fieldAttr.SqlFieldName) {
-                                        JsBedRock.Console.Write(fieldAttr.SqlFieldName);
                                         selectList.Add(fieldAttr.SqlFieldName);
                                     }
                                 }

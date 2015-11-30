@@ -1,6 +1,8 @@
 {
   "Name": "JsBedRock.Node.Db",
   "SourceFiles": [
+    "src/Accessor/AccessorBase.js",
+    "src/Accessor/AccessorLoader.js",
     "src/IQueryable.js",
     "src/IQueryResult.js"
   ],

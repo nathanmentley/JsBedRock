@@ -17,13 +17,6 @@ JsBedRock.Node.Rest = JsBedRock.Node.Rest || {};
                 },
                 _ServerType: {
                     Def: JsBedRock.Node.Web.Rest.RestWebServer
-                },
-                _Start: {
-                    Def: function () {
-                        this._WebServer.GetRouter().RegisterRoute();
-                        
-                        this.Base();
-                    }
                 }
             }
         });

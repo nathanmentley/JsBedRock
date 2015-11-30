@@ -5,8 +5,8 @@ JsBedRock.WebAppExample.Controllers = JsBedRock.WebAppExample.Controllers || {};
     asm.OnLoad(function () {
 		JsBedRock.WebAppExample.Controllers.BaseController = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.Node.Web.Rest.Controller,
-            Constructor: function (request, response) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.Rest.Controller, request, response);
+            Constructor: function (managerCache, request, response) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Node.Web.Rest.Controller, managerCache, request, response);
             },
             Members: {
                 Name: {

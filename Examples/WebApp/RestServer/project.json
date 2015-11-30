@@ -1,12 +1,15 @@
 {
   "Name": "RestServer",
   "SourceFiles": [
-    "src/DAL/Models/BlogPost.js",
     "src/DAL/BlogDatabase.js",
-    "src/DAL/BaseManager.js",
-    "src/DAL/BlogPostManager.js",
+    "src/DAL/Models/BlogPost.js",
+    "src/DAL/Accessors/BlogPostAccessor.js",
+    
+    "src/Managers/BlogPostManager.js",
+    
     "src/Controllers/BaseController.js",
     "src/Controllers/BlogController.js",
+    
     "src/Main.js"
   ],
   "Dependencies": [

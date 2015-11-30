@@ -5,8 +5,8 @@ JsBedRock.WebAppExample.Controllers = JsBedRock.WebAppExample.Controllers || {};
     asm.OnLoad(function () {
 		JsBedRock.WebAppExample.Controllers.BlogController = JsBedRock.Utils.ObjectOriented.CreateClass({
             Inherit: JsBedRock.WebAppExample.Controllers.BaseController,
-            Constructor: function (request, response) {
-                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.WebAppExample.Controllers.BaseController, request, response);
+            Constructor: function (managerCache, request, response) {
+                JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.WebAppExample.Controllers.BaseController, managerCache, request, response);
             },
             Members: {
                 Name: {
@@ -19,18 +19,20 @@ JsBedRock.WebAppExample.Controllers = JsBedRock.WebAppExample.Controllers || {};
                     Def: function (request) {
                         var promise = new JsBedRock.Promise();
                         
-                        var blogManager = new JsBedRock.WebAppExample.DAL.BlogPostManager();
-                        blogManager._Init();
-                        
-                        blogManager.GetBlogPosts().Success(function (data) {
+                        this._Manager.BlogPost.GetBlogPosts().Success(function (data) {
                             promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - " + data.GetEnumerator()[0].Subject));
                         }).Error(function (data) {
                             promise.Resolve(new JsBedRock.Models.GetPostDataResult("Data From Rest Server - DB Error"));
                         });
                         
-                        blogManager._Deinit();
-                        
                         return promise;
+                    }
+                },
+                _GetManagers: {
+                    Def: function () {
+                        return [
+                            JsBedRock.WebAppExample.Managers.BlogPostManager
+                        ];
                     }
                 }
             }
