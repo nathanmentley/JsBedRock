@@ -71,6 +71,9 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 },
                 _EnsureDirectoryExists: {
                     Def: function(directory) {
+                        if(JsBedRock.Utils.String.IsEmptyOrSpaces(directory))
+                            return;
+                        
                         var paths = directory.split(this.__Path.sep);
                         
                         if(paths.length > 1) {
@@ -79,16 +82,16 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                         }
                         
                         if(!(new JsBedRock.Node.IO.FileSystem()).DirectoryExistsSync(directory)) {
-                        (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
+                            (new JsBedRock.Node.IO.FileSystem()).MkDirSync(directory);
                         }
                     }
                 },
                 _GetSdkLocation: {
                     Def: function () {
                         if(JsBedRock.Utils.String.IsEmptyOrSpaces(this._SolutionData.SDKLocationOverride))
-                            return __dirname + "/../../";
+                            return process.env.JSBEDROCK_FRAMEWORK_PATH + '/' + JsBedRock.FrameworkVersion + "/sdk/";
                             
-                        return this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride);
+                        return this.__Path.join(this._SolutionDir, this.__SettingResolver.ResolveSolutionSetting(this._SolutionData, this._SolutionData.SDKLocationOverride));
                     }
                 },
                 _GetUglifyJsOptions: {
