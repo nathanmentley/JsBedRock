@@ -7,6 +7,7 @@
     "AssemblyWrappers/ClassLibrary.js",
     "AssemblyWrappers/NodeExecutable.js",
     "AssemblyWrappers/TestRunner.js",
+    "AssemblyWrappers/VSCodeExtension.js",
     "AssemblyAssets/BrowserExecutable/index.html"
   ],
   "OutputFile": "../../bin/{{Version}}/sdk/",

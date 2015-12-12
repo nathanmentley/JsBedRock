@@ -28,6 +28,7 @@
     "./src/libs/JsBedRock.Node.Db.MySql/project.json",
     "./src/libs/JsBedRock.Node.Web/project.json",
     "./src/libs/JsBedRock.Node.Web.Rest/project.json",
+    "./src/libs/JsBedRock.Node.Compiler/project.json",
     "./src/libs/JsBedRock.UI/project.json",
     "./src/libs/JsBedRock.UI.Web/project.json",
     

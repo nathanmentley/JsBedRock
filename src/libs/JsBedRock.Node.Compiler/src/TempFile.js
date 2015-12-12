@@ -28,7 +28,7 @@ JsBedRock.Compiler = JsBedRock.Compiler || {};
                 },
                 __CreateFileName: { 
                     Def: function () {
-                        return __dirname + "\\" + (Math.random().toString(36)+'00000000000000000').slice(2, 12) + ".temp";
+                        return __dirname + "/" + (Math.random().toString(36)+'00000000000000000').slice(2, 12) + ".temp";
                     }
                 },
 				__FileSystem: { Def: null },
