@@ -10,7 +10,9 @@ JsBedRock.Collections = JsBedRock.Collections || {};
 				Clear: function () { },
 				Contains: function (key) { },
 				Get: function (key) { },
-				Remove: function (key) { }
+				Remove: function (key) { },
+				ToList: function () { },
+				ForEach: function (lambda) { }
 			}
 		});
 	});

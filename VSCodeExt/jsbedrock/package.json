@@ -1,0 +1,35 @@
+{
+	"name": "jsbedrock",
+	"displayName": "JsBedRock",
+	"description": "VSCode Extensions for javascript development using JsBedRock.",
+	"version": "0.0.1",
+	"publisher": "JsBedRock",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./extension",
+	"contributes": {
+		"commands": [{
+			"command": "extension.compile",
+			"title": "Compile"
+		},{
+			"command": "extension.about",
+			"title": "About"
+		}],
+		"keybindings": [{
+			"command": "extension.compile",
+			"key": "ctrl+f1",
+			"mac": "cmd+f1",
+			"when": "editorTextFocus"
+		}]
+	},
+	"devDependencies": {
+		"vscode": "0.10.x"
+	}
+}

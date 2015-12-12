@@ -3,15 +3,16 @@
   "SourceFiles": [
     "src/Utils.js",
     "src/Service.js",
+    "src/RestClientService.js",
     "src/ServiceCache.js",
     "src/ServiceFactory.js",
     "src/Component.js",
     "src/ComponentCache.js",
     "src/ComponentFactory.js",
-    "src/ComponentRenderer.js"
+    "src/IComponentRenderer.js"
   ],
   "Dependencies": [
-    "JsBedRock.Core"
+    "JsBedRock.Collections"
   ],
   "OutputFile": "../../../bin/{{Version}}/JsBedRock.UI.js",
   "DebugSourceRoot": "../",

@@ -9,7 +9,8 @@ JsBedRock.UI = JsBedRock.UI || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                _Context: null
+                Name: { Def: "" },
+                _Context: { Def: null }
             }
         });
     });

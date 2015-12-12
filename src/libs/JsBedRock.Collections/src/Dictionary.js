@@ -10,25 +10,53 @@ JsBedRock.Collections = JsBedRock.Collections || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-				GetEnumerator: function () {
-                    return this._Values;
+				GetEnumerator: {
+                    Def: function () {
+                        return this._Values;
+                    }
                 },
-				Add: function (key, item) {
-                    this._Values[key] = item;
+				Add: {
+                    Def: function (key, item) {
+                        this._Values[key] = item;
+                    }
                 },
-				Clear: function () {
-                    this._Values = {};
+				Clear: {
+                    Def: function () {
+                        this._Values = {};
+                    }
                 },
-				Contains: function (key) {
-                    return (key in this._Values)
+				Contains: {
+                    Def: function (key) {
+                        return (key in this._Values)
+                    }
                 },
-				Get: function (key) {
-                    return this._Values[key];
+				Get: {
+                    Def: function (key) {
+                        return this._Values[key];
+                    }
                 },
-				Remove: function (key) {
-                    delete this._Values[key];
+				Remove: {
+                    Def: function (key) {
+                        delete this._Values[key];
+                    }
                 },
-                _Values: null
+                ToList: {
+                    Def: function () {
+                        var ret = new JsBedRock.Collections.List();
+                        
+                        for(var prop in this.GetEnumerator())
+                            ret.Add(this.Get(prop));
+                        
+                        return ret;
+                    }
+                },
+				ForEach: {
+                    Def: function (lambda) {
+                        for(var prop in this.GetEnumerator())
+                            lambda(prop, this.Get(prop));
+                    }
+                },
+                _Values: { Def: null }
             },
             Implements: [
                 JsBedRock.Collections.IEnumerable,

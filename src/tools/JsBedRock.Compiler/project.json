@@ -1,28 +1,20 @@
 {
   "Name": "JsBedRock.Compiler",
   "SourceFiles": [
-    "src/SettingResolver.js",
-    "src/TempFile.js",
-    "src/Compilers/ProjectTypesEnum.js",
-    "src/Compilers/ProjectCompilerBase.js",
-    "src/Compilers/AssemblyProjectCompilerBase.js",
-    "src/Compilers/ExecutableProjectCompilerBase.js",
-    "src/Compilers/AssetProjectCompiler.js",
-    "src/Compilers/BrowserExecutableProjectCompiler.js",
-    "src/Compilers/ClassLibraryProjectCompiler.js",
-    "src/Compilers/NodeExecutableProjectCompiler.js",
-    "src/Compilers/NodeInstallerExecutableProjectCompiler.js",
-    "src/Compilers/TestRunnerProjectCompiler.js",
+    "src/CompilerAppArguments.js",
     "src/Main.js"
   ],
   "Dependencies": [
+    "JsBedRock.Node.Compiler",
     "JsBedRock.Node.IO",
+    "JsBedRock.Node",
     "JsBedRock.Core"
   ],
   "NodeDependencies": [
     "uglify-js",
     "fstream",
-    "tar"
+    "tar",
+    "jshint"
   ],
   "OutputFile": "../../../bin/{{Version}}/sdk/tools/compiler/JsBedRock.Compiler.js",
   "DebugSourceRoot": "../",

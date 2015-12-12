@@ -3,8 +3,12 @@
   "SourceFiles": [
     "src/Types/Interface.js",
     "src/Types/Object.js",
+    "src/Types/Attribute.js",
+    "src/Types/Guid.js",
     
-    "src/Console.js"
+    "src/Console.js",
+    "src/IDisposable.js",
+    "src/Promise.js"
   ],
   "Dependencies": [
   ],

@@ -1,0 +1,12 @@
+{
+  "Name": "JsBedRock.Node",
+  "SourceFiles": [
+    "src/AppArgumentsBase.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

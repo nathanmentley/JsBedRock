@@ -1,6 +1,6 @@
 {
   "Name": "JsBedRock Web App Example",
-  "Version": "0.0.1",
+  "Version": "1.0.0",
   "License": "CC-BY-SA-4.0",
   "Description": "A web app created with JsBedRock.",
   "Author": "Nathan Mentley <NathanMentley@gmail.com>",
@@ -12,7 +12,9 @@
     "Url": "https://github.com/nathanmentley/JsBedRock/issues"
   },
   "Projects": [
-    "./webapp.json"
+    "./WebAppCommon/project.json",
+    "./ClientWebApp/project.json",
+    "./RestServer/project.json"
   ],
-  "FrameworkVersion": "0.0.1"
+  "FrameworkVersion": "0.16.02"
 }

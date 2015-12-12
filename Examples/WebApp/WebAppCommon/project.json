@@ -1,0 +1,15 @@
+{
+  "Name": "WebAppCommon",
+  "SourceFiles": [
+    "src/Models/TestResult.js",
+    "src/Models/GetPostDataResult.js",
+    "src/Models/GetPostDataRequest.js",
+    "src/Models/ErrorResult.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core",
+    "JsBedRock.Web"
+  ],
+  "OutputFile": "../bin/WebAppCommon/WebAppCommon.js",
+  "ProjectType": "ClassLibrary"
+}

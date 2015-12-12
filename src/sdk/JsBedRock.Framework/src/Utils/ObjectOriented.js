@@ -74,11 +74,16 @@ JsBedRock.Utils = JsBedRock.Utils || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {},
+            Attributes: [],
             Name: ''
         },
         InterfaceDefaults: {
             Name: '',
             Members: {}
+        },
+        MethodDefaults: {
+            Def: null,
+            Attributes: []
         }
     };
     
@@ -94,14 +99,30 @@ JsBedRock.Utils = JsBedRock.Utils || {};
             PrivateMembers.Inherit(classDef, values.Inherit);
         }
         
-        for(var prop in values.Members)
-            classDef.prototype[prop] = values.Members[prop];
+        for(var prop in values.Members) {
+            var methodValues = JsBedRock.Utils.Object.MergeObjects(PrivateMembers.MethodDefaults, values.Members[prop]);
+            classDef.prototype[prop] = methodValues.Def;
             
+            //Push Method Attributes
+            for(var i = 0; i < methodValues.Attributes.length; i++) {
+                if(!classDef.prototype.__Attributes[prop])
+                    classDef.prototype.__Attributes[prop] = [];
+                classDef.prototype.__Attributes[prop].push(methodValues.Attributes[i]);
+            }
+        }
         classDef.prototype.__ClassName = values.Name;
         
         for(var i = 0; i < values.Implements.length; i++)
             PrivateMembers.Implement(classDef, values.Implements[i]);
             
+        //Push Class Attributes
+        for(var i = 0; i < values.Attributes.length; i++) {
+            if(!classDef.prototype.__Attributes[""])
+                classDef.prototype.__Attributes[""] = [];
+                
+            classDef.prototype.__Attributes[""].push(values.Attributes[i]);
+        }
+        
         //LinkClass To Assembly
         JsBedRock.CurrentAssembly.Classes.push(classDef);
         

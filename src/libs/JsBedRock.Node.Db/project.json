@@ -1,0 +1,15 @@
+{
+  "Name": "JsBedRock.Node.Db",
+  "SourceFiles": [
+    "src/Accessor/AccessorBase.js",
+    "src/Accessor/AccessorLoader.js",
+    "src/IQueryable.js",
+    "src/IQueryResult.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Collections"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

@@ -1,0 +1,22 @@
+{
+  "Name": "ClientWebApp",
+  "SourceFiles": [
+    "src/Services/BlogService.js",
+    "src/Services/LayoutService.js",
+    "src/Components/Blog/BlogPostComponent.js",
+    "src/Components/Blog/BlogWallComponent.js",
+    "src/Components/HomePageComponent.js",
+    "src/Components/OtherPageComponent.js",
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Core",
+    "JsBedRock.Collections",
+    "JsBedRock.Web",
+    "JsBedRock.UI",
+    "JsBedRock.UI.Web",
+    "WebAppCommon"
+  ],
+  "OutputFile": "../bin/ClientWebApp/ClientWebApp.js",
+  "ProjectType": "BrowserExecutable"
+}

@@ -13,15 +13,19 @@ JsBedRock.Node.Network = JsBedRock.Node.Network || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
             Members: {
-                Start: function () {
-                    this.__Server.listen(this.__PortNumber);
+                Start: {
+                    Def: function () {
+                        this.__Server.listen(this.__PortNumber);
+                    }
                 },
-                End: function (callback) {
-                    this.__Server.close(callback);
+                End: {
+                    Def: function (callback) {
+                        this.__Server.close(callback);
+                    }
                 },
-                __Server: null,
-				__Http: null,
-                __PortNumber: null
+                __Server: { Def: null},
+				__Http: { Def: null},
+                __PortNumber: { Def: null}
             }
         });
     });

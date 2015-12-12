@@ -1,0 +1,27 @@
+{
+  "Name": "RestServer",
+  "SourceFiles": [
+    "src/DAL/BlogDatabase.js",
+    "src/DAL/Models/BlogPost.js",
+    "src/DAL/Accessors/BlogPostAccessor.js",
+    
+    "src/Managers/BlogPostManager.js",
+    
+    "src/Controllers/BaseController.js",
+    "src/Controllers/BlogController.js",
+    
+    "src/Main.js"
+  ],
+  "Dependencies": [
+    "WebAppCommon",
+    "JsBedRock.Web",
+    "JsBedRock.Node.Web.Rest",
+    "JsBedRock.Node.Db.MySql"
+  ],
+  "NodeDependencies": [
+    "mysql"
+  ],
+  "OutputFile": "../bin/RestServer/RestServer.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "NodeExecutable"
+}

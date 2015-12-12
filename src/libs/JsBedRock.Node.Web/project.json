@@ -1,0 +1,15 @@
+{
+  "Name": "JsBedRock.Node.Web",
+  "SourceFiles": [
+    "src/WebServerBase.js",
+    "src/StaticFileWebServer.js",
+    "src/WebServerStart.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.IO",
+    "JsBedRock.Node.Network"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Web.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

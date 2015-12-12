@@ -1,8 +1,12 @@
 {
   "Name": "JsBedRock.UI.Web",
   "SourceFiles": [
-    "src/HtmlHelper.js",
-    "src/HtmlComponentRenderer.js"
+    "src/HtmlComponent.js",
+    "src/HtmlComponentRenderer.js",
+    "src/WebAppRouteDef.js",
+    "src/WebAppRouterResult.js",
+    "src/WebAppRouter.js",
+    "src/WebAppStart.js"
   ],
   "Dependencies": [
     "JsBedRock.UI"

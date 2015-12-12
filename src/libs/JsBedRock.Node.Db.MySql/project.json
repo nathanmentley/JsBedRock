@@ -1,0 +1,20 @@
+{
+  "Name": "JsBedRock.Node.Db.MySql",
+  "SourceFiles": [
+    "src/FieldTypesEnum.js",
+    "src/MySqlQueryResult.js",
+    "src/MySqlConnection.js",
+    "src/MySqlEntityAttribute.js",
+    "src/MySqlEntityFieldAttribute.js",
+    "src/MySqlEntityModelBase.js",
+    "src/MySqlQueryable.js",
+    "src/MySqlEntityDatabaseBase.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.Db",
+    "JsBedRock.Reflection"
+  ],
+  "OutputFile": "../../../bin/{{Version}}/JsBedRock.Node.Db.MySql.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "ClassLibrary"
+}

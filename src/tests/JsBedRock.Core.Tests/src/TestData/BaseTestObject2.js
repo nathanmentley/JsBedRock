@@ -10,9 +10,9 @@ JsBedRock.Tests.Utils.ObjectOriented = JsBedRock.Tests.Utils.ObjectOriented || {
                     JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Tests.Utils.ObjectOriented.BaseTestObject1);
                 },
                 Members: {
-                    Name: "BaseTestObject2",
-                    TestMethod2: function (var1) { return var1 + 5; },
-                    TestMethod3: function () { return 'a'; }
+                    Name: { Def: "BaseTestObject2" },
+                    TestMethod2: { Def: function (var1) { return var1 + 5; } },
+                    TestMethod3: { Def: function () { return 'a'; } }
                 }
             });
     });

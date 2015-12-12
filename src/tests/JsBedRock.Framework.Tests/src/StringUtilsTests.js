@@ -9,13 +9,15 @@ JsBedRock.Framework.Tests = JsBedRock.Framework.Tests || {};
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.UnitTesting.TestGroup);
             },
             Members: {
-                TestGroupName: 'StringUtilsTests',
-                IsEmptyOrSpaces: function () {
-                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces("      "), "Whitespace returns true.");
-                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(""), "Empty string returns true.");
-                    this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(null), "null returns true.");
-                    this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("Westeros"), "characters returns false");
-                    this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("  Essos  "), "characters wrapped in whitespace returns false");
+                TestGroupName: { Def: 'StringUtilsTests' },
+                IsEmptyOrSpaces: {
+                    Def: function () {
+                        this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces("      "), "Whitespace returns true.");
+                        this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(""), "Empty string returns true.");
+                        this.Assert(JsBedRock.Utils.String.IsEmptyOrSpaces(null), "null returns true.");
+                        this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("Westeros"), "characters returns false");
+                        this.Assert(!JsBedRock.Utils.String.IsEmptyOrSpaces("  Essos  "), "characters wrapped in whitespace returns false");
+                    }
                 }
             }
         });

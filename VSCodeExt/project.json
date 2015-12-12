@@ -1,0 +1,21 @@
+{
+  "Name": "JsBedRockForVSCode",
+  "SourceFiles": [
+    "jsbedrock/src/extension.js"
+  ],
+  "Dependencies": [
+    "JsBedRock.Node.Compiler",
+    "JsBedRock.Node.IO",
+    "JsBedRock.Node",
+    "JsBedRock.Core"
+  ],
+  "NodeDependencies": [
+			"uglify-js",
+			"fstream",
+			"tar",
+			"jshint"
+  ],
+  "OutputFile": "./jsbedrock/extension.js",
+  "DebugSourceRoot": "../",
+  "ProjectType": "VSCodeExtension"
+}

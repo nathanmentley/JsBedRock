@@ -1,0 +1,18 @@
+{
+  "Name": "JsBedRock VSCode Extension",
+  "Version": "0.16.2",
+  "License": "CC-BY-SA-4.0",
+  "Description": "VSCode Extensions for developing apps using JSBedRock.",
+  "Author": "Nathan Mentley <NathanMentley@gmail.com>",
+  "Repository": {
+    "Type": "git",
+    "Url": "https://github.com/nathanmentley/JsBedRock"
+  },
+  "Bugs": {
+    "Url": "https://github.com/nathanmentley/JsBedRock/issues"
+  },
+  "Projects": [
+    "./project.json"
+  ],
+  "FrameworkVersion": "0.16.02"
+}

@@ -1,7 +1,9 @@
 (function(asm) {
 	asm.OnLoad(function () {
 		//Entry Point
-		(new JsBedRock.Main()).Main();
+		var argClasses = JsBedRock.Utils.ObjectOriented.Reflection.GetClassesOfType(asm, JsBedRock.Node.AppArgumentsBase);
+		
+		(new JsBedRock.Main()).Main(argClasses.length > 0 ? new argClasses[0]() : new JsBedRock.Node.AppArgumentsBase());
 	});
 	
 	var fs = require('fs');
