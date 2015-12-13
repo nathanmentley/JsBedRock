@@ -9,6 +9,7 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
         JsBedRock.Node.IO.FileSystem = JsBedRock.Utils.ObjectOriented.CreateClass({
             Constructor: function () {
 				this.__FS = require('fs');
+                this.__Path = require('path');
 				
                 JsBedRock.Utils.ObjectOriented.CallBaseConstructor(this, JsBedRock.Types.Object);
             },
@@ -95,7 +96,18 @@ JsBedRock.Node.IO = JsBedRock.Node.IO || {};
 						return this.__FS.createWriteStream(file);
 					}
 				},
-				__FS: { Def: null }
+				GetPathFromFile: {
+					Def: function (file) {
+						return this.__Path.dirname(file);
+					}
+				},
+				GetPathSeperator: {
+					Def: function () {
+						return this.__Path.sep;
+					}
+				},
+				__FS: { Def: null },
+				__Path: { Def: null }
             }
         });
     });

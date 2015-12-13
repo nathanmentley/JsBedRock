@@ -17,10 +17,10 @@
 	"contributes": {
 		"commands": [{
 			"command": "extension.compile",
-			"title": "Compile"
+			"title": "JsBedRock Compile"
 		},{
 			"command": "extension.about",
-			"title": "About"
+			"title": "JsBedRock About"
 		}],
 		"keybindings": [{
 			"command": "extension.compile",
