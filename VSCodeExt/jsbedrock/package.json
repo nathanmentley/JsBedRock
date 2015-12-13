@@ -17,10 +17,10 @@
 	"contributes": {
 		"commands": [{
 			"command": "extension.compile",
-			"title": "Compile"
+			"title": "JsBedRock Compile"
 		},{
 			"command": "extension.about",
-			"title": "About"
+			"title": "JsBedRock About"
 		}],
 		"keybindings": [{
 			"command": "extension.compile",
@@ -28,6 +28,13 @@
 			"mac": "cmd+f1",
 			"when": "editorTextFocus"
 		}]
+	},
+	"dependencies": {
+		"npm": "3.5.2",
+		"uglify-js": "2.6.1",
+		"fstream": "1.0.8",
+		"tar": "2.2.1",
+		"jshint": "2.9.1-rc1"
 	},
 	"devDependencies": {
 		"vscode": "0.10.x"
